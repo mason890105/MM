@@ -222,6 +222,23 @@ function renderAutoCard(ind,data){
 
 function renderTWChips(data){
   var html="";
+  // 夜盤行情
+  var nd=data.night_data;
+  if(nd&&(nd.night||nd.day)){
+    var sess=nd.night||nd.day;
+    var isNight=!!nd.night;
+    var chgNum=parseFloat(sess.change)||0;
+    var cc=chgColor(chgNum);
+    html+="<div class='chip-block' style='margin-bottom:8px;border-color:"+(isNight?"#5ac8fa":"#30d158")+"'>"
+      +"<div class='chip-block-title'>"+(isNight?"夜盤":"日盤")+" 台指期 · "+nd.date.slice(0,4)+"/"+nd.date.slice(4,6)+"/"+nd.date.slice(6,8)+"</div>"
+      +"<div style='display:flex;justify-content:space-between;align-items:center'>"
+      +"<span style='font-size:22px;font-weight:700'>"+sess.last+"</span>"
+      +"<div style='text-align:right'>"
+      +"<div style='font-size:15px;font-weight:600;color:"+cc+"'>"+(chgNum>=0?"+":"")+sess.change+" ("+sess.changePct+")</div>"
+      +"<div style='font-size:11px;color:rgba(235,235,245,0.4)'>成交量 "+sess.volume+"</div>"
+      +"</div></div></div>";
+  }
+
   var fd=data.foreign_data;
   var md=data.margin_data;
   var pc=data.putcall_data;
@@ -456,7 +473,12 @@ function render(market){
   html+="</div>";
 
   if(!isUS){
-    html+="<div class='section-title'>盤後籌碼（自動更新）</div>";
+    var fd=data.foreign_data;
+    var md=data.margin_data;
+    var pc=data.putcall_data;
+    var fut=data.futures_data;
+    var dataDate=fd?fd.date:md?md.date:pc?pc.date:fut?fut.date:null;
+    html+="<div class='section-title'>盤後籌碼"+(dataDate?" · "+dataDate.slice(0,4)+"/"+dataDate.slice(4,6)+"/"+dataDate.slice(6,8):"")+"</div>";
     html+="<div class='chip-section'>"+renderTWChips(data)+"</div>";
   } else {
     html+="<div class='section-title'>手動輸入指標</div>";
@@ -467,7 +489,7 @@ function render(market){
     +"<strong>自動更新：</strong>每15分鐘 &nbsp;|&nbsp; "
     +(isUS
       ?"<strong>手動：</strong>Put/Call / AAII / 市場廣度"
-      :"<strong>台股籌碼：</strong>盤後3-4點自動更新 | 期交所+證交所")
+      :"<strong>台股籌碼：</strong>自動抓取最新交易日數據 | 期交所+證交所")
     +"</div>";
 
   document.getElementById("mainContent").innerHTML=html;
