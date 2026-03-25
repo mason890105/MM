@@ -232,7 +232,7 @@ function renderSlider(ind){
   var ss=sigStyle(z.s);
   var decs=ind.step<1?2:0;
   var pct=((v-ind.min)/(ind.max-ind.min)*100).toFixed(0);
-  var bg="linear-gradient(to right,"+ss.dot+" 0%,"+ss.dot+" "+pct+"%,var(--bg4) "+pct+"%,var(--bg4) 100%)";
+  var bg="linear-gradient(to right,"+ss.dot+" 0%,"+ss.dot+" "+pct+"%, #2c2c2e "+pct+"%, #2c2c2e 100%)";
   return "<div class='slider-card "+ss.cls+"' id='sc_"+ind.key+"'>"
     +"<div class='slider-header'>"
     +"<span class='slider-name'>"+ind.label+"</span>"
@@ -255,7 +255,7 @@ function onSlider(el,key,min,max,decs){
   var z=getZone(ind,v);
   var ss=sigStyle(z.s);
   var pct=((v-min)/(max-min)*100).toFixed(0);
-  el.style.background="linear-gradient(to right,"+ss.dot+" 0%,"+ss.dot+" "+pct+"%,var(--bg4) "+pct+"%,var(--bg4) 100%)";
+  el.style.background="linear-gradient(to right,"+ss.dot+" 0%,"+ss.dot+" "+pct+"%, #2c2c2e "+pct+"%, #2c2c2e 100%)";
   document.getElementById("sv_"+key).textContent=v.toFixed(decs);
   document.getElementById("sv_"+key).style.color=ss.btxt;
   document.getElementById("sb_"+key).textContent=z.t;
