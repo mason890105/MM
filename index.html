@@ -374,9 +374,13 @@ async function loadAuto(){
   const btn=document.getElementById("refreshBtn");
   if(btn) btn.style.animation="spin 0.8s linear infinite";
   try{
-    const res=await fetch(PROXY,{cache:"no-store"});
-    apiData=await res.json();
-    if(!apiData.us) apiData={us:{},tw:{}};
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),15000);
+    const res=await fetch(PROXY,{cache:"no-store",signal:controller.signal});
+    clearTimeout(timeout);
+    const json=await res.json();
+    if(json && json.us) apiData=json;
+    else apiData={us:{},tw:{}};
   }catch(e){
     apiData={us:{},tw:{}};
     console.error("載入失敗",e);
