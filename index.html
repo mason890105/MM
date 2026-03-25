@@ -13,53 +13,55 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#000;--bg2:#111;--bg3:#1c1c1e;--bg4:#2c2c2e;
-  --txt:#fff;--txt2:#ebebf5cc;--txt3:#ebebf599;
+  --txt:#fff;--txt2:rgba(235,235,245,0.8);--txt3:rgba(235,235,245,0.6);
   --border:#38383a;
   --green:#30d158;--red:#ff453a;--amber:#ffd60a;--blue:#0a84ff;--teal:#5ac8fa;
-  --green-bg:#30d15820;--red-bg:#ff453a20;--amber-bg:#ffd60a20;--blue-bg:#0a84ff20;--teal-bg:#5ac8fa20;
-  --green-dim:#1a4a2a;--red-dim:#4a1a1a;--amber-dim:#4a3a00;
+  --green-bg:rgba(48,209,88,0.12);--red-bg:rgba(255,69,58,0.12);
+  --amber-bg:rgba(255,214,10,0.12);--blue-bg:rgba(10,132,255,0.12);
+  --teal-bg:rgba(90,200,250,0.12);
+  --green-dim:rgba(48,209,88,0.15);--red-dim:rgba(255,69,58,0.15);
+  --amber-dim:rgba(255,214,10,0.12);
   --radius:16px;--radius-sm:10px;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;padding:0 0 40px}
-.header{padding:20px 20px 0;position:sticky;top:0;background:var(--bg);z-index:10;backdrop-filter:blur(20px)}
+.header{padding:20px 20px 0;background:var(--bg);z-index:10}
 .header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
 .header-title{font-size:28px;font-weight:700;letter-spacing:-0.5px}
 .header-date{font-size:13px;color:var(--txt3)}
-.refresh-btn{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--txt2);font-size:16px;transition:transform 0.2s}
+.refresh-btn{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--txt2);font-size:18px;transition:transform 0.2s}
 .refresh-btn:active{transform:scale(0.9)}
 .market-tabs{display:flex;background:var(--bg3);border-radius:var(--radius-sm);padding:3px;margin-bottom:20px}
 .market-tab{flex:1;padding:8px;border-radius:8px;border:none;cursor:pointer;font-size:15px;font-weight:500;background:transparent;color:var(--txt3);transition:all 0.2s}
-.market-tab.active{background:var(--bg4);color:var(--txt);box-shadow:0 1px 4px rgba(0,0,0,0.4)}
+.market-tab.active{background:var(--bg4);color:var(--txt)}
 .content{padding:0 16px}
-.safety-banner{border-radius:var(--radius);padding:20px;margin-bottom:16px;position:relative;overflow:hidden}
-.safety-banner::before{content:"";position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;opacity:0.15}
+.safety-banner{border-radius:var(--radius);padding:20px;margin-bottom:16px}
 .safety-label{font-size:28px;font-weight:700;margin-bottom:4px;letter-spacing:-0.5px}
-.safety-sub{font-size:14px;opacity:0.8;margin-bottom:14px}
-.progress-track{background:rgba(0,0,0,0.3);border-radius:4px;height:6px;overflow:hidden}
-.progress-fill{height:100%;border-radius:4px;transition:width 0.5s cubic-bezier(.4,0,.2,1)}
+.safety-sub{font-size:14px;opacity:0.85;margin-bottom:14px}
+.progress-track{background:rgba(255,255,255,0.1);border-radius:4px;height:6px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;transition:width 0.5s}
 .progress-label{font-size:12px;opacity:0.7;margin-top:6px;text-align:right}
 .combo-card{background:var(--bg3);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:20px;border-left:3px solid var(--blue)}
 .combo-title{font-size:11px;color:var(--txt3);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
 .combo-val{font-size:17px;font-weight:600;margin-bottom:2px}
 .combo-desc{font-size:13px;color:var(--txt2)}
-.section-title{font-size:13px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;padding:0 4px}
+.section-title{font-size:13px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;padding:0 2px}
 .auto-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:24px}
-.metric-card{background:var(--bg3);border-radius:var(--radius-sm);padding:14px;position:relative;overflow:hidden;border:1px solid var(--border)}
+.metric-card{background:var(--bg3);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--border)}
 .metric-card.safe{border-color:var(--green);background:var(--green-dim)}
+.metric-card.caution{border-color:var(--teal);background:var(--teal-bg)}
 .metric-card.warn{border-color:var(--amber);background:var(--amber-dim)}
 .metric-card.danger{border-color:var(--red);background:var(--red-dim)}
-.metric-card.info{border-color:var(--blue)}
 .metric-dot{width:8px;height:8px;border-radius:50%;margin-bottom:8px}
 .metric-label{font-size:11px;color:var(--txt3);margin-bottom:4px;font-weight:500}
 .metric-val{font-size:22px;font-weight:700;letter-spacing:-0.5px;margin-bottom:2px}
-.metric-pct{font-size:12px;font-weight:500}
-.metric-sig{font-size:11px;margin-top:4px;padding:3px 7px;border-radius:20px;display:inline-block;font-weight:500}
-.manual-section{margin-bottom:20px}
+.metric-pct{font-size:12px;font-weight:500;margin-top:2px}
+.metric-sig{font-size:11px;margin-top:6px;padding:3px 8px;border-radius:20px;display:inline-block;font-weight:600}
 .seg-ctrl{display:flex;background:var(--bg3);border-radius:var(--radius-sm);padding:3px;margin-bottom:12px}
 .seg-btn{flex:1;padding:7px 4px;border-radius:7px;border:none;cursor:pointer;font-size:13px;font-weight:500;background:transparent;color:var(--txt3);transition:all 0.2s}
 .seg-btn.active{background:var(--bg4);color:var(--txt)}
 .slider-card{background:var(--bg3);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:8px;border:1px solid var(--border)}
 .slider-card.safe{border-color:var(--green)}
+.slider-card.caution{border-color:var(--teal)}
 .slider-card.warn{border-color:var(--amber)}
 .slider-card.danger{border-color:var(--red)}
 .slider-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
@@ -93,103 +95,100 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;ba
     <button class="market-tab" onclick="switchMarket('tw',this)">🇹🇼 台股</button>
   </div>
 </div>
-
 <div class="content" id="mainContent">
   <div class="loading-wrap"><div class="spinner"></div><div class="loading-txt">載入市場數據中...</div></div>
 </div>
-
 <script>
-const PROXY="https://market-proxy.q0900027293.workers.dev/";
-let apiData={us:{},tw:{}};
-let currentMarket="us";
+var PROXY="https://market-proxy.q0900027293.workers.dev/";
+var apiData={us:{},tw:{}};
+var currentMarket="us";
+var activeUSGroup="情緒";
+var activeTWGroup="法人籌碼";
+var manualVals={putcall:0.85,aaii:38,breadth:55,foreign:0,margin:0,short_val:0,putcall_tw:1.0,retail:0,tw_rsi_m:52};
 
-const US_AUTO=[
+var US_AUTO=[
   {key:"vix",label:"VIX 恐慌指數",zones:[{max:15,s:-1,t:"過度樂觀"},{max:20,s:2,t:"低波動"},{max:25,s:1,t:"正常"},{max:30,s:0,t:"警戒"},{max:40,s:-1,t:"恐慌"},{max:99,s:-2,t:"極端恐慌"}]},
   {key:"skew",label:"SKEW 黑天鵝",zones:[{max:115,s:2,t:"正常"},{max:130,s:1,t:"輕度風險"},{max:150,s:0,t:"中高風險"},{max:165,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端"}]},
   {key:"vvix",label:"VVIX",zones:[{max:80,s:2,t:"極度平靜"},{max:100,s:1,t:"正常"},{max:120,s:0,t:"偏高"},{max:140,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端不確定"}]},
-  {key:"dxy",label:"DXY 美元",zones:[{max:100,s:2,t:"弱美元 利多"},{max:103,s:1,t:"中性偏弱"},{max:106,s:0,t:"中性"},{max:109,s:-1,t:"強美元 壓制"},{max:999,s:-2,t:"強美元 高壓"}]},
+  {key:"dxy",label:"DXY 美元",zones:[{max:100,s:2,t:"弱美元 利多"},{max:103,s:1,t:"中性偏弱"},{max:106,s:0,t:"中性"},{max:109,s:-1,t:"強美元"},{max:999,s:-2,t:"強美元 高壓"}]},
   {key:"us10y",label:"美債 10Y",zones:[{max:3.5,s:2,t:"低殖利率 偏多"},{max:4.0,s:1,t:"適中"},{max:4.5,s:0,t:"偏高"},{max:5.0,s:-1,t:"壓估值"},{max:99,s:-2,t:"過高 危險"}]},
   {key:"gold",label:"黃金",zones:[{max:-1,s:1,t:"下跌"},{max:0,s:2,t:"微跌 中性"},{max:0.5,s:1,t:"微漲 中性"},{max:1.5,s:0,t:"上漲 謹慎"},{max:99,s:-1,t:"急漲 避險"}],usePct:true},
-  {key:"oil",label:"原油 WTI",zones:[{max:-2,s:-1,t:"急跌 需求疑慮"},{max:0,s:1,t:"微跌 中性"},{max:1,s:2,t:"微漲 中性"},{max:2.5,s:0,t:"上漲 通膨"},{max:99,s:-1,t:"急漲 通膨風險"}],usePct:true},
-  {key:"fgi",label:"Fear & Greed",zones:[{max:20,s:1,t:"極度恐慌"},{max:35,s:1,t:"恐慌"},{max:55,s:2,t:"中性"},{max:70,s:0,t:"貪婪"},{max:85,s:-1,t:"極度貪婪"},{max:100,s:-2,t:"過熱"}],noPrice:true},
+  {key:"oil",label:"原油 WTI",zones:[{max:-2,s:-1,t:"急跌"},{max:0,s:1,t:"微跌 中性"},{max:1,s:2,t:"微漲 中性"},{max:2.5,s:0,t:"上漲 通膨"},{max:99,s:-1,t:"急漲 通膨風險"}],usePct:true},
+  {key:"fgi",label:"Fear & Greed",zones:[{max:20,s:1,t:"極度恐慌"},{max:35,s:1,t:"恐慌"},{max:55,s:2,t:"中性"},{max:70,s:0,t:"貪婪"},{max:85,s:-1,t:"極度貪婪"},{max:100,s:-2,t:"過熱"}],direct:true},
   {key:"rsi",label:"大盤 RSI",zones:[{max:30,s:1,t:"超賣"},{max:40,s:0,t:"偏弱"},{max:60,s:2,t:"健康"},{max:70,s:1,t:"偏強"},{max:80,s:0,t:"超買警示"},{max:100,s:-1,t:"強烈超買"}],direct:true},
   {key:"mfi",label:"MFI 資金流向",zones:[{max:20,s:1,t:"超賣"},{max:40,s:0,t:"資金流出"},{max:60,s:2,t:"中性"},{max:80,s:1,t:"資金流入"},{max:100,s:-1,t:"超買"}],direct:true},
 ];
-const US_MANUAL=[
-  {key:"putcall",label:"Put/Call Ratio",min:0.4,max:1.8,step:0.01,def:0.85,zones:[{max:0.6,s:-1,t:"過度貪婪"},{max:0.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀(逆向)"}]},
-  {key:"aaii",label:"AAII 多頭%",min:10,max:65,step:1,def:38,zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}]},
-  {key:"breadth",label:"市場廣度%",min:0,max:100,step:1,def:55,zones:[{max:35,s:-2,t:"多數股跌"},{max:45,s:0,t:"偏弱"},{max:55,s:2,t:"均衡"},{max:65,s:1,t:"多頭強勢"},{max:100,s:0,t:"過度擴張"}]},
+
+var US_MANUAL=[
+  {key:"putcall",label:"Put/Call Ratio",min:0.4,max:1.8,step:0.01,zones:[{max:0.6,s:-1,t:"過度貪婪"},{max:0.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀(逆向)"}]},
+  {key:"aaii",label:"AAII 多頭%",min:10,max:65,step:1,zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}]},
+  {key:"breadth",label:"市場廣度%",min:0,max:100,step:1,zones:[{max:35,s:-2,t:"多數股跌"},{max:45,s:0,t:"偏弱"},{max:55,s:2,t:"均衡"},{max:65,s:1,t:"多頭強勢"},{max:100,s:0,t:"過度擴張"}]},
 ];
-const TW_AUTO=[
+
+var TW_AUTO=[
   {key:"twii",label:"加權指數",zones:[{max:-2,s:-2,t:"急跌"},{max:-1,s:-1,t:"下跌"},{max:0.3,s:1,t:"持平"},{max:1,s:2,t:"上漲"},{max:99,s:1,t:"強漲"}],usePct:true},
-  {key:"fitx",label:"台指期貨",zones:[{max:-2,s:-2,t:"急跌"},{max:-1,s:-1,t:"下跌"},{max:0.3,s:1,t:"持平"},{max:1,s:2,t:"上漲"},{max:99,s:1,t:"強漲"}],usePct:true},
-  {key:"twvix",label:"TVIX 台版",zones:[{max:15,s:2,t:"低波動"},{max:20,s:2,t:"正常"},{max:25,s:1,t:"偏高"},{max:30,s:0,t:"警戒"},{max:40,s:-1,t:"恐慌"},{max:99,s:-2,t:"極端恐慌"}]},
   {key:"twd",label:"台幣/美金",zones:[{max:30,s:2,t:"台幣強勢"},{max:31,s:2,t:"偏強"},{max:32,s:1,t:"中性"},{max:33,s:0,t:"偏弱"},{max:34,s:-1,t:"台幣弱勢"},{max:99,s:-2,t:"台幣大貶"}]},
   {key:"rsi",label:"台股 RSI",zones:[{max:30,s:1,t:"超賣"},{max:40,s:0,t:"偏弱"},{max:60,s:2,t:"健康"},{max:70,s:1,t:"偏強"},{max:80,s:0,t:"超買警示"},{max:100,s:-1,t:"強烈超買"}],direct:true},
   {key:"mfi",label:"MFI 資金流向",zones:[{max:20,s:1,t:"超賣"},{max:40,s:0,t:"資金流出"},{max:60,s:2,t:"中性"},{max:80,s:1,t:"資金流入"},{max:100,s:-1,t:"超買"}],direct:true},
 ];
-const TW_MANUAL=[
-  {key:"foreign",label:"外資買賣超(億)",min:-200,max:200,step:1,def:0,zones:[{max:-50,s:-2,t:"大幅賣超"},{max:-10,s:-1,t:"賣超"},{max:10,s:1,t:"持平"},{max:50,s:2,t:"買超"},{max:999,s:2,t:"大幅買超"}]},
-  {key:"margin",label:"融資餘額變化",min:-5,max:5,step:0.1,def:0,zones:[{max:-2,s:2,t:"大幅降低 偏多"},{max:-0.5,s:1,t:"降低 健康"},{max:0.5,s:1,t:"持平"},{max:2,s:0,t:"增加 注意"},{max:99,s:-1,t:"大幅增加 警戒"}]},
-  {key:"short",label:"融券餘額變化",min:-5,max:5,step:0.1,def:0,zones:[{max:-2,s:-1,t:"大幅降低"},{max:-0.5,s:0,t:"降低"},{max:0.5,s:1,t:"持平"},{max:2,s:1,t:"增加 偏多軋空"},{max:99,s:2,t:"大增 軋空機會"}]},
-  {key:"putcall_tw",label:"Put/Call Ratio",min:0.4,max:2,step:0.01,def:1.0,zones:[{max:0.7,s:-1,t:"過度貪婪"},{max:1.0,s:1,t:"偏多"},{max:1.3,s:2,t:"均衡"},{max:1.6,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀(逆向)"}]},
-  {key:"retail",label:"散戶小台淨部位",min:-50000,max:50000,step:100,def:0,zones:[{max:-20000,s:2,t:"大空 逆向偏多"},{max:-5000,s:1,t:"偏空 逆向參考"},{max:5000,s:1,t:"中性"},{max:20000,s:0,t:"偏多 注意反轉"},{max:99999,s:-1,t:"大多 逆向偏空"}]},
-  {key:"tw_rsi_manual",label:"台股RSI(手動)",min:0,max:100,step:1,def:52,zones:[{max:30,s:1,t:"超賣"},{max:40,s:0,t:"偏弱"},{max:60,s:2,t:"健康"},{max:70,s:1,t:"偏強"},{max:80,s:0,t:"超買"},{max:100,s:-1,t:"強烈超買"}]},
+
+var TW_MANUAL=[
+  {key:"foreign",label:"外資買賣超(億)",min:-200,max:200,step:1,zones:[{max:-50,s:-2,t:"大幅賣超"},{max:-10,s:-1,t:"賣超"},{max:10,s:1,t:"持平"},{max:50,s:2,t:"買超"},{max:999,s:2,t:"大幅買超"}]},
+  {key:"margin",label:"融資餘額變化%",min:-5,max:5,step:0.1,zones:[{max:-2,s:2,t:"大幅降低 偏多"},{max:-0.5,s:1,t:"降低 健康"},{max:0.5,s:1,t:"持平"},{max:2,s:0,t:"增加 注意"},{max:99,s:-1,t:"大幅增加 警戒"}]},
+  {key:"short_val",label:"融券餘額變化%",min:-5,max:5,step:0.1,zones:[{max:-2,s:-1,t:"大幅降低"},{max:-0.5,s:0,t:"降低"},{max:0.5,s:1,t:"持平"},{max:2,s:1,t:"增加 偏多"},{max:99,s:2,t:"大增 軋空機會"}]},
+  {key:"putcall_tw",label:"Put/Call Ratio",min:0.4,max:2,step:0.01,zones:[{max:0.7,s:-1,t:"過度貪婪"},{max:1.0,s:1,t:"偏多"},{max:1.3,s:2,t:"均衡"},{max:1.6,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀(逆向)"}]},
+  {key:"retail",label:"散戶小台淨部位",min:-50000,max:50000,step:100,zones:[{max:-20000,s:2,t:"大空 逆向偏多"},{max:-5000,s:1,t:"偏空 逆向參考"},{max:5000,s:1,t:"中性"},{max:20000,s:0,t:"偏多 注意反轉"},{max:99999,s:-1,t:"大多 逆向偏空"}]},
+  {key:"tw_rsi_m",label:"台股RSI(手動)",min:0,max:100,step:1,zones:[{max:30,s:1,t:"超賣"},{max:40,s:0,t:"偏弱"},{max:60,s:2,t:"健康"},{max:70,s:1,t:"偏強"},{max:80,s:0,t:"超買"},{max:100,s:-1,t:"強烈超買"}]},
 ];
 
-const US_MANUAL_GROUPS={"情緒":["putcall","aaii"],"技術廣度":["breadth"]};
-const TW_MANUAL_GROUPS={"法人籌碼":["foreign","margin","short"],"期貨情緒":["putcall_tw","retail","tw_rsi_manual"]};
+var US_GROUPS={"情緒":["putcall","aaii"],"技術廣度":["breadth"]};
+var TW_GROUPS={"法人籌碼":["foreign","margin","short_val"],"期貨情緒":["putcall_tw","retail","tw_rsi_m"]};
 
-const manualVals={};
-[...US_MANUAL,...TW_MANUAL].forEach(i=>manualVals[i.key]=i.def);
-let activeUSGroup="情緒";
-let activeTWGroup="法人籌碼";
-
-function getZone(ind,v){for(const z of ind.zones)if(v<=z.max)return z;return ind.zones[ind.zones.length-1];}
-
-function sigClass(s){
-  if(s>=2)return"safe";
-  if(s===1)return"info";
-  if(s===0)return"warn";
-  return"danger";
+function getZone(ind,v){
+  for(var i=0;i<ind.zones.length;i++){if(v<=ind.zones[i].max)return ind.zones[i];}
+  return ind.zones[ind.zones.length-1];
 }
-function sigColors(s){
-  if(s>=2)return{dot:"var(--green)",badge:"var(--green-bg)",badgeTxt:"var(--green)",track:"var(--green)"};
-  if(s===1)return{dot:"var(--teal)",badge:"var(--teal-bg)",badgeTxt:"var(--teal)",track:"var(--teal)"};
-  if(s===0)return{dot:"var(--amber)",badge:"var(--amber-bg)",badgeTxt:"var(--amber)",track:"var(--amber)"};
-  if(s===-1)return{dot:"var(--red)",badge:"var(--red-bg)",badgeTxt:"var(--red)",track:"var(--red)"};
-  return{dot:"#ff2d2d",badge:"rgba(255,45,45,0.3)",badgeTxt:"#ff2d2d",track:"#ff2d2d"};
+
+function sigStyle(s){
+  if(s>=2)return{cls:"safe",dot:"var(--green)",badge:"var(--green-bg)",btxt:"var(--green)"};
+  if(s===1)return{cls:"caution",dot:"var(--teal)",badge:"var(--teal-bg)",btxt:"var(--teal)"};
+  if(s===0)return{cls:"warn",dot:"var(--amber)",badge:"var(--amber-bg)",btxt:"var(--amber)"};
+  if(s===-1)return{cls:"danger",dot:"var(--red)",badge:"var(--red-bg)",btxt:"var(--red)"};
+  return{cls:"danger",dot:"#ff2d2d",badge:"rgba(255,45,45,0.25)",btxt:"#ff2d2d"};
 }
+
 function safetyInfo(r){
   if(r>=0.75)return{label:"安全 可持倉",sub:"指標多數健康，風險可控",color:"var(--green)",bg:"var(--green-dim)",track:"var(--green)"};
-  if(r>=0.55)return{label:"偏安全 謹慎樂觀",sub:"整體偏多，留意弱項",color:"var(--teal)",bg:"rgba(90,200,250,0.15)",track:"var(--teal)"};
+  if(r>=0.55)return{label:"偏安全 謹慎樂觀",sub:"整體偏多，留意弱項",color:"var(--teal)",bg:"var(--teal-bg)",track:"var(--teal)"};
   if(r>=0.38)return{label:"中性 控制倉位",sub:"多空分歧，建議觀望",color:"var(--amber)",bg:"var(--amber-dim)",track:"var(--amber)"};
   if(r>=0.2)return{label:"偏危險 考慮減碼",sub:"多項指標偏空",color:"var(--red)",bg:"var(--red-dim)",track:"var(--red)"};
   return{label:"危險 高度警戒",sub:"建議大幅減碼或離場",color:"#ff2d2d",bg:"rgba(255,45,45,0.2)",track:"#ff2d2d"};
 }
 
-function getAutoVal(ind, data){
-  if(ind.direct) return data[ind.key] ?? null;
-  if(ind.key==="fgi") return data.fgi ?? null;
-  const d=data[ind.key];
-  if(!d) return null;
-  return ind.usePct ? d.pct : d.price;
+function getAutoVal(ind,data){
+  if(ind.direct)return(data[ind.key]!==undefined&&data[ind.key]!==null)?data[ind.key]:null;
+  if(ind.key==="fgi")return(data.fgi!==undefined&&data.fgi!==null)?data.fgi:null;
+  var d=data[ind.key];
+  if(!d)return null;
+  return ind.usePct?d.pct:d.price;
 }
 
-function calcScores(autoInds, manualInds, data, mVals){
-  let total=0, count=0;
-  autoInds.forEach(ind=>{
-    const v=getAutoVal(ind,data);
-    if(v!==null&&v!==undefined){total+=getZone(ind,v).s;count++;}
-  });
-  manualInds.forEach(ind=>{
-    total+=getZone(ind,mVals[ind.key]).s; count++;
-  });
-  return{total,count};
+function calcTotal(autoInds,manInds,data){
+  var total=0;
+  for(var i=0;i<autoInds.length;i++){
+    var v=getAutoVal(autoInds[i],data);
+    if(v!==null&&v!==undefined)total+=getZone(autoInds[i],v).s;
+  }
+  for(var j=0;j<manInds.length;j++){
+    total+=getZone(manInds[j],manualVals[manInds[j].key]).s;
+  }
+  return total;
 }
 
 function comboSignal(data){
-  const vix=data.vix?.price,skew=data.skew?.price,vvix=data.vvix?.price;
+  var vix=data.vix?data.vix.price:null;
+  var skew=data.skew?data.skew.price:null;
+  var vvix=data.vvix?data.vvix.price:null;
   if(!vix||!skew||!vvix)return{t:"數據載入中",d:"等待自動數據",c:"var(--txt3)",border:"var(--blue)"};
   if(skew>145&&vix<20)return{t:"暗流湧動",d:"高SKEW+低VIX，最危險組合",c:"var(--red)",border:"var(--red)"};
   if(skew>130&&vix>25&&vvix>120)return{t:"全面恐慌",d:"三指標同時偏高，市場已定價下跌",c:"var(--red)",border:"var(--red)"};
@@ -198,194 +197,190 @@ function comboSignal(data){
   return{t:"正常波動",d:"指標無明顯異常組合",c:"var(--teal)",border:"var(--teal)"};
 }
 
-function renderAutoCard(ind, data){
-  const v=getAutoVal(ind,data);
-  const z=v!==null&&v!==undefined?getZone(ind,v):null;
-  const s=z?z.s:1;
-  const sc=sigColors(s);
-  const cls=sigClass(s);
-  let valHtml="—", pctHtml="";
+function renderAutoCard(ind,data){
+  var v=getAutoVal(ind,data);
+  var z=v!==null&&v!==undefined?getZone(ind,v):null;
+  var s=z?z.s:1;
+  var ss=sigStyle(s);
+  var valHtml="—",pctHtml="";
   if(v!==null&&v!==undefined){
-    if(ind.key==="fgi") valHtml=`${v}`;
-    else if(ind.direct) valHtml=`${v}`;
-    else if(ind.usePct){
-      const d=data[ind.key];
-      valHtml=`${v>0?"+":""}${v.toFixed(2)}%`;
+    if(ind.direct||ind.key==="fgi"){
+      valHtml=""+parseFloat(v).toFixed(ind.key==="fgi"?0:2);
+    } else if(ind.usePct){
+      valHtml=(v>0?"+":"")+v.toFixed(2)+"%";
     } else {
-      const d=data[ind.key];
+      var d=data[ind.key];
       if(d){
         valHtml=d.price>=1000?d.price.toLocaleString():d.price.toFixed(2);
-        const pct=d.pct;
-        pctHtml=`<div class="metric-pct ${pct>=0?"pct-up":"pct-dn}">${pct>=0?"▲":"▼"} ${Math.abs(pct).toFixed(2)}%</div>`;
+        var p=d.pct;
+        pctHtml="<div class='metric-pct "+(p>=0?"pct-up":"pct-dn")+"'>"+(p>=0?"▲":"▼")+" "+Math.abs(p).toFixed(2)+"%</div>";
       }
     }
   }
-  return`<div class="metric-card ${cls}">
-    <div class="metric-dot" style="background:${sc.dot}"></div>
-    <div class="metric-label">${ind.label}</div>
-    <div class="metric-val">${valHtml}</div>
-    ${pctHtml}
-    <span class="metric-sig" style="background:${sc.badge};color:${sc.badgeTxt}">${z?z.t:"載入中"}</span>
-  </div>`;
+  return "<div class='metric-card "+ss.cls+"'>"
+    +"<div class='metric-dot' style='background:"+ss.dot+"'></div>"
+    +"<div class='metric-label'>"+ind.label+"</div>"
+    +"<div class='metric-val'>"+valHtml+"</div>"
+    +pctHtml
+    +"<span class='metric-sig' style='background:"+ss.badge+";color:"+ss.btxt+"'>"+(z?z.t:"載入中")+"</span>"
+    +"</div>";
 }
 
-function renderSlider(ind, mVals, groupKey){
-  const v=mVals[ind.key];
-  const z=getZone(ind,v);
-  const sc=sigColors(z.s);
-  const cls=sigClass(z.s);
-  const decs=ind.step<1?2:0;
-  return`<div class="slider-card ${cls}" id="scard_${ind.key}">
-    <div class="slider-header">
-      <span class="slider-name">${ind.label}</span>
-      <span class="slider-badge" style="background:${sc.badge};color:${sc.badgeTxt}" id="sbadge_${ind.key}">${z.t}</span>
-    </div>
-    <div class="slider-row">
-      <input type="range" min="${ind.min}" max="${ind.max}" step="${ind.step}" value="${v}"
-        style="background:linear-gradient(to right,${sc.dot} 0%,${sc.dot} ${((v-ind.min)/(ind.max-ind.min)*100).toFixed(0)}%,var(--bg4) ${((v-ind.min)/(ind.max-ind.min)*100).toFixed(0)}%,var(--bg4) 100%)"
-        oninput="onSlider(this,'${ind.key}',${ind.min},${ind.max},${decs})"/>
-      <span class="slider-num" id="sval_${ind.key}" style="color:${sc.badgeTxt}">${parseFloat(v).toFixed(decs)}</span>
-    </div>
-  </div>`;
+function renderSlider(ind){
+  var v=manualVals[ind.key];
+  var z=getZone(ind,v);
+  var ss=sigStyle(z.s);
+  var decs=ind.step<1?2:0;
+  var pct=((v-ind.min)/(ind.max-ind.min)*100).toFixed(0);
+  var bg="linear-gradient(to right,"+ss.dot+" 0%,"+ss.dot+" "+pct+"%,var(--bg4) "+pct+"%,var(--bg4) 100%)";
+  return "<div class='slider-card "+ss.cls+"' id='sc_"+ind.key+"'>"
+    +"<div class='slider-header'>"
+    +"<span class='slider-name'>"+ind.label+"</span>"
+    +"<span class='slider-badge' id='sb_"+ind.key+"' style='background:"+ss.badge+";color:"+ss.btxt+"'>"+z.t+"</span>"
+    +"</div>"
+    +"<div class='slider-row'>"
+    +"<input type='range' min='"+ind.min+"' max='"+ind.max+"' step='"+ind.step+"' value='"+v+"' style='background:"+bg+"' "
+    +"oninput=\"onSlider(this,'"+ind.key+"',"+ind.min+","+ind.max+","+decs+")\"/>"
+    +"<span class='slider-num' id='sv_"+ind.key+"' style='color:"+ss.btxt+"'>"+parseFloat(v).toFixed(decs)+"</span>"
+    +"</div></div>";
 }
 
-function onSlider(el, key, min, max, decs){
-  const v=parseFloat(el.value);
+function onSlider(el,key,min,max,decs){
+  var v=parseFloat(el.value);
   manualVals[key]=v;
-  const ind=[...US_MANUAL,...TW_MANUAL].find(i=>i.key===key);
-  const z=getZone(ind,v);
-  const sc=sigColors(z.s);
-  const cls=sigClass(z.s);
-  const pct=((v-min)/(max-min)*100).toFixed(0);
-  el.style.background=`linear-gradient(to right,${sc.dot} 0%,${sc.dot} ${pct}%,var(--bg4) ${pct}%,var(--bg4) 100%)`;
-  document.getElementById(`sval_${key}`).textContent=v.toFixed(decs);
-  document.getElementById(`sval_${key}`).style.color=sc.badgeTxt;
-  document.getElementById(`sbadge_${key}`).textContent=z.t;
-  document.getElementById(`sbadge_${key}`).style.background=sc.badge;
-  document.getElementById(`sbadge_${key}`).style.color=sc.badgeTxt;
-  const card=document.getElementById(`scard_${key}`);
-  card.className=`slider-card ${cls}`;
+  var ind=null;
+  var all=US_MANUAL.concat(TW_MANUAL);
+  for(var i=0;i<all.length;i++){if(all[i].key===key){ind=all[i];break;}}
+  if(!ind)return;
+  var z=getZone(ind,v);
+  var ss=sigStyle(z.s);
+  var pct=((v-min)/(max-min)*100).toFixed(0);
+  el.style.background="linear-gradient(to right,"+ss.dot+" 0%,"+ss.dot+" "+pct+"%,var(--bg4) "+pct+"%,var(--bg4) 100%)";
+  document.getElementById("sv_"+key).textContent=v.toFixed(decs);
+  document.getElementById("sv_"+key).style.color=ss.btxt;
+  document.getElementById("sb_"+key).textContent=z.t;
+  document.getElementById("sb_"+key).style.background=ss.badge;
+  document.getElementById("sb_"+key).style.color=ss.btxt;
+  document.getElementById("sc_"+key).className="slider-card "+ss.cls;
   updateSafety();
 }
 
 function updateSafety(){
-  const isUS=currentMarket==="us";
-  const autoInds=isUS?US_AUTO:TW_AUTO;
-  const manInds=isUS?US_MANUAL:TW_MANUAL;
-  const data=isUS?apiData.us:apiData.tw;
-  const mn=(autoInds.length+manInds.length)*-2;
-  const mx=(autoInds.length+manInds.length)*2;
-  const {total}=calcScores(autoInds,manInds,data,manualVals);
-  const r=(total-mn)/(mx-mn);
-  const sf=safetyInfo(r);
-  const banner=document.getElementById("safetyBanner");
-  if(banner){
-    banner.style.background=sf.bg;
-    document.getElementById("safetyLabel").textContent=sf.label;
-    document.getElementById("safetyLabel").style.color=sf.color;
-    document.getElementById("safetySub").textContent=sf.sub;
-    document.getElementById("safetySub").style.color=sf.color;
-    document.getElementById("progressFill").style.width=(r*100).toFixed(0)+"%";
-    document.getElementById("progressFill").style.background=sf.track;
-    document.getElementById("progressLabel").textContent=`綜合分 ${total} / ${mx}`;
-    document.getElementById("progressLabel").style.color=sf.color;
-  }
+  var isUS=currentMarket==="us";
+  var aInds=isUS?US_AUTO:TW_AUTO;
+  var mInds=isUS?US_MANUAL:TW_MANUAL;
+  var data=isUS?apiData.us:apiData.tw;
+  var mn=(aInds.length+mInds.length)*-2;
+  var mx=(aInds.length+mInds.length)*2;
+  var total=calcTotal(aInds,mInds,data);
+  var r=(total-mn)/(mx-mn);
+  var sf=safetyInfo(r);
+  var banner=document.getElementById("safetyBanner");
+  if(!banner)return;
+  banner.style.background=sf.bg;
+  document.getElementById("safetyLabel").textContent=sf.label;
+  document.getElementById("safetyLabel").style.color=sf.color;
+  document.getElementById("safetySub").textContent=sf.sub;
+  document.getElementById("safetySub").style.color=sf.color;
+  document.getElementById("progressFill").style.width=(r*100).toFixed(0)+"%";
+  document.getElementById("progressFill").style.background=sf.track;
+  document.getElementById("progressLabel").textContent="綜合分 "+total+" / "+mx;
+  document.getElementById("progressLabel").style.color=sf.color;
 }
 
-function setManualGroup(g, market){
-  if(market==="us") activeUSGroup=g;
+function setManualGroup(g,market){
+  if(market==="us")activeUSGroup=g;
   else activeTWGroup=g;
-  renderManualSection(market);
+  renderManualPanel(market);
 }
 
-function renderManualSection(market){
-  const isUS=market==="us";
-  const manInds=isUS?US_MANUAL:TW_MANUAL;
-  const groups=isUS?US_MANUAL_GROUPS:TW_MANUAL_GROUPS;
-  const activeGroup=isUS?activeUSGroup:activeTWGroup;
-  const panel=document.getElementById("manualPanel");
+function renderManualPanel(market){
+  var isUS=market==="us";
+  var mInds=isUS?US_MANUAL:TW_MANUAL;
+  var groups=isUS?US_GROUPS:TW_GROUPS;
+  var activeGroup=isUS?activeUSGroup:activeTWGroup;
+  var panel=document.getElementById("manualPanel");
   if(!panel)return;
-  let html=`<div class="seg-ctrl">`;
-  Object.keys(groups).forEach(g=>{
-    html+=`<button class="seg-btn${g===activeGroup?" active":""}" onclick="setManualGroup('${g}','${market}')">${g}</button>`;
-  });
-  html+=`</div>`;
-  const keys=groups[activeGroup]||[];
-  keys.forEach(k=>{
-    const ind=manInds.find(i=>i.key===k);
-    if(ind) html+=renderSlider(ind,manualVals,activeGroup);
-  });
+  var html="<div class='seg-ctrl'>";
+  var gkeys=Object.keys(groups);
+  for(var i=0;i<gkeys.length;i++){
+    var g=gkeys[i];
+    html+="<button class='seg-btn"+(g===activeGroup?" active":"")+"' onclick=\"setManualGroup('"+g+"','"+market+"')\">"+g+"</button>";
+  }
+  html+="</div>";
+  var keys=groups[activeGroup]||[];
+  for(var j=0;j<keys.length;j++){
+    var ind=null;
+    for(var k=0;k<mInds.length;k++){if(mInds[k].key===keys[j]){ind=mInds[k];break;}}
+    if(ind)html+=renderSlider(ind);
+  }
   panel.innerHTML=html;
 }
 
 function render(market){
-  const isUS=market==="us";
-  const autoInds=isUS?US_AUTO:TW_AUTO;
-  const manInds=isUS?US_MANUAL:TW_MANUAL;
-  const data=isUS?apiData.us:apiData.tw;
-  const mn=(autoInds.length+manInds.length)*-2;
-  const mx=(autoInds.length+manInds.length)*2;
-  const {total}=calcScores(autoInds,manInds,data,manualVals);
-  const r=(total-mn)/(mx-mn);
-  const sf=safetyInfo(r);
-
-  let comboHtml="";
+  var isUS=market==="us";
+  var aInds=isUS?US_AUTO:TW_AUTO;
+  var mInds=isUS?US_MANUAL:TW_MANUAL;
+  var data=isUS?apiData.us:apiData.tw;
+  var mn=(aInds.length+mInds.length)*-2;
+  var mx=(aInds.length+mInds.length)*2;
+  var total=calcTotal(aInds,mInds,data);
+  var r=(total-mn)/(mx-mn);
+  var sf=safetyInfo(r);
+  var comboHtml="";
   if(isUS){
-    const cb=comboSignal(data);
-    comboHtml=`<div class="combo-card" style="border-left-color:${cb.border}">
-      <div class="combo-title">VIX + SKEW + VVIX 組合</div>
-      <div class="combo-val" style="color:${cb.c}">${cb.t}</div>
-      <div class="combo-desc">${cb.d}</div>
-    </div>`;
+    var cb=comboSignal(data);
+    comboHtml="<div class='combo-card' style='border-left-color:"+cb.border+"'>"
+      +"<div class='combo-title'>VIX + SKEW + VVIX 組合</div>"
+      +"<div class='combo-val' style='color:"+cb.c+"'>"+cb.t+"</div>"
+      +"<div class='combo-desc'>"+cb.d+"</div>"
+      +"</div>";
   }
-
-  let html=`
-  <div class="safety-banner" id="safetyBanner" style="background:${sf.bg}">
-    <div id="safetyLabel" style="font-size:28px;font-weight:700;letter-spacing:-0.5px;color:${sf.color};margin-bottom:4px">${sf.label}</div>
-    <div id="safetySub" style="font-size:14px;opacity:0.9;margin-bottom:14px;color:${sf.color}">${sf.sub}</div>
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill" style="width:${(r*100).toFixed(0)}%;background:${sf.track}"></div>
-    </div>
-    <div class="progress-label" id="progressLabel" style="color:${sf.color}">綜合分 ${total} / ${mx}</div>
-  </div>
-  ${comboHtml}
-  <div class="section-title">自動抓取指標</div>
-  <div class="auto-grid">`;
-  autoInds.forEach(ind=>{ html+=renderAutoCard(ind,data); });
-  html+=`</div>
-  <div class="section-title">手動輸入指標</div>
-  <div class="manual-section" id="manualPanel"></div>
-  <div class="footer-note">
-    <strong>自動更新：</strong>每15分鐘 &nbsp;|&nbsp; <strong>手動（盤後）：</strong>${isUS?"Put/Call / AAII / 市場廣度":"外資買賣超 / 融資券 / Put/Call / 散戶部位"}
-  </div>`;
-
+  var html="<div class='safety-banner' id='safetyBanner' style='background:"+sf.bg+"'>"
+    +"<div id='safetyLabel' class='safety-label' style='color:"+sf.color+"'>"+sf.label+"</div>"
+    +"<div id='safetySub' class='safety-sub' style='color:"+sf.color+"'>"+sf.sub+"</div>"
+    +"<div class='progress-track'><div class='progress-fill' id='progressFill' style='width:"+(r*100).toFixed(0)+"%;background:"+sf.track+"'></div></div>"
+    +"<div class='progress-label' id='progressLabel' style='color:"+sf.color+"'>綜合分 "+total+" / "+mx+"</div>"
+    +"</div>"
+    +comboHtml
+    +"<div class='section-title'>自動抓取指標</div>"
+    +"<div class='auto-grid'>";
+  for(var i=0;i<aInds.length;i++)html+=renderAutoCard(aInds[i],data);
+  html+="</div>"
+    +"<div class='section-title'>手動輸入指標</div>"
+    +"<div id='manualPanel'></div>"
+    +"<div class='footer-note'>"
+    +"<strong>自動更新：</strong>每15分鐘 &nbsp;|&nbsp; "
+    +(isUS?"<strong>手動（盤後）：</strong>Put/Call / AAII / 市場廣度":"<strong>手動（盤後）：</strong>外資 / 融資券 / Put/Call / 散戶部位")
+    +"</div>";
   document.getElementById("mainContent").innerHTML=html;
-  renderManualSection(market);
+  renderManualPanel(market);
 }
 
-function switchMarket(market, btn){
+function switchMarket(market,btn){
   currentMarket=market;
-  document.querySelectorAll(".market-tab").forEach(b=>b.classList.remove("active"));
+  var tabs=document.querySelectorAll(".market-tab");
+  for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("active");
   btn.classList.add("active");
   render(market);
 }
 
 async function loadAuto(){
-  const btn=document.getElementById("refreshBtn");
-  if(btn) btn.style.animation="spin 0.8s linear infinite";
+  var btn=document.getElementById("refreshBtn");
+  if(btn)btn.style.animation="spin 0.8s linear infinite";
   try{
-    const controller=new AbortController();
-    const timeout=setTimeout(()=>controller.abort(),15000);
-    const res=await fetch(PROXY,{cache:"no-store",signal:controller.signal});
+    var controller=new AbortController();
+    var timeout=setTimeout(function(){controller.abort();},15000);
+    var res=await fetch(PROXY,{cache:"no-store",signal:controller.signal});
     clearTimeout(timeout);
-    const json=await res.json();
-    if(json && json.us) apiData=json;
+    var json=await res.json();
+    if(json&&json.us)apiData=json;
     else apiData={us:{},tw:{}};
   }catch(e){
     apiData={us:{},tw:{}};
     console.error("載入失敗",e);
   }
-  if(btn) btn.style.animation="";
+  if(btn)btn.style.animation="";
   render(currentMarket);
 }
 
