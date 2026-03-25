@@ -327,21 +327,14 @@ function renderTWChips(data){
   html+="<div class='chip-block-title'>融資融券餘額</div>";
   if(md){
     var mChgC=chgColor(-(md.marginChg||0));
-    var sChgC=chgColor(md.shortChg||0);
     html+="<div class='chip-row'>"
       +"<span class='chip-name'>融資餘額</span>"
       +"<div class='chip-vals'>"
-      +"<span class='chip-chg' style='background:"+chgColor(-(md.marginChg||0))+"22;color:"+mChgC+"'>"
-      +chgSign(-(md.marginChg||0))+fmtNum(Math.abs(md.marginChg||0))+" 張 ("+(md.marginChgPct>0?"+":"")+fmt(md.marginChgPct,2)+"%)</span>"
-      +"<span class='chip-main'>"+fmtNum(md.margin)+"</span>"
-      +"</div></div>";
-    html+="<div class='chip-row'>"
-      +"<span class='chip-name'>融券餘額</span>"
-      +"<div class='chip-vals'>"
-      +"<span class='chip-chg' style='background:"+sChgC+"22;color:"+sChgC+"'>"
-      +chgSign(md.shortChg||0)+fmtNum(md.shortChg||0)+" 張 ("+(md.shortChgPct>0?"+":"")+fmt(md.shortChgPct,2)+"%)</span>"
-      +"<span class='chip-main'>"+fmtNum(md.short)+"</span>"
-      +"</div></div>";
+      +"<span class='chip-chg' style='background:"+mChgC+"22;color:"+mChgC+"'>"
+      +(md.marginChg>=0?"+":"")+fmtNum(md.marginChg||0)+" 億 ("+(md.marginChgPct>0?"+":"")+fmt(md.marginChgPct,2)+"%)</span>"
+      +"<span class='chip-main'>"+fmtNum(md.margin)+" 億</span>"
+      +"</div></div>"
+      +"<div style='font-size:10px;color:rgba(235,235,245,0.35);margin-top:6px'>融資減少偏多，融資增加偏空</div>";
     html+="<div style='font-size:10px;color:rgba(235,235,245,0.35);margin-top:6px'>融資減少偏多，融資增加偏空｜融券增加偏多（軋空）</div>";
   } else {
     html+="<div style='font-size:12px;color:rgba(235,235,245,0.4);padding:8px 0'>盤後4點後更新</div>";
