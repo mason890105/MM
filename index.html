@@ -5,154 +5,175 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>市場位階儀表板</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#000">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="市場儀表板">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#000;color:#fff;min-height:100vh;padding:0 0 40px}
-.header{padding:16px 16px 0;background:#000}
-.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.header-title{font-size:24px;font-weight:700;letter-spacing:-0.5px}
-.header-date{font-size:12px;color:rgba(235,235,245,0.5)}
-.refresh-btn{width:34px;height:34px;border-radius:50%;background:#1c1c1e;border:none;cursor:pointer;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center}
-.refresh-btn.spinning{animation:spin 0.8s linear infinite}
-.market-tabs{display:flex;background:#1c1c1e;border-radius:10px;padding:3px;margin-bottom:16px}
-.market-tab{flex:1;padding:7px;border-radius:8px;border:none;cursor:pointer;font-size:14px;font-weight:500;background:transparent;color:rgba(235,235,245,0.5);transition:all 0.2s}
-.market-tab.active{background:#2c2c2e;color:#fff}
-.content{padding:0 16px}
-.safety-banner{border-radius:14px;padding:16px;margin-bottom:12px}
-.safety-label{font-size:26px;font-weight:700;margin-bottom:2px;letter-spacing:-0.5px}
-.safety-sub{font-size:13px;opacity:0.85;margin-bottom:12px}
-.progress-track{background:rgba(0,0,0,0.25);border-radius:4px;height:5px;overflow:hidden}
-.progress-fill{height:100%;border-radius:4px;transition:width 0.5s}
-.progress-label{font-size:11px;opacity:0.7;margin-top:5px;text-align:right}
-.combo-card{background:#1c1c1e;border-radius:10px;padding:12px 14px;margin-bottom:16px;border-left:3px solid #0a84ff}
-.combo-title{font-size:10px;color:rgba(235,235,245,0.5);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
-.combo-val{font-size:16px;font-weight:600;margin-bottom:1px}
-.combo-desc{font-size:12px;color:rgba(235,235,245,0.7)}
-.section-title{font-size:11px;font-weight:600;color:rgba(235,235,245,0.5);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;padding:0 2px}
-.auto-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:20px}
-.metric-card{background:#1c1c1e;border-radius:10px;padding:12px;border:1px solid #2c2c2e}
-.metric-card.safe{border-color:#30d158;background:rgba(48,209,88,0.12)}
-.metric-card.caution{border-color:#5ac8fa;background:rgba(90,200,250,0.1)}
-.metric-card.warn{border-color:#ffd60a;background:rgba(255,214,10,0.1)}
-.metric-card.danger{border-color:#ff453a;background:rgba(255,69,58,0.12)}
-.metric-dot{width:7px;height:7px;border-radius:50%;margin-bottom:6px}
-.metric-label{font-size:10px;color:rgba(235,235,245,0.55);margin-bottom:3px;font-weight:500}
-.metric-val{font-size:20px;font-weight:700;letter-spacing:-0.5px}
-.metric-pct{font-size:11px;font-weight:500;margin-top:2px}
-.metric-sig{font-size:10px;margin-top:5px;padding:2px 7px;border-radius:20px;display:inline-block;font-weight:600}
-.metric-prev{font-size:10px;margin-top:2px;color:rgba(235,235,245,0.45)}
-.chip-section{margin-bottom:20px}
-.chip-block{background:#1c1c1e;border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid #2c2c2e}
-.chip-block-title{font-size:11px;color:rgba(235,235,245,0.5);margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
-.chip-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid rgba(255,255,255,0.06)}
-.chip-row:last-child{border-bottom:none}
-.chip-name{font-size:13px;color:rgba(235,235,245,0.8)}
-.chip-vals{display:flex;align-items:center;gap:10px}
-.chip-main{font-size:15px;font-weight:600}
-.chip-chg{font-size:11px;padding:2px 6px;border-radius:6px;font-weight:500}
-.chip-prev{font-size:11px;color:rgba(235,235,245,0.4)}
-.seg-ctrl{display:flex;background:#1c1c1e;border-radius:10px;padding:3px;margin-bottom:10px}
-.seg-btn{flex:1;padding:6px 4px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:500;background:transparent;color:rgba(235,235,245,0.5);transition:all 0.2s}
-.seg-btn.active{background:#2c2c2e;color:#fff}
-.slider-card{background:#1c1c1e;border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid #2c2c2e}
-.slider-card.safe{border-color:#30d158}
-.slider-card.caution{border-color:#5ac8fa}
-.slider-card.warn{border-color:#ffd60a}
-.slider-card.danger{border-color:#ff453a}
-.slider-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.slider-name{font-size:14px;font-weight:600}
-.slider-badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
-.slider-row{display:flex;align-items:center;gap:10px}
-.slider-row input[type=range]{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;outline:none;cursor:pointer}
-.slider-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.4)}
-.slider-num{font-size:15px;font-weight:700;min-width:50px;text-align:right}
-.footer-note{background:#1c1c1e;border-radius:10px;padding:10px 12px;font-size:10px;color:rgba(235,235,245,0.5);line-height:1.8}
-.footer-note strong{color:rgba(235,235,245,0.7)}
-.loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;gap:12px}
-.spinner{width:28px;height:28px;border:3px solid #2c2c2e;border-top-color:#0a84ff;border-radius:50%;animation:spin 0.8s linear infinite}
-.loading-txt{font-size:13px;color:rgba(235,235,245,0.5)}
-.pct-up{color:#30d158}
-.pct-dn{color:#ff453a}
-.neutral{color:rgba(235,235,245,0.5)}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#000;color:#fff;padding:0 0 48px}
+/* header */
+.hdr{padding:18px 16px 0;background:#000}
+.hdr-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.hdr-title{font-size:26px;font-weight:700;letter-spacing:-0.5px}
+.hdr-sub{font-size:12px;color:rgba(235,235,245,0.5);margin-top:2px}
+.rfsh{width:34px;height:34px;border-radius:50%;background:#1c1c1e;border:none;cursor:pointer;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.rfsh:active{transform:scale(.9)}
+.rfsh.spin{animation:spin .7s linear infinite}
+/* market tabs */
+.mtabs{display:flex;background:#1c1c1e;border-radius:10px;padding:3px;margin-bottom:18px}
+.mtab{flex:1;padding:7px;border-radius:8px;border:none;cursor:pointer;font-size:14px;font-weight:500;background:transparent;color:rgba(235,235,245,0.5);transition:all .2s}
+.mtab.on{background:#2c2c2e;color:#fff}
+/* content */
+.cnt{padding:0 16px}
+/* safety banner */
+.sban{border-radius:14px;padding:16px;margin-bottom:14px}
+.sban-label{font-size:26px;font-weight:700;letter-spacing:-.5px;margin-bottom:3px}
+.sban-sub{font-size:13px;opacity:.85;margin-bottom:12px}
+.pbar{background:rgba(0,0,0,.25);border-radius:4px;height:5px;overflow:hidden}
+.pbar-fill{height:100%;border-radius:4px;transition:width .5s}
+.pbar-note{font-size:11px;opacity:.65;margin-top:5px;text-align:right}
+/* combo */
+.combo{background:#1c1c1e;border-radius:10px;padding:12px 14px;margin-bottom:18px;border-left:3px solid #0a84ff}
+.combo-tt{font-size:10px;color:rgba(235,235,245,.5);margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px}
+.combo-v{font-size:16px;font-weight:600;margin-bottom:2px}
+.combo-d{font-size:12px;color:rgba(235,235,245,.7)}
+/* section title */
+.stitle{font-size:11px;font-weight:600;color:rgba(235,235,245,.5);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding:0 2px}
+/* 2-col grid */
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:18px}
+/* metric card */
+.mc{background:#1c1c1e;border-radius:10px;padding:12px;border:1px solid #2c2c2e}
+.mc.safe{border-color:#30d158;background:rgba(48,209,88,.1)}
+.mc.caut{border-color:#5ac8fa;background:rgba(90,200,250,.08)}
+.mc.warn{border-color:#ffd60a;background:rgba(255,214,10,.08)}
+.mc.dang{border-color:#ff453a;background:rgba(255,69,58,.1)}
+.mc-dot{width:7px;height:7px;border-radius:50%;margin-bottom:6px}
+.mc-lbl{font-size:10px;color:rgba(235,235,245,.55);margin-bottom:3px;font-weight:500}
+.mc-val{font-size:20px;font-weight:700;letter-spacing:-.5px}
+.mc-pct{font-size:11px;font-weight:500;margin-top:2px}
+.mc-sig{font-size:10px;margin-top:5px;padding:2px 7px;border-radius:20px;display:inline-block;font-weight:600}
+/* chip block */
+.cb{background:#1c1c1e;border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid #2c2c2e}
+.cb-title{font-size:10px;font-weight:600;color:rgba(235,235,245,.5);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.crow{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.crow:last-child{border-bottom:none}
+.crow-name{font-size:13px;color:rgba(235,235,245,.8)}
+.crow-right{display:flex;align-items:center;gap:8px}
+.crow-main{font-size:15px;font-weight:600}
+.crow-chg{font-size:11px;padding:2px 7px;border-radius:6px;font-weight:500}
+.crow-prev{font-size:11px;color:rgba(235,235,245,.4)}
+/* night session */
+.nsess{border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid}
+.nsess-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.nsess-badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.nsess-date{font-size:11px;color:rgba(235,235,245,.4)}
+.nsess-body{display:flex;justify-content:space-between;align-items:flex-end}
+.nsess-price{font-size:26px;font-weight:700;letter-spacing:-.5px}
+.nsess-right{text-align:right}
+.nsess-chg{font-size:15px;font-weight:600}
+.nsess-vol{font-size:11px;color:rgba(235,235,245,.4);margin-top:2px}
+/* margin detail */
+.marg-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.marg-row:last-child{border-bottom:none}
+.marg-label{font-size:12px;color:rgba(235,235,245,.6)}
+.marg-vals{display:flex;align-items:center;gap:6px}
+.marg-prev{font-size:12px;color:rgba(235,235,245,.4)}
+.marg-arrow{font-size:12px;color:rgba(235,235,245,.3)}
+.marg-now{font-size:14px;font-weight:600}
+.marg-chg{font-size:11px;padding:2px 6px;border-radius:6px;font-weight:500}
+/* slider */
+.segc{display:flex;background:#1c1c1e;border-radius:10px;padding:3px;margin-bottom:10px}
+.segb{flex:1;padding:6px 4px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:500;background:transparent;color:rgba(235,235,245,.5);transition:all .2s}
+.segb.on{background:#2c2c2e;color:#fff}
+.scard{background:#1c1c1e;border-radius:10px;padding:12px 14px;margin-bottom:8px;border:1px solid #2c2c2e}
+.scard.safe{border-color:#30d158}
+.scard.caut{border-color:#5ac8fa}
+.scard.warn{border-color:#ffd60a}
+.scard.dang{border-color:#ff453a}
+.scard-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.scard-name{font-size:14px;font-weight:600}
+.scard-badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.srow{display:flex;align-items:center;gap:10px}
+.srow input[type=range]{flex:1;-webkit-appearance:none;height:4px;border-radius:2px;outline:none;cursor:pointer}
+.srow input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.snum{font-size:15px;font-weight:700;min-width:50px;text-align:right}
+/* footer */
+.ftnote{background:#1c1c1e;border-radius:10px;padding:10px 12px;font-size:10px;color:rgba(235,235,245,.5);line-height:1.8}
+.ftnote strong{color:rgba(235,235,245,.7)}
+/* loading */
+.ldwrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;gap:12px}
+.spinner{width:28px;height:28px;border:3px solid #2c2c2e;border-top-color:#0a84ff;border-radius:50%;animation:spin .8s linear infinite}
+.ldtxt{font-size:13px;color:rgba(235,235,245,.5)}
+.up{color:#30d158}.dn{color:#ff453a}.neu{color:rgba(235,235,245,.5)}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-<div class="header">
-  <div class="header-top">
+<div class="hdr">
+  <div class="hdr-top">
     <div>
-      <div class="header-title">市場儀表板</div>
-      <div class="header-date" id="dateLabel"></div>
+      <div class="hdr-title">市場儀表板</div>
+      <div class="hdr-sub" id="dateLabel"></div>
     </div>
-    <button class="refresh-btn" onclick="loadAuto()" id="refreshBtn">↻</button>
+    <button class="rfsh" onclick="loadAuto()" id="rfBtn">↻</button>
   </div>
-  <div class="market-tabs">
-    <button class="market-tab active" onclick="switchMarket('us',this)">🇺🇸 美股</button>
-    <button class="market-tab" onclick="switchMarket('tw',this)">🇹🇼 台股</button>
+  <div class="mtabs">
+    <button class="mtab on" onclick="switchMkt('us',this)">🇺🇸 美股</button>
+    <button class="mtab" onclick="switchMkt('tw',this)">🇹🇼 台股</button>
   </div>
 </div>
-<div class="content" id="mainContent">
-  <div class="loading-wrap"><div class="spinner"></div><div class="loading-txt">載入市場數據中...</div></div>
+<div class="cnt" id="main">
+  <div class="ldwrap"><div class="spinner"></div><div class="ldtxt">載入市場數據中...</div></div>
 </div>
 <script>
 var PROXY="https://market-proxy.q0900027293.workers.dev/";
 var apiData={us:{},tw:{}};
-var currentMarket="us";
-var activeUSGroup="情緒";
-var activeTWGroup="法人現貨";
-var manualVals={putcall:0.85,aaii:38,breadth:55};
+var curMkt="us";
+var usGrp="情緒";
+var mVals={putcall:.85,aaii:38,breadth:55};
 
 var US_AUTO=[
-  {key:"vix",label:"VIX 恐慌指數",zones:[{max:15,s:-1,t:"過度樂觀"},{max:20,s:2,t:"低波動"},{max:25,s:1,t:"正常"},{max:30,s:0,t:"警戒"},{max:40,s:-1,t:"恐慌"},{max:99,s:-2,t:"極端恐慌"}]},
-  {key:"skew",label:"SKEW 黑天鵝",zones:[{max:115,s:2,t:"正常"},{max:130,s:1,t:"輕度風險"},{max:150,s:0,t:"中高風險"},{max:165,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端"}]},
-  {key:"vvix",label:"VVIX",zones:[{max:80,s:2,t:"極度平靜"},{max:100,s:1,t:"正常"},{max:120,s:0,t:"偏高"},{max:140,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端不確定"}]},
-  {key:"fgi",label:"Fear & Greed",zones:[{max:20,s:1,t:"極度恐慌"},{max:35,s:1,t:"恐慌"},{max:55,s:2,t:"中性"},{max:70,s:0,t:"貪婪"},{max:85,s:-1,t:"極度貪婪"},{max:100,s:-2,t:"過熱"}],direct:true},
-  {key:"dxy",label:"DXY 美元",zones:[{max:100,s:2,t:"弱美元 利多"},{max:103,s:1,t:"中性偏弱"},{max:106,s:0,t:"中性"},{max:109,s:-1,t:"強美元"},{max:999,s:-2,t:"強美元 高壓"}]},
-  {key:"us10y",label:"美債 10Y",zones:[{max:3.5,s:2,t:"低殖利率 偏多"},{max:4.0,s:1,t:"適中"},{max:4.5,s:0,t:"偏高"},{max:5.0,s:-1,t:"壓估值"},{max:99,s:-2,t:"過高 危險"}]},
-  {key:"gold",label:"黃金",zones:[{max:-1,s:1,t:"下跌"},{max:0,s:2,t:"微跌 中性"},{max:0.5,s:1,t:"微漲 中性"},{max:1.5,s:0,t:"上漲 謹慎"},{max:99,s:-1,t:"急漲 避險"}],usePct:true},
-  {key:"oil",label:"原油 WTI",zones:[{max:-2,s:-1,t:"急跌"},{max:0,s:1,t:"微跌 中性"},{max:1,s:2,t:"微漲 中性"},{max:2.5,s:0,t:"上漲 通膨"},{max:99,s:-1,t:"急漲 通膨風險"}],usePct:true},
-  {key:"rsi",label:"大盤 RSI",zones:[{max:30,s:1,t:"超賣"},{max:40,s:0,t:"偏弱"},{max:60,s:2,t:"健康"},{max:70,s:1,t:"偏強"},{max:80,s:0,t:"超買警示"},{max:100,s:-1,t:"強烈超買"}],direct:true},
-  {key:"mfi",label:"MFI 資金流向",zones:[{max:20,s:1,t:"超賣"},{max:40,s:0,t:"資金流出"},{max:60,s:2,t:"中性"},{max:80,s:1,t:"資金流入"},{max:100,s:-1,t:"超買"}],direct:true},
+  {key:"vix",lbl:"VIX",zones:[{max:15,s:-1,t:"過度樂觀"},{max:20,s:2,t:"低波動"},{max:25,s:1,t:"正常"},{max:30,s:0,t:"警戒"},{max:40,s:-1,t:"恐慌"},{max:99,s:-2,t:"極端恐慌"}]},
+  {key:"skew",lbl:"SKEW 黑天鵝",zones:[{max:115,s:2,t:"正常"},{max:130,s:1,t:"輕度風險"},{max:150,s:0,t:"中高風險"},{max:165,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端"}]},
+  {key:"vvix",lbl:"VVIX",zones:[{max:80,s:2,t:"極度平靜"},{max:100,s:1,t:"正常"},{max:120,s:0,t:"偏高"},{max:140,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端不確定"}]},
+  {key:"fgi",lbl:"Fear & Greed",zones:[{max:20,s:1,t:"極度恐慌"},{max:35,s:1,t:"恐慌"},{max:55,s:2,t:"中性"},{max:70,s:0,t:"貪婪"},{max:85,s:-1,t:"極度貪婪"},{max:100,s:-2,t:"過熱"}],direct:true},
+  {key:"dxy",lbl:"DXY 美元",zones:[{max:100,s:2,t:"弱美元"},{max:103,s:1,t:"中性偏弱"},{max:106,s:0,t:"中性"},{max:109,s:-1,t:"強美元"},{max:999,s:-2,t:"強美元高壓"}]},
+  {key:"us10y",lbl:"美債 10Y",zones:[{max:3.5,s:2,t:"低殖利率"},{max:4.0,s:1,t:"適中"},{max:4.5,s:0,t:"偏高"},{max:5.0,s:-1,t:"壓估值"},{max:99,s:-2,t:"過高危險"}]},
+  {key:"gold",lbl:"黃金",zones:[{max:-1,s:1,t:"下跌"},{max:0,s:2,t:"微跌中性"},{max:.5,s:1,t:"微漲中性"},{max:1.5,s:0,t:"上漲謹慎"},{max:99,s:-1,t:"急漲避險"}],usePct:true},
+  {key:"oil",lbl:"原油 WTI",zones:[{max:-2,s:-1,t:"急跌"},{max:0,s:1,t:"微跌中性"},{max:1,s:2,t:"微漲中性"},{max:2.5,s:0,t:"上漲通膨"},{max:99,s:-1,t:"急漲通膨"}],usePct:true},
+  {key:"rsi",lbl:"大盤 RSI",zones:[{max:30,s:1,t:"超賣"},{max:40,s:0,t:"偏弱"},{max:60,s:2,t:"健康"},{max:70,s:1,t:"偏強"},{max:80,s:0,t:"超買警示"},{max:100,s:-1,t:"強烈超買"}],direct:true},
+  {key:"mfi",lbl:"MFI 資金流向",zones:[{max:20,s:1,t:"超賣"},{max:40,s:0,t:"流出"},{max:60,s:2,t:"中性"},{max:80,s:1,t:"流入"},{max:100,s:-1,t:"超買"}],direct:true},
 ];
-var US_MANUAL=[
-  {key:"putcall",label:"Put/Call Ratio",min:0.4,max:1.8,step:0.01,zones:[{max:0.6,s:-1,t:"過度貪婪"},{max:0.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀"}]},
-  {key:"aaii",label:"AAII 多頭%",min:10,max:65,step:1,zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}]},
-  {key:"breadth",label:"市場廣度%",min:0,max:100,step:1,zones:[{max:35,s:-2,t:"多數股跌"},{max:45,s:0,t:"偏弱"},{max:55,s:2,t:"均衡"},{max:65,s:1,t:"多頭強勢"},{max:100,s:0,t:"過度擴張"}]},
+var US_MAN=[
+  {key:"putcall",lbl:"Put/Call Ratio",min:.4,max:1.8,step:.01,zones:[{max:.6,s:-1,t:"過度貪婪"},{max:.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀"}]},
+  {key:"aaii",lbl:"AAII 多頭%",min:10,max:65,step:1,zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}]},
+  {key:"breadth",lbl:"市場廣度%",min:0,max:100,step:1,zones:[{max:35,s:-2,t:"多數股跌"},{max:45,s:0,t:"偏弱"},{max:55,s:2,t:"均衡"},{max:65,s:1,t:"多頭強勢"},{max:100,s:0,t:"過度擴張"}]},
 ];
 var TW_AUTO=[
-  {key:"twii",label:"加權指數",zones:[{max:-2,s:-2,t:"急跌"},{max:-1,s:-1,t:"下跌"},{max:0.3,s:1,t:"持平"},{max:1,s:2,t:"上漲"},{max:99,s:1,t:"強漲"}],usePct:true},
-  {key:"twd",label:"台幣/美金",zones:[{max:30,s:2,t:"台幣強勢"},{max:31,s:2,t:"偏強"},{max:32,s:1,t:"中性"},{max:33,s:0,t:"偏弱"},{max:34,s:-1,t:"台幣弱勢"},{max:99,s:-2,t:"台幣大貶"}]},
-  {key:"rsi",label:"台股 RSI",zones:[{max:30,s:1,t:"超賣"},{max:40,s:0,t:"偏弱"},{max:60,s:2,t:"健康"},{max:70,s:1,t:"偏強"},{max:80,s:0,t:"超買警示"},{max:100,s:-1,t:"強烈超買"}],direct:true},
-  {key:"mfi",label:"MFI 資金流向",zones:[{max:20,s:1,t:"超賣"},{max:40,s:0,t:"資金流出"},{max:60,s:2,t:"中性"},{max:80,s:1,t:"資金流入"},{max:100,s:-1,t:"超買"}],direct:true},
+  {key:"twii",lbl:"加權指數",zones:[{max:-2,s:-2,t:"急跌"},{max:-1,s:-1,t:"下跌"},{max:.3,s:1,t:"持平"},{max:1,s:2,t:"上漲"},{max:99,s:1,t:"強漲"}],usePct:true},
+  {key:"twd",lbl:"台幣/美金",zones:[{max:30,s:2,t:"台幣強勢"},{max:31,s:2,t:"偏強"},{max:32,s:1,t:"中性"},{max:33,s:0,t:"偏弱"},{max:34,s:-1,t:"台幣弱勢"},{max:99,s:-2,t:"台幣大貶"}]},
+  {key:"rsi",lbl:"台股 RSI",zones:[{max:30,s:1,t:"超賣"},{max:40,s:0,t:"偏弱"},{max:60,s:2,t:"健康"},{max:70,s:1,t:"偏強"},{max:80,s:0,t:"超買"},{max:100,s:-1,t:"強烈超買"}],direct:true},
+  {key:"mfi",lbl:"MFI 資金流向",zones:[{max:20,s:1,t:"超賣"},{max:40,s:0,t:"流出"},{max:60,s:2,t:"中性"},{max:80,s:1,t:"流入"},{max:100,s:-1,t:"超買"}],direct:true},
 ];
 var US_GROUPS={"情緒":["putcall","aaii"],"技術廣度":["breadth"]};
 
-function getZone(ind,v){
-  for(var i=0;i<ind.zones.length;i++){if(v<=ind.zones[i].max)return ind.zones[i];}
-  return ind.zones[ind.zones.length-1];
+function gz(ind,v){for(var i=0;i<ind.zones.length;i++)if(v<=ind.zones[i].max)return ind.zones[i];return ind.zones[ind.zones.length-1];}
+function ss(s){
+  if(s>=2)return{cls:"safe",dot:"#30d158",bg:"rgba(48,209,88,.15)",tc:"#30d158"};
+  if(s===1)return{cls:"caut",dot:"#5ac8fa",bg:"rgba(90,200,250,.15)",tc:"#5ac8fa"};
+  if(s===0)return{cls:"warn",dot:"#ffd60a",bg:"rgba(255,214,10,.15)",tc:"#ffd60a"};
+  if(s===-1)return{cls:"dang",dot:"#ff453a",bg:"rgba(255,69,58,.15)",tc:"#ff453a"};
+  return{cls:"dang",dot:"#ff2d2d",bg:"rgba(255,45,45,.25)",tc:"#ff2d2d"};
 }
-function sigStyle(s){
-  if(s>=2)return{cls:"safe",dot:"#30d158",badge:"rgba(48,209,88,0.15)",btxt:"#30d158"};
-  if(s===1)return{cls:"caution",dot:"#5ac8fa",badge:"rgba(90,200,250,0.15)",btxt:"#5ac8fa"};
-  if(s===0)return{cls:"warn",dot:"#ffd60a",badge:"rgba(255,214,10,0.15)",btxt:"#ffd60a"};
-  if(s===-1)return{cls:"danger",dot:"#ff453a",badge:"rgba(255,69,58,0.15)",btxt:"#ff453a"};
-  return{cls:"danger",dot:"#ff2d2d",badge:"rgba(255,45,45,0.25)",btxt:"#ff2d2d"};
+function sfInfo(r){
+  if(r>=.75)return{lbl:"安全 可持倉",sub:"指標多數健康，風險可控",c:"#30d158",bg:"rgba(48,209,88,.15)",tr:"#30d158"};
+  if(r>=.55)return{lbl:"偏安全 謹慎樂觀",sub:"整體偏多，留意弱項",c:"#5ac8fa",bg:"rgba(90,200,250,.12)",tr:"#5ac8fa"};
+  if(r>=.38)return{lbl:"中性 控制倉位",sub:"多空分歧，建議觀望",c:"#ffd60a",bg:"rgba(255,214,10,.12)",tr:"#ffd60a"};
+  if(r>=.2)return{lbl:"偏危險 考慮減碼",sub:"多項指標偏空",c:"#ff453a",bg:"rgba(255,69,58,.15)",tr:"#ff453a"};
+  return{lbl:"危險 高度警戒",sub:"建議大幅減碼",c:"#ff2d2d",bg:"rgba(255,45,45,.2)",tr:"#ff2d2d"};
 }
-function safetyInfo(r){
-  if(r>=0.75)return{label:"安全 可持倉",sub:"指標多數健康，風險可控",color:"#30d158",bg:"rgba(48,209,88,0.15)",track:"#30d158"};
-  if(r>=0.55)return{label:"偏安全 謹慎樂觀",sub:"整體偏多，留意弱項",color:"#5ac8fa",bg:"rgba(90,200,250,0.12)",track:"#5ac8fa"};
-  if(r>=0.38)return{label:"中性 控制倉位",sub:"多空分歧，建議觀望",color:"#ffd60a",bg:"rgba(255,214,10,0.12)",track:"#ffd60a"};
-  if(r>=0.2)return{label:"偏危險 考慮減碼",sub:"多項指標偏空",color:"#ff453a",bg:"rgba(255,69,58,0.15)",track:"#ff453a"};
-  return{label:"危險 高度警戒",sub:"建議大幅減碼或離場",color:"#ff2d2d",bg:"rgba(255,45,45,0.2)",track:"#ff2d2d"};
-}
-function comboSignal(data){
-  var vix=data.vix?data.vix.price:null;
-  var skew=data.skew?data.skew.price:null;
-  var vvix=data.vvix?data.vvix.price:null;
+function combo(data){
+  var vix=data.vix?.price,skew=data.skew?.price,vvix=data.vvix?.price;
   if(!vix||!skew||!vvix)return{t:"數據載入中",d:"等待自動數據",c:"#888",border:"#0a84ff"};
   if(skew>145&&vix<20)return{t:"暗流湧動",d:"高SKEW+低VIX，最危險組合",c:"#ff453a",border:"#ff453a"};
   if(skew>130&&vix>25&&vvix>120)return{t:"全面恐慌",d:"三指標同時偏高，市場已定價下跌",c:"#ff453a",border:"#ff453a"};
@@ -160,184 +181,194 @@ function comboSignal(data){
   if(skew<120&&vix<20&&vvix<100)return{t:"市場平靜",d:"三指標均低，風險溢價正常",c:"#30d158",border:"#30d158"};
   return{t:"正常波動",d:"指標無明顯異常組合",c:"#5ac8fa",border:"#5ac8fa"};
 }
-function getAutoVal(ind,data){
-  if(ind.direct)return(data[ind.key]!==undefined&&data[ind.key]!==null)?data[ind.key]:null;
-  var d=data[ind.key];
-  if(!d)return null;
+function getV(ind,data){
+  if(ind.direct)return data[ind.key]!==undefined&&data[ind.key]!==null?data[ind.key]:null;
+  var d=data[ind.key];if(!d)return null;
   return ind.usePct?d.pct:d.price;
 }
-function calcTotal(aInds,mInds,data){
-  var total=0;
-  for(var i=0;i<aInds.length;i++){
-    var v=getAutoVal(aInds[i],data);
-    if(v!==null&&v!==undefined)total+=getZone(aInds[i],v).s;
-  }
-  for(var j=0;j<mInds.length;j++){
-    total+=getZone(mInds[j],manualVals[mInds[j].key]).s;
-  }
-  return total;
+function calcTot(aInds,mInds,data){
+  var tot=0;
+  aInds.forEach(ind=>{var v=getV(ind,data);if(v!==null&&v!==undefined)tot+=gz(ind,v).s;});
+  mInds.forEach(ind=>{tot+=gz(ind,mVals[ind.key]).s;});
+  return tot;
 }
-function fmt(n,dec){
-  if(n===null||n===undefined||isNaN(n))return"—";
-  return parseFloat(n).toFixed(dec||0);
-}
-function fmtNum(n){
-  if(n===null||n===undefined||isNaN(n))return"—";
-  return parseInt(n).toLocaleString();
-}
-function chgColor(n){return n>0?"#30d158":n<0?"#ff453a":"rgba(235,235,245,0.5)";}
-function chgSign(n){return n>0?"+":"";}
+function fmtN(n,d){if(n===null||n===undefined||isNaN(n))return"—";return parseFloat(n).toFixed(d||0);}
+function fmtInt(n){if(n===null||n===undefined||isNaN(n))return"—";return parseInt(n).toLocaleString();}
+function cc(n){return n>0?"#30d158":n<0?"#ff453a":"rgba(235,235,245,.5)";}
+function sgn(n){return n>0?"+":"";}
 
-function renderAutoCard(ind,data){
-  var v=getAutoVal(ind,data);
-  var z=v!==null&&v!==undefined?getZone(ind,v):null;
-  var s=z?z.s:1;
-  var ss=sigStyle(s);
-  var valHtml="—",pctHtml="",prevHtml="";
+function mcCard(ind,data){
+  var v=getV(ind,data);
+  var z=v!==null&&v!==undefined?gz(ind,v):null;
+  var st=ss(z?z.s:1);
+  var val="—",pct="";
   if(v!==null&&v!==undefined){
-    if(ind.direct){
-      valHtml=""+parseFloat(v).toFixed(ind.key==="fgi"?0:2);
-    } else if(ind.usePct){
-      valHtml=(v>0?"+":"")+v.toFixed(2)+"%";
-    } else {
+    if(ind.direct)val=""+parseFloat(v).toFixed(ind.key==="fgi"?0:2);
+    else if(ind.usePct)val=(v>0?"+":"")+v.toFixed(2)+"%";
+    else{
       var d=data[ind.key];
       if(d){
-        valHtml=d.price>=1000?d.price.toLocaleString():d.price.toFixed(2);
+        val=d.price>=1000?d.price.toLocaleString():d.price.toFixed(2);
         var p=d.pct;
-        pctHtml="<div class='metric-pct "+(p>=0?"pct-up":"pct-dn")+"'>"+(p>=0?"▲":"▼")+" "+Math.abs(p).toFixed(2)+"%</div>";
+        pct="<div class='mc-pct "+(p>=0?"up":"dn")+"'>"+(p>=0?"▲":"▼")+" "+Math.abs(p).toFixed(2)+"%</div>";
       }
     }
-    if(ind.key==="fgi"&&data.fgi!==null){
-      var fgiLabels=["","極度恐慌","恐慌","中性","貪婪","極度貪婪"];
-    }
   }
-  return "<div class='metric-card "+ss.cls+"'>"
-    +"<div class='metric-dot' style='background:"+ss.dot+"'></div>"
-    +"<div class='metric-label'>"+ind.label+"</div>"
-    +"<div class='metric-val'>"+valHtml+"</div>"
-    +pctHtml
-    +"<span class='metric-sig' style='background:"+ss.badge+";color:"+ss.btxt+"'>"+(z?z.t:"載入中")+"</span>"
+  return "<div class='mc "+st.cls+"'>"
+    +"<div class='mc-dot' style='background:"+st.dot+"'></div>"
+    +"<div class='mc-lbl'>"+ind.lbl+"</div>"
+    +"<div class='mc-val'>"+val+"</div>"
+    +pct
+    +"<span class='mc-sig' style='background:"+st.bg+";color:"+st.tc+"'>"+(z?z.t:"載入中")+"</span>"
     +"</div>";
 }
 
-function renderTWChips(data){
+function renderNight(nd){
+  if(!nd) return "";
   var html="";
-  // 夜盤行情
-  var nd=data.night_data;
-  if(nd&&(nd.night||nd.day)){
-    var sess=nd.night||nd.day;
-    var isNight=!!nd.night;
-    var chgNum=parseFloat(sess.change)||0;
-    var cc=chgColor(chgNum);
-    html+="<div class='chip-block' style='margin-bottom:8px;border-color:"+(isNight?"#5ac8fa":"#30d158")+"'>"
-      +"<div class='chip-block-title'>"+(isNight?"夜盤":"日盤")+" 台指期 · "+nd.date.slice(0,4)+"/"+nd.date.slice(4,6)+"/"+nd.date.slice(6,8)+"</div>"
-      +"<div style='display:flex;justify-content:space-between;align-items:center'>"
-      +"<span style='font-size:22px;font-weight:700'>"+sess.last+"</span>"
-      +"<div style='text-align:right'>"
-      +"<div style='font-size:15px;font-weight:600;color:"+cc+"'>"+(chgNum>=0?"+":"")+sess.change+" ("+sess.changePct+")</div>"
-      +"<div style='font-size:11px;color:rgba(235,235,245,0.4)'>成交量 "+sess.volume+"</div>"
+  // 夜盤
+  if(nd.night){
+    var n=nd.night;
+    var chg=parseFloat(n.change)||0;
+    var c=cc(chg);
+    html+="<div class='nsess' style='background:rgba(90,200,250,.08);border-color:#5ac8fa'>"
+      +"<div class='nsess-hdr'>"
+      +"<span class='nsess-badge' style='background:rgba(90,200,250,.2);color:#5ac8fa'>🌙 夜盤</span>"
+      +"<span class='nsess-date'>"+nd.date.slice(0,4)+"/"+nd.date.slice(4,6)+"/"+nd.date.slice(6,8)+"</span>"
+      +"</div>"
+      +"<div class='nsess-body'>"
+      +"<div class='nsess-price'>"+n.last+"</div>"
+      +"<div class='nsess-right'>"
+      +"<div class='nsess-chg' style='color:"+c+"'>"+sgn(chg)+n.change+" ("+n.changePct+")</div>"
+      +"<div class='nsess-vol'>成交 "+parseInt(n.volume).toLocaleString()+" 口</div>"
       +"</div></div></div>";
   }
+  // 日盤
+  if(nd.day){
+    var d=nd.day;
+    var dc=parseFloat(d.change)||0;
+    var dcc=cc(dc);
+    html+="<div class='nsess' style='background:rgba(48,209,88,.08);border-color:#30d158'>"
+      +"<div class='nsess-hdr'>"
+      +"<span class='nsess-badge' style='background:rgba(48,209,88,.2);color:#30d158'>☀️ 日盤</span>"
+      +"<span class='nsess-date'>"+nd.date.slice(0,4)+"/"+nd.date.slice(4,6)+"/"+nd.date.slice(6,8)+"</span>"
+      +"</div>"
+      +"<div class='nsess-body'>"
+      +"<div class='nsess-price'>"+d.last+"</div>"
+      +"<div class='nsess-right'>"
+      +"<div class='nsess-chg' style='color:"+dcc+"'>"+sgn(dc)+d.change+" ("+d.changePct+")</div>"
+      +"<div class='nsess-vol'>成交 "+parseInt(d.volume).toLocaleString()+" 口</div>"
+      +"</div></div></div>";
+  }
+  return html;
+}
 
+function renderTWChips(data){
   var fd=data.foreign_data;
   var md=data.margin_data;
   var pc=data.putcall_data;
   var fut=data.futures_data;
+  var nd=data.night_data;
+  var html="";
+
+  // 夜盤/日盤
+  if(nd){
+    html+="<div class='stitle'>台指期行情</div>";
+    html+=renderNight(nd);
+  }
 
   // 三大法人現貨
-  html+="<div class='chip-block'>";
-  html+="<div class='chip-block-title'>三大法人現貨買賣超</div>";
-  if(fd){
+  html+="<div class='stitle' style='margin-top:16px'>三大法人現貨買賣超</div>";
+  html+="<div class='cb'>";
+  if(fd&&fd.foreign!==null){
     var rows=[
-      {name:"外資",val:fd.foreign,unit:"億"},
-      {name:"投信",val:fd.trust,unit:"億"},
-      {name:"自營商",val:fd.dealer,unit:"億"},
-      {name:"合計",val:fd.total,unit:"億"},
+      {n:"外資",v:fd.foreign},{n:"投信",v:fd.trust},
+      {n:"自營商",v:fd.dealer},{n:"三大合計",v:fd.total,bold:true}
     ];
     rows.forEach(function(row){
-      var c=chgColor(row.val);
-      html+="<div class='chip-row'>"
-        +"<span class='chip-name'>"+row.name+"</span>"
-        +"<div class='chip-vals'>"
-        +"<span class='chip-main' style='color:"+c+"'>"+chgSign(row.val)+fmtNum(row.val)+" 億</span>"
+      var c=cc(row.v);
+      html+="<div class='crow'>"
+        +"<span class='crow-name'"+(row.bold?" style='font-weight:600'":"")+" >"+row.n+"</span>"
+        +"<div class='crow-right'>"
+        +"<span class='crow-main' style='color:"+c+"'>"+sgn(row.v)+fmtN(row.v,1)+" 億</span>"
         +"</div></div>";
     });
   } else {
-    html+="<div style='font-size:12px;color:rgba(235,235,245,0.4);padding:8px 0'>盤後4點後更新</div>";
+    html+="<div style='font-size:12px;color:rgba(235,235,245,.4);padding:8px 0'>盤後約下午4點更新</div>";
   }
   html+="</div>";
 
   // 期貨三大法人
-  html+="<div class='chip-block'>";
-  html+="<div class='chip-block-title'>三大法人期貨淨部位（口）</div>";
+  html+="<div class='stitle' style='margin-top:16px'>三大法人期貨淨部位（口）</div>";
+  html+="<div class='cb'>";
   if(fut){
-    var futRows=[
-      {name:"外資台指(TXF)",val:fut.txf?fut.txf.foreign:null,chg:fut.txf?fut.txf.foreign_chg:null},
-      {name:"外資小台(MXF)",val:fut.mxf?fut.mxf.foreign:null,chg:fut.mxf?fut.mxf.foreign_chg:null},
-      {name:"外資微台(TMF)",val:fut.tmf?fut.tmf.foreign:null,chg:fut.tmf?fut.tmf.foreign_chg:null},
-      {name:"投信台指",val:fut.txf?fut.txf.trust:null,chg:fut.txf?fut.txf.trust_chg:null},
-      {name:"自營台指",val:fut.txf?fut.txf.dealer:null,chg:fut.txf?fut.txf.dealer_chg:null},
+    var frows=[
+      {n:"外資 台指(TXF)",v:fut.txf?.foreign,chg:fut.txf?.foreign_chg},
+      {n:"外資 小台(MXF)",v:fut.mxf?.foreign,chg:fut.mxf?.foreign_chg},
+      {n:"外資 微台(TMF)",v:fut.tmf?.foreign,chg:fut.tmf?.foreign_chg},
+      {n:"投信 台指",v:fut.txf?.trust,chg:fut.txf?.trust_chg},
+      {n:"自營 台指",v:fut.txf?.dealer,chg:fut.txf?.dealer_chg},
     ];
-    futRows.forEach(function(row){
-      var c=row.val!==null?chgColor(row.val):"rgba(235,235,245,0.4)";
+    frows.forEach(function(row){
+      var c=row.v!==null?cc(row.v):"rgba(235,235,245,.4)";
       var chgHtml="";
       if(row.chg!==null&&row.chg!==undefined){
-        chgHtml="<span class='chip-chg' style='background:"+chgColor(row.chg)+"22;color:"+chgColor(row.chg)+"'>"+chgSign(row.chg)+fmtNum(row.chg)+"</span>";
+        var cc2=cc(row.chg);
+        chgHtml="<span class='crow-chg' style='background:"+cc2+"22;color:"+cc2+"'>"+sgn(row.chg)+fmtInt(row.chg)+"</span>";
       }
-      html+="<div class='chip-row'>"
-        +"<span class='chip-name'>"+row.name+"</span>"
-        +"<div class='chip-vals'>"
+      html+="<div class='crow'>"
+        +"<span class='crow-name'>"+row.n+"</span>"
+        +"<div class='crow-right'>"
         +chgHtml
-        +"<span class='chip-main' style='color:"+c+"'>"+chgSign(row.val)+fmtNum(row.val)+"</span>"
+        +"<span class='crow-main' style='color:"+c+"'>"+sgn(row.v)+fmtInt(row.v)+"</span>"
         +"</div></div>";
     });
+    html+="<div style='font-size:10px;color:rgba(235,235,245,.35);margin-top:6px'>括號內為較前日變化</div>";
   } else {
-    html+="<div style='font-size:12px;color:rgba(235,235,245,0.4);padding:8px 0'>盤後3點後更新</div>";
+    html+="<div style='font-size:12px;color:rgba(235,235,245,.4);padding:8px 0'>盤後約下午3點更新</div>";
   }
   html+="</div>";
 
-  // Put/Call + 融資融券
-  html+="<div class='auto-grid'>";
-
-  // PC Ratio
+  // Put/Call
+  html+="<div class='stitle' style='margin-top:16px'>Put/Call Ratio</div>";
+  html+="<div class='g2' style='margin-bottom:8px'>";
   if(pc){
-    var pcS=pc.oiRatio>130?-1:pc.oiRatio>110?0:pc.oiRatio>90?1:2;
-    var pcSS=sigStyle(pcS);
-    html+="<div class='chip-block metric-card "+pcSS.cls+"' style='margin-bottom:0'>"
-      +"<div class='metric-dot' style='background:"+pcSS.dot+"'></div>"
-      +"<div class='metric-label'>PC Ratio 未平倉</div>"
-      +"<div class='metric-val'>"+fmt(pc.oiRatio,2)+"</div>"
-      +"<div class='metric-prev'>昨日 "+fmt(pc.prevOiRatio,2)+"</div>"
-      +"<span class='metric-sig' style='background:"+pcSS.badge+";color:"+pcSS.btxt+"'>"
-      +(pc.oiRatio>130?"偏空 謹慎":pc.oiRatio>110?"中性偏空":pc.oiRatio>90?"中性":"偏多")
-      +"</span></div>";
-    html+="<div class='chip-block metric-card "+pcSS.cls+"' style='margin-bottom:0'>"
-      +"<div class='metric-dot' style='background:"+pcSS.dot+"'></div>"
-      +"<div class='metric-label'>PC Ratio 成交量</div>"
-      +"<div class='metric-val'>"+fmt(pc.volumeRatio,2)+"</div>"
-      +"<div class='metric-prev'>昨日 "+fmt(pc.prevVolumeRatio,2)+"</div>"
-      +"<span class='metric-sig' style='background:"+pcSS.badge+";color:"+pcSS.btxt+"'>"
-      +(pc.volumeRatio>120?"Put偏多 謹慎":pc.volumeRatio>100?"偏空":"偏多")
-      +"</span></div>";
+    var ois=pc.oiRatio>130?-1:pc.oiRatio>110?0:1;
+    var vos=pc.volumeRatio>120?-1:pc.volumeRatio>100?0:1;
+    var oiss=ss(ois),voss=ss(vos);
+    html+="<div class='mc "+oiss.cls+"'>"
+      +"<div class='mc-dot' style='background:"+oiss.dot+"'></div>"
+      +"<div class='mc-lbl'>未平倉比 (OI)</div>"
+      +"<div class='mc-val'>"+fmtN(pc.oiRatio,2)+"</div>"
+      +"<div class='mc-pct neu'>昨 "+fmtN(pc.prevOiRatio,2)+"</div>"
+      +"<span class='mc-sig' style='background:"+oiss.bg+";color:"+oiss.tc+"'>"+(pc.oiRatio>130?"偏空":pc.oiRatio>110?"中性偏空":"偏多")+"</span>"
+      +"</div>";
+    html+="<div class='mc "+voss.cls+"'>"
+      +"<div class='mc-dot' style='background:"+voss.dot+"'></div>"
+      +"<div class='mc-lbl'>成交量比 (Vol)</div>"
+      +"<div class='mc-val'>"+fmtN(pc.volumeRatio,2)+"</div>"
+      +"<div class='mc-pct neu'>昨 "+fmtN(pc.prevVolumeRatio,2)+"</div>"
+      +"<span class='mc-sig' style='background:"+voss.bg+";color:"+voss.tc+"'>"+(pc.volumeRatio>120?"Put偏多":pc.volumeRatio>100?"偏空":"偏多")+"</span>"
+      +"</div>";
   }
   html+="</div>";
 
-  // 融資融券
-  html+="<div class='chip-block' style='margin-top:8px'>";
-  html+="<div class='chip-block-title'>融資融券餘額</div>";
-  if(md){
-    var mChgC=chgColor(-(md.marginChg||0));
-    html+="<div class='chip-row'>"
-      +"<span class='chip-name'>融資餘額</span>"
-      +"<div class='chip-vals'>"
-      +"<span class='chip-chg' style='background:"+mChgC+"22;color:"+mChgC+"'>"
-      +(md.marginChg>=0?"+":"")+fmtNum(md.marginChg||0)+" 億 ("+(md.marginChgPct>0?"+":"")+fmt(md.marginChgPct,2)+"%)</span>"
-      +"<span class='chip-main'>"+fmtNum(md.margin)+" 億</span>"
-      +"</div></div>"
-      +"<div style='font-size:10px;color:rgba(235,235,245,0.35);margin-top:6px'>融資減少偏多，融資增加偏空</div>";
-    html+="<div style='font-size:10px;color:rgba(235,235,245,0.35);margin-top:6px'>融資減少偏多，融資增加偏空｜融券增加偏多（軋空）</div>";
+  // 融資餘額
+  html+="<div class='stitle' style='margin-top:8px'>融資餘額（億元）</div>";
+  html+="<div class='cb'>";
+  if(md&&md.margin!==null){
+    var mc2=cc(-(md.marginChg||0));
+    html+="<div class='marg-row'>"
+      +"<span class='marg-label'>融資餘額</span>"
+      +"<div class='marg-vals'>"
+      +"<span class='marg-prev'>"+fmtN(md.marginPrev,1)+"億</span>"
+      +"<span class='marg-arrow'>→</span>"
+      +"<span class='marg-now'>"+fmtN(md.margin,1)+"億</span>"
+      +"<span class='marg-chg' style='background:"+mc2+"22;color:"+mc2+"'>"+sgn(md.marginChg)+fmtN(md.marginChg,1)+"億 ("+sgn(md.marginChgPct)+fmtN(md.marginChgPct,2)+"%)</span>"
+      +"</div></div>";
+    html+="<div style='font-size:10px;color:rgba(235,235,245,.35);margin-top:8px;padding-top:6px;border-top:.5px solid rgba(255,255,255,.06)'>融資減少 → 偏多｜融資增加 → 偏空</div>";
   } else {
-    html+="<div style='font-size:12px;color:rgba(235,235,245,0.4);padding:8px 0'>盤後4點後更新</div>";
+    html+="<div style='font-size:12px;color:rgba(235,235,245,.4);padding:8px 0'>盤後約下午4點更新</div>";
   }
   html+="</div>";
 
@@ -345,178 +376,146 @@ function renderTWChips(data){
 }
 
 function renderSlider(ind){
-  var v=manualVals[ind.key];
-  var z=getZone(ind,v);
-  var ss=sigStyle(z.s);
+  var v=mVals[ind.key];
+  var z=gz(ind,v);
+  var st=ss(z.s);
   var decs=ind.step<1?2:0;
   var pct=((v-ind.min)/(ind.max-ind.min)*100).toFixed(0);
-  var bg="linear-gradient(to right,"+ss.dot+" 0%,"+ss.dot+" "+pct+"%, #2c2c2e "+pct+"%, #2c2c2e 100%)";
-  return "<div class='slider-card "+ss.cls+"' id='sc_"+ind.key+"'>"
-    +"<div class='slider-header'>"
-    +"<span class='slider-name'>"+ind.label+"</span>"
-    +"<span class='slider-badge' id='sb_"+ind.key+"' style='background:"+ss.badge+";color:"+ss.btxt+"'>"+z.t+"</span>"
+  var bg="linear-gradient(to right,"+st.dot+" 0%,"+st.dot+" "+pct+"%, #2c2c2e "+pct+"%, #2c2c2e 100%)";
+  return "<div class='scard "+st.cls+"' id='sc_"+ind.key+"'>"
+    +"<div class='scard-hdr'>"
+    +"<span class='scard-name'>"+ind.lbl+"</span>"
+    +"<span class='scard-badge' id='sb_"+ind.key+"' style='background:"+st.bg+";color:"+st.tc+"'>"+z.t+"</span>"
     +"</div>"
-    +"<div class='slider-row'>"
+    +"<div class='srow'>"
     +"<input type='range' min='"+ind.min+"' max='"+ind.max+"' step='"+ind.step+"' value='"+v+"' style='background:"+bg+"' "
-    +"oninput=\"onSlider(this,'"+ind.key+"',"+ind.min+","+ind.max+","+decs+")\"/>"
-    +"<span class='slider-num' id='sv_"+ind.key+"' style='color:"+ss.btxt+"'>"+parseFloat(v).toFixed(decs)+"</span>"
+    +"oninput=\"onSlide(this,'"+ind.key+"',"+ind.min+","+ind.max+","+decs+")\"/>"
+    +"<span class='snum' id='sv_"+ind.key+"' style='color:"+st.tc+"'>"+parseFloat(v).toFixed(decs)+"</span>"
     +"</div></div>";
 }
 
-function onSlider(el,key,min,max,decs){
+function onSlide(el,key,min,max,decs){
   var v=parseFloat(el.value);
-  manualVals[key]=v;
-  var ind=null;
-  for(var i=0;i<US_MANUAL.length;i++){if(US_MANUAL[i].key===key){ind=US_MANUAL[i];break;}}
+  mVals[key]=v;
+  var ind=US_MAN.find(function(i){return i.key===key;});
   if(!ind)return;
-  var z=getZone(ind,v);
-  var ss=sigStyle(z.s);
+  var z=gz(ind,v);
+  var st=ss(z.s);
   var pct=((v-min)/(max-min)*100).toFixed(0);
-  el.style.background="linear-gradient(to right,"+ss.dot+" 0%,"+ss.dot+" "+pct+"%, #2c2c2e "+pct+"%, #2c2c2e 100%)";
+  el.style.background="linear-gradient(to right,"+st.dot+" 0%,"+st.dot+" "+pct+"%, #2c2c2e "+pct+"%, #2c2c2e 100%)";
   document.getElementById("sv_"+key).textContent=v.toFixed(decs);
-  document.getElementById("sv_"+key).style.color=ss.btxt;
+  document.getElementById("sv_"+key).style.color=st.tc;
   document.getElementById("sb_"+key).textContent=z.t;
-  document.getElementById("sb_"+key).style.background=ss.badge;
-  document.getElementById("sb_"+key).style.color=ss.btxt;
-  document.getElementById("sc_"+key).className="slider-card "+ss.cls;
-  updateSafety();
+  document.getElementById("sb_"+key).style.background=st.bg;
+  document.getElementById("sb_"+key).style.color=st.tc;
+  document.getElementById("sc_"+key).className="scard "+st.cls;
+  updateBanner();
 }
 
-function updateSafety(){
-  var isUS=currentMarket==="us";
-  var aInds=isUS?US_AUTO:TW_AUTO;
-  var mInds=isUS?US_MANUAL:[];
+function updateBanner(){
+  var isUS=curMkt==="us";
+  var aI=isUS?US_AUTO:TW_AUTO;
+  var mI=isUS?US_MAN:[];
   var data=isUS?apiData.us:apiData.tw;
-  var mn=(aInds.length+mInds.length)*-2;
-  var mx=(aInds.length+mInds.length)*2;
-  var total=calcTotal(aInds,mInds,data);
-  var r=(total-mn)/(mx-mn);
-  var sf=safetyInfo(r);
-  var banner=document.getElementById("safetyBanner");
-  if(!banner)return;
-  banner.style.background=sf.bg;
-  document.getElementById("safetyLabel").textContent=sf.label;
-  document.getElementById("safetyLabel").style.color=sf.color;
-  document.getElementById("safetySub").textContent=sf.sub;
-  document.getElementById("safetySub").style.color=sf.color;
-  document.getElementById("progressFill").style.width=(r*100).toFixed(0)+"%";
-  document.getElementById("progressFill").style.background=sf.track;
-  document.getElementById("progressLabel").textContent="綜合分 "+total+" / "+mx;
-  document.getElementById("progressLabel").style.color=sf.color;
+  var mn=(aI.length+mI.length)*-2,mx=(aI.length+mI.length)*2;
+  var tot=calcTot(aI,mI,data);
+  var r=(tot-mn)/(mx-mn);
+  var sf=sfInfo(r);
+  var b=document.getElementById("sban");
+  if(!b)return;
+  b.style.background=sf.bg;
+  document.getElementById("sban-lbl").textContent=sf.lbl;
+  document.getElementById("sban-lbl").style.color=sf.c;
+  document.getElementById("sban-sub").textContent=sf.sub;
+  document.getElementById("sban-sub").style.color=sf.c;
+  document.getElementById("pbar-fill").style.width=(r*100).toFixed(0)+"%";
+  document.getElementById("pbar-fill").style.background=sf.tr;
+  document.getElementById("pbar-note").textContent="綜合分 "+tot+" / "+mx;
+  document.getElementById("pbar-note").style.color=sf.c;
 }
 
-function setManualGroup(g){
-  activeUSGroup=g;
-  renderManualPanel("us");
-}
+function setGrp(g){usGrp=g;renderManPanel();}
 
-function renderManualPanel(market){
-  var panel=document.getElementById("manualPanel");
+function renderManPanel(){
+  var panel=document.getElementById("manPanel");
   if(!panel)return;
-  if(market!=="us"){panel.innerHTML="";return;}
-  var groups=US_GROUPS;
-  var html="<div class='seg-ctrl'>";
-  var gkeys=Object.keys(groups);
-  for(var i=0;i<gkeys.length;i++){
-    var g=gkeys[i];
-    html+="<button class='seg-btn"+(g===activeUSGroup?" active":"")+"' onclick=\"setManualGroup('"+g+"')\">"+g+"</button>";
-  }
+  var html="<div class='segc'>";
+  Object.keys(US_GROUPS).forEach(function(g){
+    html+="<button class='segb"+(g===usGrp?" on":"")+"' onclick=\"setGrp('"+g+"')\">"+g+"</button>";
+  });
   html+="</div>";
-  var keys=groups[activeUSGroup]||[];
-  for(var j=0;j<keys.length;j++){
-    var ind=null;
-    for(var k=0;k<US_MANUAL.length;k++){if(US_MANUAL[k].key===keys[j]){ind=US_MANUAL[k];break;}}
+  (US_GROUPS[usGrp]||[]).forEach(function(k){
+    var ind=US_MAN.find(function(i){return i.key===k;});
     if(ind)html+=renderSlider(ind);
-  }
+  });
   panel.innerHTML=html;
 }
 
-function render(market){
-  var isUS=market==="us";
-  var aInds=isUS?US_AUTO:TW_AUTO;
-  var mInds=isUS?US_MANUAL:[];
+function render(mkt){
+  var isUS=mkt==="us";
+  var aI=isUS?US_AUTO:TW_AUTO;
+  var mI=isUS?US_MAN:[];
   var data=isUS?apiData.us:apiData.tw;
-  var mn=(aInds.length+mInds.length)*-2;
-  var mx=(aInds.length+mInds.length)*2;
-  var total=calcTotal(aInds,mInds,data);
-  var r=(total-mn)/(mx-mn);
-  var sf=safetyInfo(r);
+  var mn=(aI.length+mI.length)*-2,mx=(aI.length+mI.length)*2;
+  var tot=calcTot(aI,mI,data);
+  var r=(tot-mn)/(mx-mn);
+  var sf=sfInfo(r);
 
-  var comboHtml="";
-  if(isUS){
-    var cb=comboSignal(data);
-    comboHtml="<div class='combo-card' style='border-left-color:"+cb.border+"'>"
-      +"<div class='combo-title'>VIX + SKEW + VVIX 組合訊號</div>"
-      +"<div class='combo-val' style='color:"+cb.c+"'>"+cb.t+"</div>"
-      +"<div class='combo-desc'>"+cb.d+"</div>"
-      +"</div>";
-  }
+  var cb2="";
+  if(isUS){var cb=combo(data);cb2="<div class='combo' style='border-left-color:"+cb.border+"'><div class='combo-tt'>VIX + SKEW + VVIX 組合</div><div class='combo-v' style='color:"+cb.c+"'>"+cb.t+"</div><div class='combo-d'>"+cb.d+"</div></div>";}
 
-  var html="<div class='safety-banner' id='safetyBanner' style='background:"+sf.bg+"'>"
-    +"<div id='safetyLabel' class='safety-label' style='color:"+sf.color+"'>"+sf.label+"</div>"
-    +"<div id='safetySub' class='safety-sub' style='color:"+sf.color+"'>"+sf.sub+"</div>"
-    +"<div class='progress-track'><div class='progress-fill' id='progressFill' style='width:"+(r*100).toFixed(0)+"%;background:"+sf.track+"'></div></div>"
-    +"<div class='progress-label' id='progressLabel' style='color:"+sf.color+"'>綜合分 "+total+" / "+mx+"</div>"
+  var html="<div class='sban' id='sban' style='background:"+sf.bg+"'>"
+    +"<div id='sban-lbl' class='sban-label' style='color:"+sf.c+"'>"+sf.lbl+"</div>"
+    +"<div id='sban-sub' class='sban-sub' style='color:"+sf.c+"'>"+sf.sub+"</div>"
+    +"<div class='pbar'><div class='pbar-fill' id='pbar-fill' style='width:"+(r*100).toFixed(0)+"%;background:"+sf.tr+"'></div></div>"
+    +"<div class='pbar-note' id='pbar-note' style='color:"+sf.c+"'>綜合分 "+tot+" / "+mx+"</div>"
     +"</div>"
-    +comboHtml
-    +"<div class='section-title'>自動抓取指標</div>"
-    +"<div class='auto-grid'>";
-
-  for(var i=0;i<aInds.length;i++)html+=renderAutoCard(aInds[i],data);
+    +cb2
+    +"<div class='stitle'>自動抓取指標</div>"
+    +"<div class='g2'>";
+  aI.forEach(function(ind){html+=mcCard(ind,data);});
   html+="</div>";
 
   if(!isUS){
-    var fd=data.foreign_data;
-    var md=data.margin_data;
-    var pc=data.putcall_data;
-    var fut=data.futures_data;
-    var dataDate=fd?fd.date:md?md.date:pc?pc.date:fut?fut.date:null;
-    html+="<div class='section-title'>盤後籌碼"+(dataDate?" · "+dataDate.slice(0,4)+"/"+dataDate.slice(4,6)+"/"+dataDate.slice(6,8):"")+"</div>";
-    html+="<div class='chip-section'>"+renderTWChips(data)+"</div>";
+    html+=renderTWChips(data);
   } else {
-    html+="<div class='section-title'>手動輸入指標</div>";
-    html+="<div id='manualPanel'></div>";
+    html+="<div class='stitle'>手動輸入指標</div><div id='manPanel'></div>";
   }
 
-  html+="<div class='footer-note'>"
+  html+="<div class='ftnote'>"
     +"<strong>自動更新：</strong>每15分鐘 &nbsp;|&nbsp; "
-    +(isUS
-      ?"<strong>手動：</strong>Put/Call / AAII / 市場廣度"
-      :"<strong>台股籌碼：</strong>自動抓取最新交易日數據 | 期交所+證交所")
+    +(isUS?"<strong>手動：</strong>Put/Call / AAII / 市場廣度":"<strong>台股籌碼：</strong>盤後3~4點自動更新")
     +"</div>";
 
-  document.getElementById("mainContent").innerHTML=html;
-  if(isUS)renderManualPanel(market);
+  document.getElementById("main").innerHTML=html;
+  if(isUS)renderManPanel();
 }
 
-function switchMarket(market,btn){
-  currentMarket=market;
-  var tabs=document.querySelectorAll(".market-tab");
-  for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("active");
-  btn.classList.add("active");
-  render(market);
+function switchMkt(mkt,btn){
+  curMkt=mkt;
+  document.querySelectorAll(".mtab").forEach(function(b){b.classList.remove("on");});
+  btn.classList.add("on");
+  render(mkt);
 }
 
 async function loadAuto(){
-  var btn=document.getElementById("refreshBtn");
-  if(btn)btn.classList.add("spinning");
+  var btn=document.getElementById("rfBtn");
+  if(btn)btn.classList.add("spin");
   try{
-    var controller=new AbortController();
-    var tid=setTimeout(function(){controller.abort();},15000);
-    var res=await fetch(PROXY,{cache:"no-store",signal:controller.signal});
+    var ctrl=new AbortController();
+    var tid=setTimeout(function(){ctrl.abort();},15000);
+    var res=await fetch(PROXY,{cache:"no-store",signal:ctrl.signal});
     clearTimeout(tid);
     var json=await res.json();
     if(json&&json.us)apiData=json;
     else apiData={us:{},tw:{}};
-  }catch(e){
-    apiData={us:{},tw:{}};
-  }
-  if(btn)btn.classList.remove("spinning");
-  render(currentMarket);
+  }catch(e){apiData={us:{},tw:{}};}
+  if(btn)btn.classList.remove("spin");
+  render(curMkt);
 }
 
 var d=new Date();
-document.getElementById("dateLabel").textContent=d.toLocaleDateString("zh-TW",{year:"numeric",month:"2-digit",day:"2-digit",weekday:"short"});
+document.getElementById("dateLabel").textContent=d.toLocaleDateString("zh-TW",{year:"numeric",month:"2-digit",day:"2-digit",weekday:"short"})+" · 每15分自動更新";
 loadAuto();
 setInterval(loadAuto,15*60*1000);
 </script>
