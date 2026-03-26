@@ -332,7 +332,7 @@ function fmtP(p,dec){
 // ── LIVE FETCH ──
 function batchSyms(){
   var s=[];[US_FUT,US_COM,US_VIX].forEach(g=>Object.values(g).forEach(f=>s.push(f.sym)));
-  if(curMkt==="tw") s.push("TXF=F","^TWII","^TWOII");
+  if(curMkt==="tw") s.push("TXF=F");
   return s;
 }
 async function fetchBatch(){
@@ -406,8 +406,17 @@ function updateVix(key,f){
   if(ze){var z=vixZone(d.price);ze.style.background=z.bg;ze.style.color=z.tc;ze.textContent=z.t;}
 }
 function updateTW(key,f){
-  var sym={twii:"^TWII",otc:"^TWOII",txf:"TXF=F"}[key];
-  var d=liveData[sym];if(!d)return;
+  var d=null;
+  if(key==="txf"){
+    d=liveData["TXF=F"]||null;
+  } else if(key==="twii"){
+    var src=apiData.tw.twii;
+    if(src) d={price:src.price,prev:src.prev,pct:src.pct};
+  } else if(key==="otc"){
+    var src=apiData.tw.otc;
+    if(src) d={price:src.price,prev:src.prev,pct:src.pct};
+  }
+  if(!d) return;
   var el=document.getElementById("tw_"+key);if(!el)return;
   var pe=el.querySelector("[data-price]");if(pe)updPrice(pe,fmtP(d.price,2),d.pct);
   var ce=el.querySelector("[data-chg]");if(ce)ce.innerHTML=chgHtml(d);
