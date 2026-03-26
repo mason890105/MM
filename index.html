@@ -332,7 +332,6 @@ function fmtP(p,dec){
 // ── LIVE FETCH ──
 function batchSyms(){
   var s=[];[US_FUT,US_COM,US_VIX].forEach(g=>Object.values(g).forEach(f=>s.push(f.sym)));
-  if(curMkt==="tw") s.push("TXF=F");
   return s;
 }
 async function fetchBatch(){
@@ -408,7 +407,17 @@ function updateVix(key,f){
 function updateTW(key,f){
   var d=null;
   if(key==="txf"){
-    d=liveData["TXF=F"]||null;
+    var nd=apiData.tw.night_data;
+    if(nd){
+      var row=nd.night||nd.day;
+      if(row){
+        var price=parseFloat(row.last);
+        var chg=parseFloat(row.change);
+        var prev=price-chg;
+        var pct=prev?+(chg/Math.abs(prev)*100).toFixed(2):0;
+        d={price:price,prev:prev,pct:pct};
+      }
+    }
   } else if(key==="twii"){
     var src=apiData.tw.twii;
     if(src) d={price:src.price,prev:src.prev,pct:src.pct};
