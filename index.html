@@ -4,117 +4,121 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Market Oracle</title>
-<meta name="theme-color" content="#0d0d0f">
+<meta name="theme-color" content="#f5f2ed">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#0d0d0f;--bg2:#141416;--bg3:#1c1c1f;--bg4:#242428;
-  --line:#2a2a2e;--line2:#3a3a3f;
-  --text:#ffffff;--text2:#b0b0b8;--text3:#606068;
-  --up:#00e676;--dn:#ff1744;--warn:#ffab00;--info:#40c4ff;
-  --up-bg:rgba(0,230,118,.12);--dn-bg:rgba(255,23,68,.12);--warn-bg:rgba(255,171,0,.12);
+  --bg:#f5f2ed;--bg2:#fffefb;--bg3:#f0ece4;--bg4:#e8e3d8;
+  --line:#ddd8ce;--line2:#ccc7bb;
+  --text:#1a1814;--text2:#6b6456;--text3:#9e9688;
+  --up:#00875a;--dn:#d63031;--warn:#c76f00;--info:#0066cc;
+  --up-bg:rgba(0,135,90,.08);--dn-bg:rgba(214,48,49,.08);--warn-bg:rgba(199,111,0,.08);--info-bg:rgba(0,102,204,.08);
+  --shadow:0 1px 3px rgba(0,0,0,.08);
 }
-html,body{background:var(--bg);color:var(--text);min-height:100vh;
-  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif}
-body{padding:0 0 80px;font-size:14px;line-height:1.5}
+html,body{background:var(--bg);color:var(--text);min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif}
+body{padding:0 0 60px;font-size:14px;line-height:1.5}
 
 /* ── HEADER ── */
-.hdr{background:var(--bg2);border-bottom:1px solid var(--line);padding:16px 16px 0;position:sticky;top:0;z-index:10}
-.hdr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.hdr-title{font-size:16px;font-weight:700;letter-spacing:-.3px}
+.hdr{background:var(--bg2);border-bottom:1px solid var(--line);padding:14px 16px 0;position:sticky;top:0;z-index:10;box-shadow:var(--shadow)}
+.hdr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.hdr-title{font-size:17px;font-weight:700;color:var(--text);letter-spacing:-.3px}
 .hdr-title span{color:var(--info)}
 .hdr-right{display:flex;align-items:center;gap:8px}
-.hdr-time{font-size:11px;color:var(--text3);font-variant-numeric:tabular-nums}
-.rfsh{width:32px;height:32px;border:1px solid var(--line2);border-radius:8px;
-  background:transparent;cursor:pointer;color:var(--text2);font-size:15px;
-  display:flex;align-items:center;justify-content:center}
-.rfsh:active{opacity:.5}
+.hdr-time{font-size:11px;color:var(--text3)}
+.rfsh{width:30px;height:30px;border:1px solid var(--line2);border-radius:6px;background:var(--bg3);cursor:pointer;color:var(--text2);font-size:14px;display:flex;align-items:center;justify-content:center}
+.rfsh:active{opacity:.6}
 .rfsh.spin{animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ── STATUS ── */
-.status{display:flex;align-items:center;gap:6px;padding:0 0 12px;font-size:11px;color:var(--text3)}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--up);flex-shrink:0}
+.status{display:flex;align-items:center;gap:6px;padding:6px 0 10px;font-size:11px;color:var(--text3)}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--up);flex-shrink:0}
 .dot.off{background:var(--text3)}
-.pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;letter-spacing:.3px}
+.pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;letter-spacing:.3px}
 .pill.open  {background:var(--up-bg);color:var(--up)}
 .pill.pre   {background:var(--warn-bg);color:var(--warn)}
-.pill.post  {background:rgba(74,144,217,.12);color:var(--info)}
+.pill.post  {background:var(--info-bg);color:var(--info)}
 .pill.closed{background:var(--bg3);color:var(--text3)}
 
 /* ── TABS ── */
-.tabs{display:flex;gap:0;margin:0 -16px;border-top:1px solid var(--line)}
-.tab{flex:1;padding:10px 8px;border:none;background:transparent;cursor:pointer;
-  font-size:13px;font-weight:600;color:var(--text3);
-  border-bottom:2px solid transparent;transition:color .15s;margin-bottom:-1px}
-.tab.on{color:var(--text);border-bottom-color:var(--info)}
+.tabs{display:flex;margin:0 -16px;border-top:1px solid var(--line)}
+.tab{flex:1;padding:10px 8px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--text3);border-bottom:2px solid transparent;transition:color .15s;margin-bottom:-1px}
+.tab.on{color:var(--info);border-bottom-color:var(--info)}
 
 /* ── CONTENT ── */
 .cnt{padding:0 16px}
 
-/* ── SECTION ── */
-.sec{margin-top:20px}
-.sec-title{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:1px;
-  text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-
 /* ── ORACLE ── */
-.oracle{background:var(--bg3);border-radius:12px;padding:16px;margin-top:16px;border:1px solid var(--line)}
-.oracle-label{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-.oracle-verdict{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:3px}
-.oracle-sub{font-size:13px;color:var(--text2);margin-bottom:12px}
-.oracle-bar{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-bottom:6px}
+.oracle{background:var(--bg2);border-radius:10px;padding:14px 16px;margin-top:14px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.oracle-label{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.oracle-verdict{font-size:19px;font-weight:700;margin-bottom:2px;letter-spacing:-.3px}
+.oracle-sub{font-size:12px;color:var(--text2);margin-bottom:10px}
+.oracle-bar{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-bottom:4px}
 .oracle-fill{height:100%;border-radius:2px;transition:width .5s ease}
-.oracle-score{font-size:11px;color:var(--text3);text-align:right}
+.oracle-score{font-size:10px;color:var(--text3);text-align:right}
 
 /* ── COMBO ── */
 .combo{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
-.combo:last-child{border-bottom:none}
-.combo-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.combo-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .combo-val{font-size:13px;font-weight:600}
 .combo-desc{font-size:11px;color:var(--text2);margin-top:1px}
 
+/* ── SECTION ── */
+.sec{margin-top:16px}
+.sec-title{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:0}
+
 /* ── PRICE ROW ── */
-.prow{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.prow{display:flex;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
 .prow:last-child{border-bottom:none}
 .prow-left{flex:1;min-width:0}
-.prow-sym{font-size:13px;font-weight:600}
-.prow-name{font-size:11px;color:var(--text3);margin-top:1px}
-.prow-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.prow-price{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.prow-sym{font-size:13px;font-weight:600;color:var(--text)}
+.prow-name{font-size:10px;color:var(--text3);margin-top:1px}
+.prow-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.prow-price{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.3px;color:var(--text)}
 .prow-price.up{color:var(--up)}
 .prow-price.dn{color:var(--dn)}
-.prow-chg{font-size:11px;font-weight:600;min-width:82px;text-align:right}
-.prow-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:2px;letter-spacing:.3px}
+.prow-chg{font-size:11px;font-weight:600;min-width:80px;text-align:right}
+.prow-zone{font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap}
+.prow-badge{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:3px}
 .prow-badge.open {background:var(--up-bg);color:var(--up)}
 .prow-badge.pre  {background:var(--warn-bg);color:var(--warn)}
-.prow-badge.post {background:rgba(74,144,217,.12);color:var(--info)}
-.prow-zone{font-size:10px;padding:2px 7px;border-radius:4px;margin-left:4px;white-space:nowrap;font-weight:600}
+.prow-badge.post {background:var(--info-bg);color:var(--info)}
 
-/* ── DEEP ROW ── */
-.drow{display:flex;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
-.drow:last-child{border-bottom:none}
-.drow-lbl{font-size:13px;color:var(--text2);flex:1}
-.drow-val{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;margin-right:8px}
-.drow-zone{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;white-space:nowrap}
+/* ── 兩欄並列 ── */
+.g2{display:grid;grid-template-columns:1fr 1fr}
+.g2 .prow{padding:9px 8px 9px 0}
+.g2 .prow:nth-child(even){padding-left:12px;border-left:1px solid var(--line)}
+.g2 .mrow{padding:8px 8px 8px 0}
+.g2 .mrow:nth-child(even){padding-left:12px;border-left:1px solid var(--line)}
+
+/* ── 三欄並列 ── */
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr}
+.g3 .prow{padding:9px 6px 9px 0}
+.g3 .prow:nth-child(3n+2),.g3 .prow:nth-child(3n){padding-left:10px;border-left:1px solid var(--line)}
+
+/* ── METRIC ROW ── */
+.mrow{display:flex;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:none}
+.mrow-lbl{font-size:12px;color:var(--text2);flex:1}
+.mrow-val{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;margin-right:8px}
+.mrow-zone{font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;white-space:nowrap}
 
 /* ── MANUAL INPUT ── */
 .manual-item{padding:10px 0;border-bottom:1px solid var(--line)}
 .manual-item:last-child{border-bottom:none}
-.manual-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.manual-lbl{font-size:13px;font-weight:600}
+.manual-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.manual-lbl{font-size:13px;font-weight:600;color:var(--text)}
 .manual-status{display:flex;align-items:center;gap:6px}
 .manual-val-display{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
-.manual-zone{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px}
+.manual-zone{font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px}
 .manual-meta{font-size:10px;color:var(--text3);margin-bottom:6px}
-.manual-ai-tag{font-size:9px;padding:1px 6px;border-radius:10px;background:rgba(74,144,217,.15);color:var(--info);font-weight:600;margin-left:4px}
+.manual-ai-tag{font-size:9px;padding:1px 5px;border-radius:8px;background:var(--info-bg);color:var(--info);font-weight:600;margin-left:4px}
 .manual-input-row{display:flex;gap:6px;align-items:center}
-.manual-input-row input{flex:1;background:var(--bg4);border:1px solid var(--line2);border-radius:8px;
-  padding:7px 10px;font-size:14px;color:var(--text);outline:none;font-variant-numeric:tabular-nums}
+.manual-input-row input{flex:1;background:var(--bg);border:1px solid var(--line2);border-radius:7px;padding:7px 10px;font-size:14px;color:var(--text);outline:none}
 .manual-input-row input:focus{border-color:var(--info)}
-.manual-btn{padding:7px 14px;background:var(--info);border:none;border-radius:8px;
-  color:#fff;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.manual-btn{padding:7px 14px;background:var(--info);border:none;border-radius:7px;color:#fff;font-size:13px;font-weight:600;cursor:pointer}
 .manual-btn:active{opacity:.7}
 .manual-hint{font-size:10px;color:var(--text3);margin-top:4px}
 
@@ -134,11 +138,11 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 /* ── SESSION ── */
 .sess{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:4px}
 .sess-half{background:var(--bg2);padding:12px}
-.sess-tag{font-size:10px;color:var(--text3);letter-spacing:.5px;margin-bottom:8px;font-weight:600;text-transform:uppercase}
-.sess-price{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;margin-bottom:2px;letter-spacing:-.5px}
+.sess-tag{font-size:10px;color:var(--text3);letter-spacing:.5px;margin-bottom:6px;font-weight:600;text-transform:uppercase}
+.sess-price{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;margin-bottom:2px;letter-spacing:-.3px}
 .sess-chg{font-size:12px;font-weight:600;margin-bottom:2px}
 .sess-vol{font-size:10px;color:var(--text3)}
-.sess-vs{font-size:10px;margin-top:3px}
+.sess-vs{font-size:10px;margin-top:2px}
 
 /* ── P/C ── */
 .pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:8px}
@@ -146,7 +150,7 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 .pc-sess{font-size:10px;color:var(--text3);letter-spacing:.5px;margin-bottom:8px;font-weight:600;text-transform:uppercase}
 .pc-num{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;margin-bottom:2px;letter-spacing:-.5px}
 .pc-sub{font-size:11px;color:var(--text3);margin-bottom:6px}
-.pc-sig{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block}
+.pc-sig{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;display:inline-block}
 .pc-drow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
 .pc-drow:last-child{border-bottom:none}
 .pc-dlbl{font-size:12px;color:var(--text2)}
@@ -154,21 +158,25 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 
 /* ── MARGIN ── */
 .margin-flow{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
-.margin-num{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.margin-num{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.3px}
 .margin-arrow{font-size:18px;color:var(--text3)}
 .margin-sig{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
 
-/* ── 兩欄並列 ── */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.grid2 .prow{padding:8px 6px}
-.grid2 .prow:nth-child(odd){border-right:1px solid var(--line)}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
-.grid3 .prow{padding:8px 6px}
-.grid3 .prow:nth-child(3n+1),.grid3 .prow:nth-child(3n+2){border-right:1px solid var(--line)}
-.grid2 .mrow,.grid3 .mrow{padding:8px 6px}
-.grid2 .mrow:nth-child(odd){border-right:1px solid var(--line)}
+/* ── SLIDERS ── */
+.seg{display:flex;border-bottom:1px solid var(--line);margin-bottom:2px}
+.segb{flex:1;padding:8px 4px;border:none;background:transparent;cursor:pointer;font-size:11px;font-weight:600;color:var(--text3);border-bottom:2px solid transparent;transition:color .15s;margin-bottom:-1px}
+.segb.on{color:var(--info);border-bottom-color:var(--info)}
+.srow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.srow:last-child{border-bottom:none}
+.srow-lbl{font-size:12px;color:var(--text2);width:106px;flex-shrink:0}
+.srow-zone{font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;width:68px;flex-shrink:0;text-align:center}
+.srow-wrap{flex:1;display:flex;align-items:center;gap:10px}
+.srow-wrap input[type=range]{flex:1;-webkit-appearance:none;height:2px;border-radius:1px;outline:none;cursor:pointer;background:var(--line2)}
+.srow-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--info);cursor:pointer;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.srow-num{font-size:13px;font-weight:700;min-width:40px;text-align:right;font-variant-numeric:tabular-nums}
 
-.footer{padding:14px 16px;border-top:1px solid var(--line);font-size:11px;color:var(--text3);line-height:1.9}
+/* ── FOOTER ── */
+.footer{padding:12px 16px;border-top:1px solid var(--line);font-size:11px;color:var(--text3);line-height:1.8}
 
 /* ── LOADING ── */
 .ldwrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 16px;gap:10px}
@@ -179,7 +187,7 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 .tag-up  {background:var(--up-bg);color:var(--up)}
 .tag-dn  {background:var(--dn-bg);color:var(--dn)}
 .tag-warn{background:var(--warn-bg);color:var(--warn)}
-.tag-neu {background:var(--bg4);color:var(--text2)}
+.tag-neu {background:var(--bg3);color:var(--text2)}
 </style>
 </head>
 <body>
@@ -218,14 +226,10 @@ var US_COM={gold:{sym:"GC=F",short:"黃金",dec:2},oil:{sym:"CL=F",short:"原油
 var US_VIX={vix:{sym:"^VIX",short:"VIX"},vvix:{sym:"^VVIX",short:"VVIX"},skew:{sym:"^SKEW",short:"SKEW"}};
 var TW_LIVE={twii:{sym:"^TWII",short:"TWII",name:"加權指數"},otc:{sym:"^TWOII",short:"OTC",name:"櫃買指數"},txf:{sym:"TXF=F",short:"TXF",name:"台指期貨"}};
 
-// 手動指標本地儲存
-var MANUAL_KEYS=["putcall","aaii","breadth"];
+var MANUAL_KEYS=["putcall","aaii","trin"];
 var manualData={};
 MANUAL_KEYS.forEach(k=>{
-  try{
-    var s=localStorage.getItem("manual_"+k);
-    if(s) manualData[k]=JSON.parse(s);
-  }catch{}
+  try{var s=localStorage.getItem("manual_"+k);if(s)manualData[k]=JSON.parse(s);}catch{}
 });
 function saveManual(key,val){
   var obj={val:parseFloat(val),updatedAt:new Date().toISOString(),source:"manual"};
@@ -233,19 +237,17 @@ function saveManual(key,val){
   try{localStorage.setItem("manual_"+key,JSON.stringify(obj));}catch{}
 }
 function setAIManual(key,val,fetchedAt){
-  if(val===null||val===undefined) return;
+  if(val===null||val===undefined)return;
   var obj={val:parseFloat(val),updatedAt:fetchedAt||new Date().toISOString(),source:"ai"};
   manualData[key]=obj;
   try{localStorage.setItem("manual_"+key,JSON.stringify(obj));}catch{}
 }
-function getManualVal(key){ return manualData[key]?.val??null; }
+function getManualVal(key){return manualData[key]?.val??null;}
 function fmtUpdated(iso){
-  if(!iso) return"未設定";
-  var d=new Date(iso),now=new Date();
-  var diff=Math.floor((now-d)/60000);
-  if(diff<1) return"剛剛";
-  if(diff<60) return diff+"分鐘前";
-  if(diff<1440) return Math.floor(diff/60)+"小時前";
+  if(!iso)return"未設定";
+  var d=new Date(iso),now=new Date(),diff=Math.floor((now-d)/60000);
+  if(diff<1)return"剛剛";if(diff<60)return diff+"分鐘前";
+  if(diff<1440)return Math.floor(diff/60)+"小時前";
   return d.toLocaleDateString("zh-TW",{month:"2-digit",day:"2-digit"});
 }
 
@@ -255,16 +257,13 @@ function usMarketState(){
   var et=new Date(now.getTime()+(now.getTimezoneOffset()+(isDST?-4:-5)*60)*60000);
   var mins=et.getHours()*60+et.getMinutes(),dow=et.getDay();
   if(dow===0||dow===6)return"closed";
-  if(mins>=240&&mins<570)return"pre";
-  if(mins>=570&&mins<960)return"open";
-  if(mins>=960&&mins<1200)return"post";
-  return"closed";
+  if(mins>=240&&mins<570)return"pre";if(mins>=570&&mins<960)return"open";
+  if(mins>=960&&mins<1200)return"post";return"closed";
 }
 var STATE_LBL={pre:"盤前",open:"盤中",post:"盤後",closed:"已收盤"};
 
-var apiData={us:{},tw:{}},liveData={},curMkt="us",liveTimer=null,liveOK=false;
+var apiData={us:{},tw:{}},liveData={},curMkt="us",usGrp="情緒",liveTimer=null,liveOK=false;
 
-// ── ZONES ──
 var US_AUTO=[
   {key:"vix",  lbl:"VIX",         zones:[{max:15,s:-1,t:"過度樂觀"},{max:20,s:2,t:"低波動"},{max:25,s:1,t:"正常"},{max:30,s:0,t:"警戒"},{max:40,s:-1,t:"恐慌"},{max:99,s:-2,t:"極端恐慌"}]},
   {key:"skew", lbl:"SKEW",        zones:[{max:115,s:2,t:"正常"},{max:130,s:1,t:"輕度風險"},{max:150,s:0,t:"中高風險"},{max:165,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端"}]},
@@ -278,9 +277,9 @@ var US_AUTO=[
   {key:"mfi",  lbl:"MFI",         zones:[{max:20,s:1,t:"超賣"},{max:40,s:0,t:"流出"},{max:60,s:2,t:"中性"},{max:80,s:1,t:"流入"},{max:100,s:-1,t:"超買"}],direct:true},
 ];
 var US_MANUAL_DEFS=[
-  {key:"putcall",lbl:"Put/Call Ratio",placeholder:"例：0.85",zones:[{max:.6,s:-1,t:"過度貪婪"},{max:.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀"}],hint:"CBOE 每日更新，AI 自動抓取"},
-  {key:"aaii",   lbl:"AAII 多頭%",   placeholder:"例：38",  zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}],hint:"AAII 每週更新（週四），AI 自動抓取"},
-  {key:"trin",   lbl:"TRIN",         placeholder:"例：1.20",zones:[{max:.5,s:-1,t:"過度樂觀"},{max:.8,s:1,t:"偏多"},{max:1.2,s:2,t:"中性"},{max:2.0,s:0,t:"偏空"},{max:99,s:1,t:"極度恐慌"}],hint:"每日盤中手動更新"},
+  {key:"putcall",lbl:"Put/Call Ratio",placeholder:"例：0.85",zones:[{max:.6,s:-1,t:"過度貪婪"},{max:.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀"}],hint:"CBOE 每日更新"},
+  {key:"aaii",   lbl:"AAII 多頭%",   placeholder:"例：38",  zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}],hint:"AAII 每週更新（週四）"},
+  {key:"trin",   lbl:"TRIN",         placeholder:"例：1.20",zones:[{max:.5,s:-1,t:"過度樂觀"},{max:.8,s:1,t:"偏多"},{max:1.2,s:2,t:"中性"},{max:2.0,s:0,t:"偏空"},{max:99,s:1,t:"極度恐慌"}],hint:"盤中手動更新"},
 ];
 var TW_AUTO=[
   {key:"twd",   lbl:"台幣 / 美金",  zones:[{max:30,s:2,t:"台幣強勢"},{max:31,s:2,t:"偏強"},{max:32,s:1,t:"中性"},{max:33,s:0,t:"偏弱"},{max:34,s:-1,t:"台幣弱勢"},{max:99,s:-2,t:"台幣大貶"}]},
@@ -288,13 +287,14 @@ var TW_AUTO=[
   {key:"rsi",   lbl:"台股 RSI",     zones:[{max:30,s:1,t:"超賣"},{max:40,s:0,t:"偏弱"},{max:60,s:2,t:"健康"},{max:70,s:1,t:"偏強"},{max:80,s:0,t:"超買"},{max:100,s:-1,t:"強烈超買"}],direct:true},
   {key:"mfi",   lbl:"MFI",          zones:[{max:20,s:1,t:"超賣"},{max:40,s:0,t:"流出"},{max:60,s:2,t:"中性"},{max:80,s:1,t:"流入"},{max:100,s:-1,t:"超買"}],direct:true},
 ];
+var US_GROUPS={"情緒":["putcall","aaii","trin"]};
 var IND_LIVE={vix:"^VIX",skew:"^SKEW",vvix:"^VVIX",gold:"GC=F",oil:"CL=F",dxy:"DX-Y.NYB",us10y:"^TNX"};
-var VIX_Z=[{max:15,t:"過度樂觀",tc:"var(--dn)",bg:"var(--dn-bg)"},{max:20,t:"低波動",tc:"var(--up)",bg:"var(--up-bg)"},{max:25,t:"正常",tc:"var(--text2)",bg:"var(--bg4)"},{max:30,t:"警戒",tc:"var(--warn)",bg:"var(--warn-bg)"},{max:40,t:"恐慌",tc:"var(--dn)",bg:"var(--dn-bg)"},{max:999,t:"極端恐慌",tc:"var(--dn)",bg:"var(--dn-bg)"}];
+var VIX_Z=[{max:15,t:"過度樂觀",tc:"var(--dn)",bg:"var(--dn-bg)"},{max:20,t:"低波動",tc:"var(--up)",bg:"var(--up-bg)"},{max:25,t:"正常",tc:"var(--text2)",bg:"var(--bg3)"},{max:30,t:"警戒",tc:"var(--warn)",bg:"var(--warn-bg)"},{max:40,t:"恐慌",tc:"var(--dn)",bg:"var(--dn-bg)"},{max:999,t:"極端恐慌",tc:"var(--dn)",bg:"var(--dn-bg)"}];
 function vixZone(v){for(var z of VIX_Z)if(v<=z.max)return z;return VIX_Z[VIX_Z.length-1];}
 function gz(ind,v){for(var i=0;i<ind.zones.length;i++)if(v<=ind.zones[i].max)return ind.zones[i];return ind.zones[ind.zones.length-1];}
-function st(s){
+function ss(s){
   if(s>=2) return{tc:"var(--up)",  bg:"var(--up-bg)"};
-  if(s===1)return{tc:"var(--text2)",bg:"var(--bg4)"};
+  if(s===1)return{tc:"var(--text2)",bg:"var(--bg3)"};
   if(s===0)return{tc:"var(--warn)",bg:"var(--warn-bg)"};
   return{tc:"var(--dn)",bg:"var(--dn-bg)"};
 }
@@ -338,7 +338,7 @@ function fmtP(p,dec){
   return p>=1000?p.toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec}):p.toFixed(dec);
 }
 
-// ── LIVE FETCH ──
+// ── LIVE ──
 function batchSyms(){
   var s=[];[US_FUT,US_COM,US_VIX].forEach(g=>Object.values(g).forEach(f=>s.push(f.sym)));
   return s;
@@ -356,23 +356,20 @@ async function fetchBatch(){
 }
 function startLiveTimer(){
   if(liveTimer)clearInterval(liveTimer);
-  fetchBatch();
-  liveTimer=setInterval(fetchBatch,5000);
+  fetchBatch();liveTimer=setInterval(fetchBatch,5000);
 }
 function updateStatus(){
   var dot=document.getElementById("liveDot");
   var lbl=document.getElementById("liveLabel");
-  var st2=document.getElementById("mktState");
+  var st=document.getElementById("mktState");
   var tim=document.getElementById("statusTime");
   if(!dot)return;
   dot.className=liveOK?"dot":"dot off";
   lbl.textContent=liveOK?"即時":"連線中斷";
   if(tim)tim.textContent=new Date().toLocaleTimeString("zh-TW",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
-  if(st2&&curMkt==="us"){var s=usMarketState();st2.className="pill "+s;st2.textContent=STATE_LBL[s];}
-  else if(st2){st2.className="pill closed";st2.textContent="--";}
+  if(st&&curMkt==="us"){var s=usMarketState();st.className="pill "+s;st.textContent=STATE_LBL[s];}
+  else if(st){st.className="pill closed";st.textContent="--";}
 }
-
-// ── ROW UPDATE ──
 function updPrice(el,newVal,pct){
   if(!el||el.textContent===newVal)return;
   el.textContent=newVal;
@@ -413,28 +410,12 @@ function updateVix(key,f){
   var ze=el.querySelector("[data-zone]");
   if(ze){var z=vixZone(d.price);ze.style.background=z.bg;ze.style.color=z.tc;ze.textContent=z.t;}
 }
-function updateTW(key,f){
+function updateTW(key){
   var d=null;
-  if(key==="txf"){
-    var nd=apiData.tw.night_data;
-    if(nd){
-      var row=nd.night||nd.day;
-      if(row){
-        var price=parseFloat(row.last);
-        var chg=parseFloat(row.change);
-        var prev=price-chg;
-        var pct=prev?+(chg/Math.abs(prev)*100).toFixed(2):0;
-        d={price:price,prev:prev,pct:pct};
-      }
-    }
-  } else if(key==="twii"){
-    var src=apiData.tw.twii;
-    if(src) d={price:src.price,prev:src.prev,pct:src.pct};
-  } else if(key==="otc"){
-    var src=apiData.tw.otc;
-    if(src) d={price:src.price,prev:src.prev,pct:src.pct};
-  }
-  if(!d) return;
+  if(key==="txf"){var nd=apiData.tw.night_data;if(nd){var row=nd.night||nd.day;if(row){var price=parseFloat(row.last),chg=parseFloat(row.change),prev=price-chg,pct=prev?(chg/Math.abs(prev)*100):0;d={price:price,prev:prev,pct:+pct.toFixed(2)};}}}
+  else if(key==="twii"){var s=apiData.tw.twii;if(s)d={price:s.price,prev:s.prev,pct:s.pct};}
+  else if(key==="otc"){var s=apiData.tw.otc;if(s)d={price:s.price,prev:s.prev,pct:s.pct};}
+  if(!d)return;
   var el=document.getElementById("tw_"+key);if(!el)return;
   var pe=el.querySelector("[data-price]");if(pe)updPrice(pe,fmtP(d.price,2),d.pct);
   var ce=el.querySelector("[data-chg]");if(ce)ce.innerHTML=chgHtml(d);
@@ -448,11 +429,6 @@ function updateAllRows(){
     var cv=document.getElementById("combo-val"),cd=document.getElementById("combo-desc");
     if(cv){cv.textContent=cb.t;cv.style.color=cb.c;}
     if(cd)cd.textContent=cb.d;
-  }else{
-    Object.entries(TW_LIVE).forEach(([k,f])=>updateTW(k,f));
-    // 加權和OTC從深度數據更新，不等 liveData
-    updateTW("twii",null);
-    updateTW("otc",null);
   }
 }
 
@@ -483,7 +459,7 @@ function comRow(key,f){
 }
 function vixRow(key,f){
   var d=liveData[f.sym];
-  var z=d?vixZone(d.price):{t:"—",tc:"var(--text3)",bg:"var(--bg4)"};
+  var z=d?vixZone(d.price):{t:"—",tc:"var(--text3)",bg:"var(--bg3)"};
   return"<div class='prow' id='vix_"+key+"'>"
     +"<div class='prow-left'><div class='prow-sym'>"+f.short+"</div></div>"
     +"<div class='prow-right'>"
@@ -493,17 +469,14 @@ function vixRow(key,f){
     +"</div></div>";
 }
 function twRow(key,f){
-  // twii/otc 從 apiData 取，txf 從 liveData 取
   var d=null;
-  if(key==="txf"){
-    d=liveData["TXF=F"]||null;
-  }
-  else if(key==="twii"){ var s=apiData.tw.twii; if(s) d={price:s.price,prev:s.prev,pct:s.pct}; }
-  else if(key==="otc") { var s=apiData.tw.otc;  if(s) d={price:s.price,prev:s.prev,pct:s.pct}; }
+  if(key==="txf"){var nd=apiData.tw.night_data;if(nd){var row=nd.night||nd.day;if(row){var price=parseFloat(row.last),chg=parseFloat(row.change),prev=price-chg,pct=prev?(chg/Math.abs(prev)*100):0;d={price:price,prev:prev,pct:+pct.toFixed(2)};}}}
+  else if(key==="twii"){var s=apiData.tw.twii;if(s)d={price:s.price,prev:s.prev,pct:s.pct};}
+  else if(key==="otc"){var s=apiData.tw.otc;if(s)d={price:s.price,prev:s.prev,pct:s.pct};}
   return"<div class='prow' id='tw_"+key+"'>"
     +"<div class='prow-left'><div class='prow-sym'>"+f.short+"</div><div class='prow-name'>"+f.name+"</div></div>"
     +"<div class='prow-right'>"
-    +"<div class='prow-price' data-price style='font-size:22px'>"+(d?fmtP(d.price,2):"—")+"</div>"
+    +"<div class='prow-price' data-price style='font-size:20px'>"+(d?fmtP(d.price,2):"—")+"</div>"
     +"<div class='prow-chg' data-chg>"+chgHtml(d)+"</div>"
     +"</div></div>";
 }
@@ -511,58 +484,46 @@ function deepRows(aI,data){
   var h="";
   aI.forEach(ind=>{
     var v=getV(ind,data);
-    var z=v!=null?gz(ind,v):null,s=st(z?z.s:1);
+    var z=v!=null?gz(ind,v):null,st2=ss(z?z.s:1);
     var val="—";
     if(v!=null){
       if(ind.direct)val=parseFloat(v).toFixed(ind.key==="fgi"?0:2);
       else if(ind.usePct)val=(v>0?"+":"")+v.toFixed(2)+"%";
       else{var src=liveData[IND_LIVE[ind.key]]||data[ind.key];if(src)val=src.price>=1000?src.price.toLocaleString():src.price.toFixed(2);}
     }
-    h+="<div class='drow'>"
-      +"<div class='drow-lbl'>"+ind.lbl+"</div>"
-      +"<div class='drow-val' style='color:"+s.tc+"'>"+val+"</div>"
-      +"<div class='drow-zone' style='background:"+s.bg+";color:"+s.tc+"'>"+(z?z.t:"—")+"</div>"
+    h+="<div class='mrow'>"
+      +"<div class='mrow-lbl'>"+ind.lbl+"</div>"
+      +"<div class='mrow-val' style='color:"+st2.tc+"'>"+val+"</div>"
+      +"<div class='mrow-zone' style='background:"+st2.bg+";color:"+st2.tc+"'>"+(z?z.t:"—")+"</div>"
       +"</div>";
   });
   return h;
 }
-
-// ── MANUAL INPUT ITEMS ──
 function manualItem(def){
   var m=manualData[def.key];
   var val=m?.val??null;
   var z=val!=null?gz(def,val):null;
-  var s=st(z?z.s:1);
+  var st2=ss(z?z.s:1);
   var isAI=m?.source==="ai";
   return"<div class='manual-item'>"
-    +"<div class='manual-top'>"
-    +"<span class='manual-lbl'>"+def.lbl+"</span>"
+    +"<div class='manual-top'><span class='manual-lbl'>"+def.lbl+"</span>"
     +"<div class='manual-status'>"
-    +(val!=null?"<span class='manual-val-display' style='color:"+s.tc+"'>"+fmtN(val,def.key==="putcall"?2:1)+"</span>":"")
-    +(z?"<span class='manual-zone' style='background:"+s.bg+";color:"+s.tc+"'>"+z.t+"</span>":"")
+    +(val!=null?"<span class='manual-val-display' style='color:"+st2.tc+"'>"+fmtN(val,def.key==="putcall"?2:1)+"</span>":"")
+    +(z?"<span class='manual-zone' style='background:"+st2.bg+";color:"+st2.tc+"'>"+z.t+"</span>":"")
     +"</div></div>"
-    +"<div class='manual-meta'>"
-    +(m?"上次更新："+fmtUpdated(m.updatedAt)+(isAI?"<span class='manual-ai-tag'>AI 自動</span>":""):"尚未輸入")
-    +"</div>"
+    +"<div class='manual-meta'>"+(m?"上次更新："+fmtUpdated(m.updatedAt)+(isAI?"<span class='manual-ai-tag'>AI 自動</span>":""):"尚未輸入")+"</div>"
     +"<div class='manual-input-row'>"
-    +"<input type='number' id='minput_"+def.key+"' placeholder='"+def.placeholder+"' step='0.01' "
-    +(val!=null?"value='"+val+"'":"")
-    +"/>"
+    +"<input type='number' id='minput_"+def.key+"' placeholder='"+def.placeholder+"' step='0.01' "+(val!=null?"value='"+val+"'":"")+" />"
     +"<button class='manual-btn' onclick='submitManual(\""+def.key+"\")'>更新</button>"
     +"</div>"
     +"<div class='manual-hint'>"+def.hint+"</div>"
     +"</div>";
 }
 function submitManual(key){
-  var el=document.getElementById("minput_"+key);
-  if(!el)return;
-  var v=parseFloat(el.value);
-  if(isNaN(v))return;
-  saveManual(key,v);
-  render(curMkt);
+  var el=document.getElementById("minput_"+key);if(!el)return;
+  var v=parseFloat(el.value);if(isNaN(v))return;
+  saveManual(key,v);render(curMkt);
 }
-
-// ── TW CHIP RENDERS ──
 function renderNight(nd){
   if(!nd)return"";
   var date=nd.date.slice(0,4)+"/"+nd.date.slice(4,6)+"/"+nd.date.slice(6,8);
@@ -579,10 +540,10 @@ function renderNight(nd){
     +"</div></div>";
 }
 function pcSig(oi){
-  if(oi==null)return{t:"—",tc:"var(--text3)",bg:"var(--bg4)"};
+  if(oi==null)return{t:"—",tc:"var(--text3)",bg:"var(--bg3)"};
   if(oi>130)return{t:"偏空",tc:"var(--dn)",bg:"var(--dn-bg)"};
   if(oi>110)return{t:"中性偏空",tc:"var(--warn)",bg:"var(--warn-bg)"};
-  if(oi>90) return{t:"中性",tc:"var(--text2)",bg:"var(--bg4)"};
+  if(oi>90) return{t:"中性",tc:"var(--text2)",bg:"var(--bg3)"};
   return{t:"偏多",tc:"var(--up)",bg:"var(--up-bg)"};
 }
 function diffSig(d){
@@ -673,8 +634,6 @@ function renderMargin(md){
     +"<span style='font-size:13px;font-weight:700;color:"+cc(md.marginChg)+"'>"+(md.marginChg>=0?"+":"")+fmtN(md.marginChg,1)+" 億 ("+(md.marginChgPct>=0?"+":"")+fmtN(md.marginChgPct,2)+"%)</span>"
     +"</div>";
 }
-
-// ── BANNER UPDATE ──
 function updateBanner(){
   var isUS=curMkt==="us";
   var aI=isUS?US_AUTO:TW_AUTO,mI=isUS?US_MANUAL_DEFS:[];
@@ -682,7 +641,7 @@ function updateBanner(){
   var mn=(aI.length+mI.length)*-2,mx=(aI.length+mI.length)*2;
   var tot=calcTot(aI,mI,data),r=(tot-mn)/(mx-mn),sf=sfInfo(r);
   var b=document.getElementById("oracle");if(!b)return;
-  b.style.borderColor=sf.c+"44";
+  b.style.borderColor=sf.c+"55";
   document.getElementById("oracle-verdict").textContent=sf.lbl;
   document.getElementById("oracle-verdict").style.color=sf.c;
   document.getElementById("oracle-sub").textContent=sf.sub;
@@ -701,7 +660,7 @@ function render(mkt){
   var tot=calcTot(aI,mI,data),r=(tot-mn)/(mx-mn),sf=sfInfo(r);
   var cb=combo(data);
 
-  var h="<div class='oracle' id='oracle' style='border-color:"+sf.c+"44'>"
+  var h="<div class='oracle' id='oracle' style='border-color:"+sf.c+"55'>"
     +"<div class='oracle-label'>神諭訊號</div>"
     +"<div class='oracle-verdict' id='oracle-verdict' style='color:"+sf.c+"'>"+sf.lbl+"</div>"
     +"<div class='oracle-sub' id='oracle-sub'>"+sf.sub+"</div>"
@@ -710,7 +669,7 @@ function render(mkt){
     +"</div>";
 
   if(isUS){
-    h+="<div class='sec'>"
+    h+="<div class='sec' style='margin-top:12px'>"
       +"<div class='combo' id='combo-box'>"
       +"<div class='combo-dot' style='background:"+cb.c+"'></div>"
       +"<div><div class='combo-val' id='combo-val' style='color:"+cb.c+"'>"+cb.t+"</div>"
@@ -721,18 +680,20 @@ function render(mkt){
     Object.entries(US_FUT).forEach(([k,f])=>h+=futRow(k,f));
     h+="</div>";
 
-    h+="<div class='sec'>"+secTitle("商品報價 · 即時")+"<div class='grid2'>";
+    h+="<div class='sec'>"+secTitle("商品報價 · 即時")
+      +"<div class='g2'>";
     Object.entries(US_COM).forEach(([k,f])=>h+=comRow(k,f));
     h+="</div></div>";
 
-    h+="<div class='sec'>"+secTitle("波動率 · 即時")+"<div class='grid3'>";
+    h+="<div class='sec'>"+secTitle("波動率 · 即時")
+      +"<div class='g3'>";
     Object.entries(US_VIX).forEach(([k,f])=>h+=vixRow(k,f));
     h+="</div></div>";
 
-    h+="<div class='sec'>"+secTitle("深度指標 · 自動")+"<div class='grid2'>"
-      +deepRows(aI,data)+"</div></div>";
+    h+="<div class='sec'>"+secTitle("深度指標 · 自動")
+      +"<div class='g2'>"+deepRows(aI,data)+"</div></div>";
 
-    h+="<div class='sec'>"+secTitle("情緒指標 · 盤後更新");
+    h+="<div class='sec'>"+secTitle("情緒指標 · 手動更新");
     mI.forEach(def=>h+=manualItem(def));
     h+="</div>";
 
@@ -740,15 +701,15 @@ function render(mkt){
     h+="<div class='sec'>"+secTitle("台股即時行情");
     Object.entries(TW_LIVE).forEach(([k,f])=>h+=twRow(k,f));
     h+="</div>";
-
     h+="<div class='sec'>"+secTitle("三大法人 · 現貨")+renderForeign(data.foreign_data)+"</div>";
     h+="<div class='sec'>"+secTitle("三大法人 · 期貨淨部位")+renderFutInst(data.futures_data)+"</div>";
     h+="<div class='sec'>"+secTitle("Put / Call Ratio")+renderPC(data.putcall_data)+"</div>";
     h+="<div class='sec'>"+secTitle("融資餘額")+renderMargin(data.margin_data)+"</div>";
-    h+="<div class='sec'>"+secTitle("深度指標")+deepRows(aI,data)+"</div>";
+    h+="<div class='sec'>"+secTitle("深度指標 · 自動")
+      +"<div class='g2'>"+deepRows(aI,data)+"</div></div>";
   }
 
-  h+="<div class='footer'>即時 5 秒 · 深度數據 15 分鐘"+(isUS?" · 情緒指標支援 AI 自動抓取":" · 台股籌碼盤後更新")+"</div>";
+  h+="<div class='footer'>即時 5 秒 · 深度數據 15 分鐘"+(isUS?" · Put/Call、AAII、TRIN 手動更新":" · 籌碼盤後更新")+"</div>";
   document.getElementById("main").innerHTML=h;
   updateStatus();
 }
@@ -767,10 +728,8 @@ async function loadDeep(){
     var json=await res.json();
     if(json&&json.us){
       apiData=json;
-      // 如果 Worker 有 AI 解析結果，自動更新本地
-      if(json.us.aaii!=null)    setAIManual("aaii",   json.us.aaii,    json.us.ai_fetched_at);
-      if(json.us.breadth!=null) setAIManual("breadth",json.us.breadth, json.us.ai_fetched_at);
-      if(json.us.putcall!=null) setAIManual("putcall",json.us.putcall, json.us.ai_fetched_at);
+      if(json.us.aaii!=null)   setAIManual("aaii",   json.us.aaii,   json.us.ai_fetched_at);
+      if(json.us.putcall!=null)setAIManual("putcall",json.us.putcall,json.us.ai_fetched_at);
     }else apiData={us:{},tw:{}};
   }catch{apiData={us:{},tw:{}};}
   if(btn)btn.classList.remove("spin");
