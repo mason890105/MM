@@ -12,9 +12,9 @@
 :root{
   --bg:#0d0d0f;--bg2:#141416;--bg3:#1c1c1f;--bg4:#242428;
   --line:#2a2a2e;--line2:#3a3a3f;
-  --text:#f0f0f2;--text2:#8a8a90;--text3:#4a4a50;
-  --up:#00c48c;--dn:#ff4757;--warn:#ffa502;--info:#4a90d9;
-  --up-bg:rgba(0,196,140,.1);--dn-bg:rgba(255,71,87,.1);--warn-bg:rgba(255,165,2,.1);
+  --text:#ffffff;--text2:#b0b0b8;--text3:#606068;
+  --up:#00e676;--dn:#ff1744;--warn:#ffab00;--info:#40c4ff;
+  --up-bg:rgba(0,230,118,.12);--dn-bg:rgba(255,23,68,.12);--warn-bg:rgba(255,171,0,.12);
 }
 html,body{background:var(--bg);color:var(--text);min-height:100vh;
   font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif}
@@ -158,7 +158,16 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 .margin-arrow{font-size:18px;color:var(--text3)}
 .margin-sig{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
 
-/* ── FOOTER ── */
+/* ── 兩欄並列 ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.grid2 .prow{padding:8px 6px}
+.grid2 .prow:nth-child(odd){border-right:1px solid var(--line)}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.grid3 .prow{padding:8px 6px}
+.grid3 .prow:nth-child(3n+1),.grid3 .prow:nth-child(3n+2){border-right:1px solid var(--line)}
+.grid2 .mrow,.grid3 .mrow{padding:8px 6px}
+.grid2 .mrow:nth-child(odd){border-right:1px solid var(--line)}
+
 .footer{padding:14px 16px;border-top:1px solid var(--line);font-size:11px;color:var(--text3);line-height:1.9}
 
 /* ── LOADING ── */
@@ -261,7 +270,6 @@ var US_AUTO=[
   {key:"skew", lbl:"SKEW",        zones:[{max:115,s:2,t:"正常"},{max:130,s:1,t:"輕度風險"},{max:150,s:0,t:"中高風險"},{max:165,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端"}]},
   {key:"vvix", lbl:"VVIX",        zones:[{max:80,s:2,t:"極度平靜"},{max:100,s:1,t:"正常"},{max:120,s:0,t:"偏高"},{max:140,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端不確定"}]},
   {key:"fgi",  lbl:"Fear & Greed",zones:[{max:20,s:1,t:"極度恐慌"},{max:35,s:1,t:"恐慌"},{max:55,s:2,t:"中性"},{max:70,s:0,t:"貪婪"},{max:85,s:-1,t:"極度貪婪"},{max:100,s:-2,t:"過熱"}],direct:true},
-  {key:"trin", lbl:"TRIN",        zones:[{max:.5,s:-1,t:"過度樂觀"},{max:.8,s:1,t:"偏多"},{max:1.2,s:2,t:"中性"},{max:2.0,s:0,t:"偏空"},{max:99,s:1,t:"極度恐慌"}],direct:true},
   {key:"dxy",  lbl:"DXY",         zones:[{max:100,s:2,t:"弱美元"},{max:103,s:1,t:"中性偏弱"},{max:106,s:0,t:"中性"},{max:109,s:-1,t:"強美元"},{max:999,s:-2,t:"強美元高壓"}]},
   {key:"us10y",lbl:"美債 10Y",    zones:[{max:3.5,s:2,t:"低殖利率"},{max:4.0,s:1,t:"適中"},{max:4.5,s:0,t:"偏高"},{max:5.0,s:-1,t:"壓估值"},{max:99,s:-2,t:"過高危險"}]},
   {key:"gold", lbl:"黃金",        zones:[{max:-1,s:1,t:"下跌"},{max:0,s:2,t:"微跌中性"},{max:.5,s:1,t:"微漲中性"},{max:1.5,s:0,t:"上漲謹慎"},{max:99,s:-1,t:"急漲避險"}],usePct:true},
@@ -270,9 +278,9 @@ var US_AUTO=[
   {key:"mfi",  lbl:"MFI",         zones:[{max:20,s:1,t:"超賣"},{max:40,s:0,t:"流出"},{max:60,s:2,t:"中性"},{max:80,s:1,t:"流入"},{max:100,s:-1,t:"超買"}],direct:true},
 ];
 var US_MANUAL_DEFS=[
-  {key:"putcall",lbl:"Put/Call Ratio",placeholder:"例：0.85",zones:[{max:.6,s:-1,t:"過度貪婪"},{max:.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀"}],hint:"CBOE 每日更新"},
-  {key:"aaii",   lbl:"AAII 多頭%",   placeholder:"例：38",  zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}],hint:"AAII 每週更新（週四）"},
-  {key:"breadth",lbl:"市場廣度%",    placeholder:"例：55",  zones:[{max:35,s:-2,t:"多數股跌"},{max:45,s:0,t:"偏弱"},{max:55,s:2,t:"均衡"},{max:65,s:1,t:"多頭強勢"},{max:100,s:0,t:"過度擴張"}],hint:"NYSE 上漲股% "},
+  {key:"putcall",lbl:"Put/Call Ratio",placeholder:"例：0.85",zones:[{max:.6,s:-1,t:"過度貪婪"},{max:.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀"}],hint:"CBOE 每日更新，AI 自動抓取"},
+  {key:"aaii",   lbl:"AAII 多頭%",   placeholder:"例：38",  zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}],hint:"AAII 每週更新（週四），AI 自動抓取"},
+  {key:"trin",   lbl:"TRIN",         placeholder:"例：1.20",zones:[{max:.5,s:-1,t:"過度樂觀"},{max:.8,s:1,t:"偏多"},{max:1.2,s:2,t:"中性"},{max:2.0,s:0,t:"偏空"},{max:99,s:1,t:"極度恐慌"}],hint:"每日盤中手動更新"},
 ];
 var TW_AUTO=[
   {key:"twd",   lbl:"台幣 / 美金",  zones:[{max:30,s:2,t:"台幣強勢"},{max:31,s:2,t:"偏強"},{max:32,s:1,t:"中性"},{max:33,s:0,t:"偏弱"},{max:34,s:-1,t:"台幣弱勢"},{max:99,s:-2,t:"台幣大貶"}]},
@@ -713,16 +721,16 @@ function render(mkt){
     Object.entries(US_FUT).forEach(([k,f])=>h+=futRow(k,f));
     h+="</div>";
 
-    h+="<div class='sec'>"+secTitle("商品報價 · 即時");
+    h+="<div class='sec'>"+secTitle("商品報價 · 即時")+"<div class='grid2'>";
     Object.entries(US_COM).forEach(([k,f])=>h+=comRow(k,f));
-    h+="</div>";
+    h+="</div></div>";
 
-    h+="<div class='sec'>"+secTitle("波動率 · 即時");
+    h+="<div class='sec'>"+secTitle("波動率 · 即時")+"<div class='grid3'>";
     Object.entries(US_VIX).forEach(([k,f])=>h+=vixRow(k,f));
-    h+="</div>";
+    h+="</div></div>";
 
-    h+="<div class='sec'>"+secTitle("深度指標 · 自動")
-      +deepRows(aI,data)+"</div>";
+    h+="<div class='sec'>"+secTitle("深度指標 · 自動")+"<div class='grid2'>"
+      +deepRows(aI,data)+"</div></div>";
 
     h+="<div class='sec'>"+secTitle("情緒指標 · 盤後更新");
     mI.forEach(def=>h+=manualItem(def));
