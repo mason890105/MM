@@ -19,47 +19,30 @@
 html,body{background:var(--bg);color:var(--text);min-height:100vh;
   font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif}
 body{padding:0 0 80px;font-size:14px;line-height:1.5}
-
-/* ── HEADER ── */
 .hdr{background:var(--bg2);border-bottom:1px solid var(--line);padding:16px 16px 0;position:sticky;top:0;z-index:10}
 .hdr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .hdr-title{font-size:16px;font-weight:700;letter-spacing:-.3px}
 .hdr-title span{color:var(--info)}
 .hdr-right{display:flex;align-items:center;gap:8px}
 .hdr-time{font-size:11px;color:var(--text3);font-variant-numeric:tabular-nums}
-.rfsh{width:32px;height:32px;border:1px solid var(--line2);border-radius:8px;
-  background:transparent;cursor:pointer;color:var(--text2);font-size:15px;
-  display:flex;align-items:center;justify-content:center}
+.rfsh{width:32px;height:32px;border:1px solid var(--line2);border-radius:8px;background:transparent;cursor:pointer;color:var(--text2);font-size:15px;display:flex;align-items:center;justify-content:center}
 .rfsh:active{opacity:.5}
 .rfsh.spin{animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ── STATUS ── */
 .status{display:flex;align-items:center;gap:6px;padding:0 0 12px;font-size:11px;color:var(--text3)}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--up);flex-shrink:0}
 .dot.off{background:var(--text3)}
 .pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;letter-spacing:.3px}
-.pill.open  {background:var(--up-bg);color:var(--up)}
-.pill.pre   {background:var(--warn-bg);color:var(--warn)}
-.pill.post  {background:rgba(74,144,217,.12);color:var(--info)}
+.pill.open{background:var(--up-bg);color:var(--up)}
+.pill.pre{background:var(--warn-bg);color:var(--warn)}
+.pill.post{background:rgba(74,144,217,.12);color:var(--info)}
 .pill.closed{background:var(--bg3);color:var(--text3)}
-
-/* ── TABS ── */
-.tabs{display:flex;gap:0;margin:0 -16px;border-top:1px solid var(--line)}
-.tab{flex:1;padding:10px 8px;border:none;background:transparent;cursor:pointer;
-  font-size:13px;font-weight:600;color:var(--text3);
-  border-bottom:2px solid transparent;transition:color .15s;margin-bottom:-1px}
+.tabs{display:flex;margin:0 -16px;border-top:1px solid var(--line)}
+.tab{flex:1;padding:10px 8px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--text3);border-bottom:2px solid transparent;transition:color .15s;margin-bottom:-1px}
 .tab.on{color:var(--text);border-bottom-color:var(--info)}
-
-/* ── CONTENT ── */
 .cnt{padding:0 16px}
-
-/* ── SECTION ── */
 .sec{margin-top:20px}
-.sec-title{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:1px;
-  text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-
-/* ── ORACLE ── */
+.sec-title{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
 .oracle{background:var(--bg3);border-radius:12px;padding:16px;margin-top:16px;border:1px solid var(--line)}
 .oracle-label{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
 .oracle-verdict{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:3px}
@@ -67,15 +50,10 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 .oracle-bar{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-bottom:6px}
 .oracle-fill{height:100%;border-radius:2px;transition:width .5s ease}
 .oracle-score{font-size:11px;color:var(--text3);text-align:right}
-
-/* ── COMBO ── */
 .combo{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
-.combo:last-child{border-bottom:none}
 .combo-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .combo-val{font-size:13px;font-weight:600}
 .combo-desc{font-size:11px;color:var(--text2);margin-top:1px}
-
-/* ── PRICE ROW ── */
 .prow{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
 .prow:last-child{border-bottom:none}
 .prow-left{flex:1;min-width:0}
@@ -87,19 +65,15 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 .prow-price.dn{color:var(--dn)}
 .prow-chg{font-size:11px;font-weight:600;min-width:82px;text-align:right}
 .prow-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:2px;letter-spacing:.3px}
-.prow-badge.open {background:var(--up-bg);color:var(--up)}
-.prow-badge.pre  {background:var(--warn-bg);color:var(--warn)}
-.prow-badge.post {background:rgba(74,144,217,.12);color:var(--info)}
+.prow-badge.open{background:var(--up-bg);color:var(--up)}
+.prow-badge.pre{background:var(--warn-bg);color:var(--warn)}
+.prow-badge.post{background:rgba(74,144,217,.12);color:var(--info)}
 .prow-zone{font-size:10px;padding:2px 7px;border-radius:4px;margin-left:4px;white-space:nowrap;font-weight:600}
-
-/* ── DEEP ROW ── */
 .drow{display:flex;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
 .drow:last-child{border-bottom:none}
 .drow-lbl{font-size:13px;color:var(--text2);flex:1}
 .drow-val{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;margin-right:8px}
 .drow-zone{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;white-space:nowrap}
-
-/* ── MANUAL INPUT ── */
 .manual-item{padding:10px 0;border-bottom:1px solid var(--line)}
 .manual-item:last-child{border-bottom:none}
 .manual-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
@@ -110,15 +84,11 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 .manual-meta{font-size:10px;color:var(--text3);margin-bottom:6px}
 .manual-ai-tag{font-size:9px;padding:1px 6px;border-radius:10px;background:rgba(74,144,217,.15);color:var(--info);font-weight:600;margin-left:4px}
 .manual-input-row{display:flex;gap:6px;align-items:center}
-.manual-input-row input{flex:1;background:var(--bg4);border:1px solid var(--line2);border-radius:8px;
-  padding:7px 10px;font-size:14px;color:var(--text);outline:none;font-variant-numeric:tabular-nums}
+.manual-input-row input{flex:1;background:var(--bg4);border:1px solid var(--line2);border-radius:8px;padding:7px 10px;font-size:14px;color:var(--text);outline:none;font-variant-numeric:tabular-nums}
 .manual-input-row input:focus{border-color:var(--info)}
-.manual-btn{padding:7px 14px;background:var(--info);border:none;border-radius:8px;
-  color:#fff;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.manual-btn{padding:7px 14px;background:var(--info);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
 .manual-btn:active{opacity:.7}
 .manual-hint{font-size:10px;color:var(--text3);margin-top:4px}
-
-/* ── CHIP TABLE ── */
 .ct{width:100%;border-collapse:collapse}
 .ct tr{border-bottom:1px solid var(--line)}
 .ct tr:last-child{border-bottom:none}
@@ -130,17 +100,6 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 .ct-val{font-size:13px;font-weight:700;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .ct-chg{font-size:10px;text-align:right;padding-left:6px;white-space:nowrap}
 .ct-date{font-size:11px;color:var(--text3);padding:4px 0 6px}
-
-/* ── SESSION ── */
-.sess{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:4px}
-.sess-half{background:var(--bg2);padding:12px}
-.sess-tag{font-size:10px;color:var(--text3);letter-spacing:.5px;margin-bottom:8px;font-weight:600;text-transform:uppercase}
-.sess-price{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;margin-bottom:2px;letter-spacing:-.5px}
-.sess-chg{font-size:12px;font-weight:600;margin-bottom:2px}
-.sess-vol{font-size:10px;color:var(--text3)}
-.sess-vs{font-size:10px;margin-top:3px}
-
-/* ── P/C ── */
 .pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:8px}
 .pc-half{background:var(--bg2);padding:12px}
 .pc-sess{font-size:10px;color:var(--text3);letter-spacing:.5px;margin-bottom:8px;font-weight:600;text-transform:uppercase}
@@ -151,30 +110,21 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
 .pc-drow:last-child{border-bottom:none}
 .pc-dlbl{font-size:12px;color:var(--text2)}
 .pc-dval{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
-
-/* ── MARGIN ── */
 .margin-flow{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
 .margin-num{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
 .margin-arrow{font-size:18px;color:var(--text3)}
 .margin-sig{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
-
-/* ── FOOTER ── */
 .footer{padding:14px 16px;border-top:1px solid var(--line);font-size:11px;color:var(--text3);line-height:1.9}
-
-/* ── LOADING ── */
 .ldwrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 16px;gap:10px}
 .ld-txt{font-size:13px;color:var(--text3)}
-
-/* ── UTILS ── */
 .up{color:var(--up)}.dn{color:var(--dn)}.neu{color:var(--text3)}
-.tag-up  {background:var(--up-bg);color:var(--up)}
-.tag-dn  {background:var(--dn-bg);color:var(--dn)}
+.tag-up{background:var(--up-bg);color:var(--up)}
+.tag-dn{background:var(--dn-bg);color:var(--dn)}
 .tag-warn{background:var(--warn-bg);color:var(--warn)}
-.tag-neu {background:var(--bg4);color:var(--text2)}
+.tag-neu{background:var(--bg4);color:var(--text2)}
 </style>
 </head>
 <body>
-
 <div class="hdr">
   <div class="hdr-top">
     <div class="hdr-title">Market <span>Oracle</span></div>
@@ -194,29 +144,24 @@ body{padding:0 0 80px;font-size:14px;line-height:1.5}
     <button class="tab" onclick="switchMkt('tw',this)">🇹🇼 台股</button>
   </div>
 </div>
-
 <div class="cnt" id="main">
   <div class="ldwrap"><div class="ld-txt">載入中...</div></div>
 </div>
-
 <script>
-var WORKER   ="https://market-proxy.q0900027293.workers.dev";
+var WORKER="https://market-proxy.q0900027293.workers.dev";
 var BATCH_URL=WORKER+"/batch";
-var DEEP_URL =WORKER+"/";
+var DEEP_URL=WORKER+"/";
 
 var US_FUT={es:{sym:"ES=F",short:"ES",name:"S&P 500"},nq:{sym:"NQ=F",short:"NQ",name:"Nasdaq 100"},ym:{sym:"YM=F",short:"YM",name:"Dow Jones"},rty:{sym:"RTY=F",short:"RTY",name:"Russell 2000"}};
 var US_COM={gold:{sym:"GC=F",short:"黃金",dec:2},oil:{sym:"CL=F",short:"原油 WTI",dec:2},dxy:{sym:"DX-Y.NYB",short:"美元指數",dec:3},us10y:{sym:"^TNX",short:"美債 10Y",dec:3}};
 var US_VIX={vix:{sym:"^VIX",short:"VIX"},vvix:{sym:"^VVIX",short:"VVIX"},skew:{sym:"^SKEW",short:"SKEW"}};
 var TW_LIVE={twii:{sym:"^TWII",short:"TWII",name:"加權指數"},otc:{sym:"^TWOII",short:"OTC",name:"櫃買指數"},txf:{sym:"TXF=F",short:"TXF",name:"台指期貨"}};
 
-// 手動指標本地儲存
+// 手動指標
 var MANUAL_KEYS=["putcall","aaii","breadth"];
 var manualData={};
-MANUAL_KEYS.forEach(k=>{
-  try{
-    var s=localStorage.getItem("manual_"+k);
-    if(s) manualData[k]=JSON.parse(s);
-  }catch{}
+MANUAL_KEYS.forEach(function(k){
+  try{var s=localStorage.getItem("manual_"+k);if(s)manualData[k]=JSON.parse(s);}catch{}
 });
 function saveManual(key,val){
   var obj={val:parseFloat(val),updatedAt:new Date().toISOString(),source:"manual"};
@@ -224,19 +169,18 @@ function saveManual(key,val){
   try{localStorage.setItem("manual_"+key,JSON.stringify(obj));}catch{}
 }
 function setAIManual(key,val,fetchedAt){
-  if(val===null||val===undefined) return;
+  if(val===null||val===undefined)return;
   var obj={val:parseFloat(val),updatedAt:fetchedAt||new Date().toISOString(),source:"ai"};
   manualData[key]=obj;
   try{localStorage.setItem("manual_"+key,JSON.stringify(obj));}catch{}
 }
-function getManualVal(key){ return manualData[key]?.val??null; }
+function getManualVal(key){return manualData[key]?.val??null;}
 function fmtUpdated(iso){
-  if(!iso) return"未設定";
-  var d=new Date(iso),now=new Date();
-  var diff=Math.floor((now-d)/60000);
-  if(diff<1) return"剛剛";
-  if(diff<60) return diff+"分鐘前";
-  if(diff<1440) return Math.floor(diff/60)+"小時前";
+  if(!iso)return"未設定";
+  var d=new Date(iso),now=new Date(),diff=Math.floor((now-d)/60000);
+  if(diff<1)return"剛剛";
+  if(diff<60)return diff+"分鐘前";
+  if(diff<1440)return Math.floor(diff/60)+"小時前";
   return d.toLocaleDateString("zh-TW",{month:"2-digit",day:"2-digit"});
 }
 
@@ -255,7 +199,6 @@ var STATE_LBL={pre:"盤前",open:"盤中",post:"盤後",closed:"已收盤"};
 
 var apiData={us:{},tw:{}},liveData={},curMkt="us",liveTimer=null,liveOK=false;
 
-// ── ZONES ──
 var US_AUTO=[
   {key:"vix",  lbl:"VIX",         zones:[{max:15,s:-1,t:"過度樂觀"},{max:20,s:2,t:"低波動"},{max:25,s:1,t:"正常"},{max:30,s:0,t:"警戒"},{max:40,s:-1,t:"恐慌"},{max:99,s:-2,t:"極端恐慌"}]},
   {key:"skew", lbl:"SKEW",        zones:[{max:115,s:2,t:"正常"},{max:130,s:1,t:"輕度風險"},{max:150,s:0,t:"中高風險"},{max:165,s:-1,t:"高度警戒"},{max:999,s:-2,t:"極端"}]},
@@ -271,7 +214,7 @@ var US_AUTO=[
 var US_MANUAL_DEFS=[
   {key:"putcall",lbl:"Put/Call Ratio",placeholder:"例：0.85",zones:[{max:.6,s:-1,t:"過度貪婪"},{max:.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀"}],hint:"CBOE 每日更新"},
   {key:"aaii",   lbl:"AAII 多頭%",   placeholder:"例：38",  zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}],hint:"AAII 每週更新（週四）"},
-  {key:"breadth",lbl:"市場廣度%",    placeholder:"例：55",  zones:[{max:35,s:-2,t:"多數股跌"},{max:45,s:0,t:"偏弱"},{max:55,s:2,t:"均衡"},{max:65,s:1,t:"多頭強勢"},{max:100,s:0,t:"過度擴張"}],hint:"NYSE 上漲股% "},
+  {key:"breadth",lbl:"市場廣度%",    placeholder:"例：55",  zones:[{max:35,s:-2,t:"多數股跌"},{max:45,s:0,t:"偏弱"},{max:55,s:2,t:"均衡"},{max:65,s:1,t:"多頭強勢"},{max:100,s:0,t:"過度擴張"}],hint:"NYSE 上漲股%"},
 ];
 var TW_AUTO=[
   {key:"twd",   lbl:"台幣 / 美金",  zones:[{max:30,s:2,t:"台幣強勢"},{max:31,s:2,t:"偏強"},{max:32,s:1,t:"中性"},{max:33,s:0,t:"偏弱"},{max:34,s:-1,t:"台幣弱勢"},{max:99,s:-2,t:"台幣大貶"}]},
@@ -283,17 +226,17 @@ var IND_LIVE={vix:"^VIX",skew:"^SKEW",vvix:"^VVIX",gold:"GC=F",oil:"CL=F",dxy:"D
 var VIX_Z=[{max:15,t:"過度樂觀",tc:"var(--dn)",bg:"var(--dn-bg)"},{max:20,t:"低波動",tc:"var(--up)",bg:"var(--up-bg)"},{max:25,t:"正常",tc:"var(--text2)",bg:"var(--bg4)"},{max:30,t:"警戒",tc:"var(--warn)",bg:"var(--warn-bg)"},{max:40,t:"恐慌",tc:"var(--dn)",bg:"var(--dn-bg)"},{max:999,t:"極端恐慌",tc:"var(--dn)",bg:"var(--dn-bg)"}];
 function vixZone(v){for(var z of VIX_Z)if(v<=z.max)return z;return VIX_Z[VIX_Z.length-1];}
 function gz(ind,v){for(var i=0;i<ind.zones.length;i++)if(v<=ind.zones[i].max)return ind.zones[i];return ind.zones[ind.zones.length-1];}
-function st(s){
-  if(s>=2) return{tc:"var(--up)",  bg:"var(--up-bg)"};
+function ss(s){
+  if(s>=2)return{tc:"var(--up)",bg:"var(--up-bg)"};
   if(s===1)return{tc:"var(--text2)",bg:"var(--bg4)"};
   if(s===0)return{tc:"var(--warn)",bg:"var(--warn-bg)"};
   return{tc:"var(--dn)",bg:"var(--dn-bg)"};
 }
 function sfInfo(r){
-  if(r>=.75)return{lbl:"可持倉",   sub:"風險可控，整體偏多",  c:"var(--up)",  tr:"var(--up)"};
-  if(r>=.55)return{lbl:"謹慎樂觀", sub:"整體偏多，留意弱項",  c:"var(--info)",tr:"var(--info)"};
-  if(r>=.38)return{lbl:"控制倉位", sub:"多空分歧，建議觀望",  c:"var(--warn)",tr:"var(--warn)"};
-  if(r>=.2) return{lbl:"考慮減碼", sub:"多項指標偏空",        c:"var(--dn)",  tr:"var(--dn)"};
+  if(r>=.75)return{lbl:"可持倉",   sub:"風險可控，整體偏多",c:"var(--up)",  tr:"var(--up)"};
+  if(r>=.55)return{lbl:"謹慎樂觀", sub:"整體偏多，留意弱項",c:"var(--info)",tr:"var(--info)"};
+  if(r>=.38)return{lbl:"控制倉位", sub:"多空分歧，建議觀望",c:"var(--warn)",tr:"var(--warn)"};
+  if(r>=.2) return{lbl:"考慮減碼", sub:"多項指標偏空",       c:"var(--dn)",  tr:"var(--dn)"};
   return{lbl:"高度警戒",sub:"建議大幅減碼",c:"var(--dn)",tr:"var(--dn)"};
 }
 function combo(data){
@@ -301,7 +244,7 @@ function combo(data){
   var skew=liveData["^SKEW"]?.price||data.skew?.price;
   var vvix=liveData["^VVIX"]?.price||data.vvix?.price;
   if(!vix||!skew||!vvix)return{t:"數據載入中",d:"等待中",c:"var(--text3)"};
-  if(skew>145&&vix<20)  return{t:"暗流湧動",d:"高SKEW + 低VIX，最危險組合",c:"var(--dn)"};
+  if(skew>145&&vix<20)return{t:"暗流湧動",d:"高SKEW + 低VIX，最危險組合",c:"var(--dn)"};
   if(skew>130&&vix>25&&vvix>120)return{t:"全面恐慌",d:"三指標同時偏高",c:"var(--dn)"};
   if(vvix>130)return{t:"極端不確定",d:"VVIX 暴高，走向難預測",c:"var(--warn)"};
   if(skew<120&&vix<20&&vvix<100)return{t:"市場平靜",d:"三指標均低，風險溢價正常",c:"var(--up)"};
@@ -316,8 +259,8 @@ function getV(ind,data){
 }
 function calcTot(aI,mI,data){
   var tot=0;
-  aI.forEach(i=>{var v=getV(i,data);if(v!=null)tot+=gz(i,v).s;});
-  mI.forEach(i=>{var v=getManualVal(i.key);if(v!=null)tot+=gz(i,v).s;});
+  aI.forEach(function(i){var v=getV(i,data);if(v!=null)tot+=gz(i,v).s;});
+  mI.forEach(function(i){var v=getManualVal(i.key);if(v!=null)tot+=gz(i,v).s;});
   return tot;
 }
 function fmtN(n,d){if(n==null||isNaN(n))return"—";return parseFloat(n).toFixed(d||0);}
@@ -328,10 +271,16 @@ function fmtP(p,dec){
   if(p==null)return"—";dec=dec||2;
   return p>=1000?p.toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec}):p.toFixed(dec);
 }
+function chgHtml(d){
+  if(!d||d.price==null)return"<span class='neu'>—</span>";
+  var sign=d.pct>=0?"▲":"▼",abs=Math.abs(d.price-d.prev).toFixed(2);
+  return"<span class='"+(d.pct>=0?"up":"dn")+"'>"+sign+" "+abs+" ("+sgn(d.pct).trim()+Math.abs(d.pct).toFixed(2)+"%)</span>";
+}
 
-// ── LIVE FETCH ──
+// ── BATCH LIVE ──
 function batchSyms(){
-  var s=[];[US_FUT,US_COM,US_VIX].forEach(g=>Object.values(g).forEach(f=>s.push(f.sym)));
+  var s=[];
+  [US_FUT,US_COM,US_VIX].forEach(function(g){Object.values(g).forEach(function(f){s.push(f.sym);});});
   return s;
 }
 async function fetchBatch(){
@@ -339,7 +288,7 @@ async function fetchBatch(){
     var r=await fetch(BATCH_URL+"?syms="+batchSyms().join(","),{cache:"no-store"});
     var json=await r.json();
     var ok=false;
-    batchSyms().forEach(sym=>{if(json[sym]){liveData[sym]=json[sym];ok=true;}});
+    batchSyms().forEach(function(sym){if(json[sym]){liveData[sym]=json[sym];ok=true;}});
     liveOK=ok;
   }catch{liveOK=false;}
   updateStatus();
@@ -353,27 +302,20 @@ function startLiveTimer(){
 function updateStatus(){
   var dot=document.getElementById("liveDot");
   var lbl=document.getElementById("liveLabel");
-  var st2=document.getElementById("mktState");
+  var st=document.getElementById("mktState");
   var tim=document.getElementById("statusTime");
   if(!dot)return;
   dot.className=liveOK?"dot":"dot off";
   lbl.textContent=liveOK?"即時":"連線中斷";
   if(tim)tim.textContent=new Date().toLocaleTimeString("zh-TW",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
-  if(st2&&curMkt==="us"){var s=usMarketState();st2.className="pill "+s;st2.textContent=STATE_LBL[s];}
-  else if(st2){st2.className="pill closed";st2.textContent="--";}
+  if(st&&curMkt==="us"){var s=usMarketState();st.className="pill "+s;st.textContent=STATE_LBL[s];}
+  else if(st){st.className="pill closed";st.textContent="--";}
 }
-
-// ── ROW UPDATE ──
 function updPrice(el,newVal,pct){
   if(!el||el.textContent===newVal)return;
   el.textContent=newVal;
   el.className=el.className.replace(/\bup\b|\bdn\b/g,"").trim();
   if(pct>0)el.classList.add("up");else if(pct<0)el.classList.add("dn");
-}
-function chgHtml(d){
-  if(!d)return"<span class='neu'>—</span>";
-  var sign=d.pct>=0?"▲":"▼",abs=Math.abs(d.price-d.prev).toFixed(2);
-  return"<span class='"+(d.pct>=0?"up":"dn")+"'>"+sign+" "+abs+" ("+sgn(d.pct).trim()+d.pct.toFixed(2)+"%)</span>";
 }
 function updateFut(key,f){
   var d=liveData[f.sym];if(!d)return;
@@ -393,61 +335,29 @@ function updateCom(key,f){
   var el=document.getElementById("com_"+key);if(!el)return;
   var pe=el.querySelector("[data-price]");if(pe)updPrice(pe,fmtP(d.price,f.dec),d.pct);
   var ce=el.querySelector("[data-chg]");
-  if(ce)ce.innerHTML=d?"<span class='"+(d.pct>=0?"up":"dn")+"'>"+(d.pct>=0?"▲":"▼")+" "+sgn(d.pct).trim()+d.pct.toFixed(2)+"%</span>":"—";
+  if(ce)ce.innerHTML=d?"<span class='"+(d.pct>=0?"up":"dn")+"'>"+(d.pct>=0?"▲":"▼")+" "+sgn(d.pct).trim()+Math.abs(d.pct).toFixed(2)+"%</span>":"—";
 }
 function updateVix(key,f){
   var d=liveData[f.sym];if(!d)return;
   var el=document.getElementById("vix_"+key);if(!el)return;
   var pe=el.querySelector("[data-price]");if(pe)updPrice(pe,fmtP(d.price,2),d.pct);
   var ce=el.querySelector("[data-chg]");
-  if(ce)ce.innerHTML=d?"<span class='"+(d.pct>=0?"up":"dn")+"'>"+(d.pct>=0?"▲":"▼")+" "+sgn(d.pct).trim()+d.pct.toFixed(2)+"%</span>":"—";
+  if(ce)ce.innerHTML=d?"<span class='"+(d.pct>=0?"up":"dn")+"'>"+(d.pct>=0?"▲":"▼")+" "+sgn(d.pct).trim()+Math.abs(d.pct).toFixed(2)+"%</span>":"—";
   var ze=el.querySelector("[data-zone]");
   if(ze){var z=vixZone(d.price);ze.style.background=z.bg;ze.style.color=z.tc;ze.textContent=z.t;}
 }
-function updateTW(key,f){
-  var d=null;
-  if(key==="txf"){
-    var nd=apiData.tw.night_data;
-    if(nd){
-      var row=nd.night||nd.day;
-      if(row){
-        var price=parseFloat(row.last);
-        var chg=parseFloat(row.change);
-        var prev=price-chg;
-        var pct=prev?+(chg/Math.abs(prev)*100).toFixed(2):0;
-        d={price:price,prev:prev,pct:pct};
-      }
-    }
-  } else if(key==="twii"){
-    var src=apiData.tw.twii;
-    if(src) d={price:src.price,prev:src.prev,pct:src.pct};
-  } else if(key==="otc"){
-    var src=apiData.tw.otc;
-    if(src) d={price:src.price,prev:src.prev,pct:src.pct};
-  }
-  if(!d) return;
-  var el=document.getElementById("tw_"+key);if(!el)return;
-  var pe=el.querySelector("[data-price]");if(pe)updPrice(pe,fmtP(d.price,2),d.pct);
-  var ce=el.querySelector("[data-chg]");if(ce)ce.innerHTML=chgHtml(d);
-}
 function updateAllRows(){
-  if(curMkt==="us"){
-    Object.entries(US_FUT).forEach(([k,f])=>updateFut(k,f));
-    Object.entries(US_COM).forEach(([k,f])=>updateCom(k,f));
-    Object.entries(US_VIX).forEach(([k,f])=>updateVix(k,f));
-    var cb=combo(apiData.us);
-    var cv=document.getElementById("combo-val"),cd=document.getElementById("combo-desc");
-    if(cv){cv.textContent=cb.t;cv.style.color=cb.c;}
-    if(cd)cd.textContent=cb.d;
-  }else{
-    Object.entries(TW_LIVE).forEach(([k,f])=>updateTW(k,f));
-    // 加權和OTC從深度數據更新，不等 liveData
-    updateTW("twii",null);
-    updateTW("otc",null);
-  }
+  if(curMkt!=="us")return;
+  Object.entries(US_FUT).forEach(function([k,f]){updateFut(k,f);});
+  Object.entries(US_COM).forEach(function([k,f]){updateCom(k,f);});
+  Object.entries(US_VIX).forEach(function([k,f]){updateVix(k,f);});
+  var cb=combo(apiData.us);
+  var cv=document.getElementById("combo-val"),cd=document.getElementById("combo-desc");
+  if(cv){cv.textContent=cb.t;cv.style.color=cb.c;}
+  if(cd)cd.textContent=cb.d;
 }
 
-// ── RENDER HELPERS ──
+// ── RENDER ──
 function secTitle(t){return"<div class='sec-title'>"+t+"</div>";}
 function futRow(key,f){
   var d=liveData[f.sym];
@@ -469,7 +379,7 @@ function comRow(key,f){
     +"<div class='prow-left'><div class='prow-sym'>"+f.short+"</div></div>"
     +"<div class='prow-right'>"
     +"<div class='prow-price' data-price>"+(d?fmtP(d.price,f.dec):"—")+"</div>"
-    +"<div class='prow-chg' data-chg>"+(d?"<span class='"+(d.pct>=0?"up":"dn")+"'>"+(d.pct>=0?"▲":"▼")+" "+sgn(d.pct).trim()+d.pct.toFixed(2)+"%</span>":"—")+"</div>"
+    +"<div class='prow-chg' data-chg>"+(d?"<span class='"+(d.pct>=0?"up":"dn")+"'>"+(d.pct>=0?"▲":"▼")+" "+sgn(d.pct).trim()+Math.abs(d.pct).toFixed(2)+"%</span>":"—")+"</div>"
     +"</div></div>";
 }
 function vixRow(key,f){
@@ -479,18 +389,33 @@ function vixRow(key,f){
     +"<div class='prow-left'><div class='prow-sym'>"+f.short+"</div></div>"
     +"<div class='prow-right'>"
     +"<div class='prow-price' data-price style='color:"+z.tc+"'>"+(d?fmtP(d.price,2):"—")+"</div>"
-    +"<div class='prow-chg' data-chg>"+(d?"<span class='"+(d.pct>=0?"up":"dn")+"'>"+(d.pct>=0?"▲":"▼")+" "+sgn(d.pct).trim()+d.pct.toFixed(2)+"%</span>":"—")+"</div>"
+    +"<div class='prow-chg' data-chg>"+(d?"<span class='"+(d.pct>=0?"up":"dn")+"'>"+(d.pct>=0?"▲":"▼")+" "+sgn(d.pct).trim()+Math.abs(d.pct).toFixed(2)+"%</span>":"—")+"</div>"
     +"<div class='prow-zone' data-zone style='background:"+z.bg+";color:"+z.tc+"'>"+z.t+"</div>"
     +"</div></div>";
 }
+
+// 台股行情列：直接從 apiData 取，不依賴 liveData
 function twRow(key,f){
-  // twii/otc 從 apiData 取，txf 從 liveData 取
   var d=null;
-  if(key==="txf"){
-    d=liveData["TXF=F"]||null;
+  if(key==="twii"){
+    var s=apiData.tw.twii;
+    if(s&&s.price)d={price:s.price,prev:s.prev,pct:s.pct};
+  }else if(key==="otc"){
+    var s=apiData.tw.otc;
+    if(s&&s.price)d={price:s.price,prev:s.prev,pct:s.pct};
+  }else if(key==="txf"){
+    var nd=apiData.tw.night_data;
+    if(nd){
+      var row=nd.night||nd.day;
+      if(row){
+        var price=parseFloat(row.last);
+        var chg=parseFloat(row.change);
+        var prev=price-chg;
+        var pct=prev?+(chg/Math.abs(prev)*100).toFixed(2):0;
+        d={price:price,prev:prev,pct:pct};
+      }
+    }
   }
-  else if(key==="twii"){ var s=apiData.tw.twii; if(s) d={price:s.price,prev:s.prev,pct:s.pct}; }
-  else if(key==="otc") { var s=apiData.tw.otc;  if(s) d={price:s.price,prev:s.prev,pct:s.pct}; }
   return"<div class='prow' id='tw_"+key+"'>"
     +"<div class='prow-left'><div class='prow-sym'>"+f.short+"</div><div class='prow-name'>"+f.name+"</div></div>"
     +"<div class='prow-right'>"
@@ -498,11 +423,12 @@ function twRow(key,f){
     +"<div class='prow-chg' data-chg>"+chgHtml(d)+"</div>"
     +"</div></div>";
 }
+
 function deepRows(aI,data){
   var h="";
-  aI.forEach(ind=>{
+  aI.forEach(function(ind){
     var v=getV(ind,data);
-    var z=v!=null?gz(ind,v):null,s=st(z?z.s:1);
+    var z=v!=null?gz(ind,v):null,s=ss(z?z.s:1);
     var val="—";
     if(v!=null){
       if(ind.direct)val=parseFloat(v).toFixed(ind.key==="fgi"?0:2);
@@ -517,57 +443,60 @@ function deepRows(aI,data){
   });
   return h;
 }
-
-// ── MANUAL INPUT ITEMS ──
 function manualItem(def){
   var m=manualData[def.key];
   var val=m?.val??null;
   var z=val!=null?gz(def,val):null;
-  var s=st(z?z.s:1);
+  var s=ss(z?z.s:1);
   var isAI=m?.source==="ai";
   return"<div class='manual-item'>"
-    +"<div class='manual-top'>"
-    +"<span class='manual-lbl'>"+def.lbl+"</span>"
+    +"<div class='manual-top'><span class='manual-lbl'>"+def.lbl+"</span>"
     +"<div class='manual-status'>"
     +(val!=null?"<span class='manual-val-display' style='color:"+s.tc+"'>"+fmtN(val,def.key==="putcall"?2:1)+"</span>":"")
     +(z?"<span class='manual-zone' style='background:"+s.bg+";color:"+s.tc+"'>"+z.t+"</span>":"")
     +"</div></div>"
-    +"<div class='manual-meta'>"
-    +(m?"上次更新："+fmtUpdated(m.updatedAt)+(isAI?"<span class='manual-ai-tag'>AI 自動</span>":""):"尚未輸入")
-    +"</div>"
+    +"<div class='manual-meta'>"+(m?"上次更新："+fmtUpdated(m.updatedAt)+(isAI?"<span class='manual-ai-tag'>AI 自動</span>":""):"尚未輸入")+"</div>"
     +"<div class='manual-input-row'>"
-    +"<input type='number' id='minput_"+def.key+"' placeholder='"+def.placeholder+"' step='0.01' "
-    +(val!=null?"value='"+val+"'":"")
-    +"/>"
+    +"<input type='number' id='minput_"+def.key+"' placeholder='"+def.placeholder+"' step='0.01' "+(val!=null?"value='"+val+"'":"")+" />"
     +"<button class='manual-btn' onclick='submitManual(\""+def.key+"\")'>更新</button>"
     +"</div>"
     +"<div class='manual-hint'>"+def.hint+"</div>"
     +"</div>";
 }
 function submitManual(key){
-  var el=document.getElementById("minput_"+key);
-  if(!el)return;
-  var v=parseFloat(el.value);
-  if(isNaN(v))return;
-  saveManual(key,v);
-  render(curMkt);
+  var el=document.getElementById("minput_"+key);if(!el)return;
+  var v=parseFloat(el.value);if(isNaN(v))return;
+  saveManual(key,v);render(curMkt);
 }
-
-// ── TW CHIP RENDERS ──
-function renderNight(nd){
-  if(!nd)return"";
-  var date=nd.date.slice(0,4)+"/"+nd.date.slice(4,6)+"/"+nd.date.slice(6,8);
-  var day=nd.day,night=nd.night;
-  var dc=day?parseFloat(day.change)||0:0,nc=night?parseFloat(night.change)||0:0;
-  var diff="",diffPct="";
-  if(night&&day){var dv=parseFloat(night.last)-parseFloat(day.last),dp=day.last>0?dv/parseFloat(day.last)*100:0;diff=(dv>0?"+":"")+dv.toFixed(0);diffPct=(dp>0?"+":"")+dp.toFixed(2)+"%";}
-  return"<div class='sess'>"
-    +"<div class='sess-half'><div class='sess-tag'>☀ 日盤 · "+date+"</div>"
-    +(day?"<div class='sess-price'>"+day.last+"</div><div class='sess-chg' style='color:"+cc(dc)+"'>"+(dc>=0?"▲":"▼")+" "+day.change+" ("+day.changePct+")</div><div class='sess-vol'>成交 "+parseInt(day.volume).toLocaleString()+" 口</div>":"<div style='color:var(--text3);font-size:13px;padding-top:6px'>無數據</div>")
-    +"</div>"
-    +"<div class='sess-half'><div class='sess-tag'>🌙 夜盤 · "+date+"</div>"
-    +(night?"<div class='sess-price'>"+night.last+"</div><div class='sess-chg' style='color:"+cc(nc)+"'>"+(nc>=0?"▲":"▼")+" "+night.change+" ("+night.changePct+")</div>"+(diff?"<div class='sess-vs' style='color:"+cc(parseFloat(diff))+"'>vs 日盤 "+diff+" ("+diffPct+")</div>":"")+"<div class='sess-vol'>成交 "+parseInt(night.volume).toLocaleString()+" 口</div>":"<div style='color:var(--text3);font-size:13px;padding-top:6px'>尚未開盤</div>")
-    +"</div></div>";
+function renderForeign(fd){
+  if(!fd||fd.foreign==null)return"<div style='color:var(--text3);font-size:12px;padding:10px 0'>數據載入中…</div>";
+  var fdate=fd.date?fd.date.slice(0,4)+"/"+fd.date.slice(4,6)+"/"+fd.date.slice(6,8):"";
+  var h="<div class='ct-date'>"+fdate+"</div><table class='ct'>";
+  [{n:"外資",v:fd.foreign},{n:"投信",v:fd.trust},{n:"自營商",v:fd.dealer},{n:"三大合計",v:fd.total,b:true}]
+  .forEach(function(r){
+    var c=cc(r.v),bw=Math.min(Math.abs(r.v||0)/300*100,100).toFixed(0),bc=r.v>=0?"var(--up)":"var(--dn)";
+    h+="<tr><td class='ct-lbl'"+(r.b?" style='font-weight:700;color:var(--text)'":" ")+">"+r.n+"</td>"
+      +"<td class='ct-bar'><div class='ct-bar-bg'><div class='ct-bar-fill' style='width:"+bw+"%;background:"+bc+"'></div></div></td>"
+      +"<td class='ct-val' style='color:"+c+"'>"+(r.v>=0?"+":"")+fmtN(r.v,1)+" 億</td></tr>";
+  });
+  return h+"</table>";
+}
+function renderFutInst(fut){
+  if(!fut)return"<div style='color:var(--text3);font-size:12px;padding:10px 0'>數據載入中…</div>";
+  var fdate=fut.date?fut.date.slice(0,4)+"/"+fut.date.slice(4,6)+"/"+fut.date.slice(6,8):"";
+  var h="<div class='ct-date'>"+fdate+"</div><table class='ct'>";
+  [{n:"外資 台指(TXF)",v:fut.txf?.foreign,chg:fut.txf?.foreign_chg},
+   {n:"外資 小台(MXF)",v:fut.mxf?.foreign,chg:fut.mxf?.foreign_chg},
+   {n:"外資 微台(TMF)",v:fut.tmf?.foreign,chg:fut.tmf?.foreign_chg},
+   {n:"投信 台指",v:fut.txf?.trust,chg:fut.txf?.trust_chg},
+   {n:"自營 台指",v:fut.txf?.dealer,chg:fut.txf?.dealer_chg}]
+  .forEach(function(r){
+    var c=r.v!=null?cc(r.v):"var(--text3)";
+    var chg=r.chg!=null?"<span style='color:"+cc(r.chg)+"'>"+(r.chg>0?"▲":"▼")+Math.abs(r.chg).toLocaleString()+"</span>":"";
+    h+="<tr><td class='ct-lbl'>"+r.n+"</td><td class='ct-chg'>"+chg+"</td>"
+      +"<td class='ct-val' style='color:"+c+"'>"+(r.v>=0?"+":"")+fmtInt(r.v)+"</td></tr>";
+  });
+  return h+"</table>";
 }
 function pcSig(oi){
   if(oi==null)return{t:"—",tc:"var(--text3)",bg:"var(--bg4)"};
@@ -619,36 +548,6 @@ function renderPC(pc){
     return h;
   }
 }
-function renderForeign(fd){
-  if(!fd||fd.foreign==null)return"<div style='color:var(--text3);font-size:12px;padding:10px 0'>數據載入中…</div>";
-  var fdate=fd.date?fd.date.slice(0,4)+"/"+fd.date.slice(4,6)+"/"+fd.date.slice(6,8):"";
-  var h="<div class='ct-date'>"+fdate+"</div><table class='ct'>";
-  [{n:"外資",v:fd.foreign},{n:"投信",v:fd.trust},{n:"自營商",v:fd.dealer},{n:"三大合計",v:fd.total,b:true}]
-  .forEach(function(r){
-    var c=cc(r.v),bw=Math.min(Math.abs(r.v||0)/300*100,100).toFixed(0),bc=r.v>=0?"var(--up)":"var(--dn)";
-    h+="<tr><td class='ct-lbl'"+(r.b?" style='font-weight:700;color:var(--text)'":" ")+">"+r.n+"</td>"
-      +"<td class='ct-bar'><div class='ct-bar-bg'><div class='ct-bar-fill' style='width:"+bw+"%;background:"+bc+"'></div></div></td>"
-      +"<td class='ct-val' style='color:"+c+"'>"+(r.v>=0?"+":"")+fmtN(r.v,1)+" 億</td></tr>";
-  });
-  return h+"</table>";
-}
-function renderFutInst(fut){
-  if(!fut)return"<div style='color:var(--text3);font-size:12px;padding:10px 0'>數據載入中…</div>";
-  var fdate=fut.date?fut.date.slice(0,4)+"/"+fut.date.slice(4,6)+"/"+fut.date.slice(6,8):"";
-  var h="<div class='ct-date'>"+fdate+"</div><table class='ct'>";
-  [{n:"外資 台指(TXF)",v:fut.txf?.foreign,chg:fut.txf?.foreign_chg},
-   {n:"外資 小台(MXF)",v:fut.mxf?.foreign,chg:fut.mxf?.foreign_chg},
-   {n:"外資 微台(TMF)",v:fut.tmf?.foreign,chg:fut.tmf?.foreign_chg},
-   {n:"投信 台指",v:fut.txf?.trust,chg:fut.txf?.trust_chg},
-   {n:"自營 台指",v:fut.txf?.dealer,chg:fut.txf?.dealer_chg}]
-  .forEach(function(r){
-    var c=r.v!=null?cc(r.v):"var(--text3)";
-    var chg=r.chg!=null?"<span style='color:"+cc(r.chg)+"'>"+(r.chg>0?"▲":"▼")+Math.abs(r.chg).toLocaleString()+"</span>":"";
-    h+="<tr><td class='ct-lbl'>"+r.n+"</td><td class='ct-chg'>"+chg+"</td>"
-      +"<td class='ct-val' style='color:"+c+"'>"+(r.v>=0?"+":"")+fmtInt(r.v)+"</td></tr>";
-  });
-  return h+"</table>";
-}
 function renderMargin(md){
   if(!md||md.margin==null)return"<div style='color:var(--text3);font-size:12px;padding:10px 0'>數據載入中…</div>";
   var mdate=md.date?md.date.slice(0,4)+"/"+md.date.slice(4,6)+"/"+md.date.slice(6,8):"";
@@ -664,8 +563,6 @@ function renderMargin(md){
     +"<span style='font-size:13px;font-weight:700;color:"+cc(md.marginChg)+"'>"+(md.marginChg>=0?"+":"")+fmtN(md.marginChg,1)+" 億 ("+(md.marginChgPct>=0?"+":"")+fmtN(md.marginChgPct,2)+"%)</span>"
     +"</div>";
 }
-
-// ── BANNER UPDATE ──
 function updateBanner(){
   var isUS=curMkt==="us";
   var aI=isUS?US_AUTO:TW_AUTO,mI=isUS?US_MANUAL_DEFS:[];
@@ -682,8 +579,6 @@ function updateBanner(){
   document.getElementById("oracle-score").textContent="評分 "+tot+" / "+mx;
   document.getElementById("oracle-score").style.color=sf.c;
 }
-
-// ── MAIN RENDER ──
 function render(mkt){
   var isUS=mkt==="us";
   var aI=isUS?US_AUTO:TW_AUTO,mI=isUS?US_MANUAL_DEFS:[];
@@ -691,7 +586,6 @@ function render(mkt){
   var mn=(aI.length+mI.length)*-2,mx=(aI.length+mI.length)*2;
   var tot=calcTot(aI,mI,data),r=(tot-mn)/(mx-mn),sf=sfInfo(r);
   var cb=combo(data);
-
   var h="<div class='oracle' id='oracle' style='border-color:"+sf.c+"44'>"
     +"<div class='oracle-label'>神諭訊號</div>"
     +"<div class='oracle-verdict' id='oracle-verdict' style='color:"+sf.c+"'>"+sf.lbl+"</div>"
@@ -699,66 +593,55 @@ function render(mkt){
     +"<div class='oracle-bar'><div class='oracle-fill' id='oracle-fill' style='width:"+(r*100).toFixed(0)+"%;background:"+sf.tr+"'></div></div>"
     +"<div class='oracle-score' id='oracle-score' style='color:"+sf.c+"'>評分 "+tot+" / "+mx+"</div>"
     +"</div>";
-
   if(isUS){
-    h+="<div class='sec'>"
-      +"<div class='combo' id='combo-box'>"
+    h+="<div class='sec'><div class='combo' id='combo-box'>"
       +"<div class='combo-dot' style='background:"+cb.c+"'></div>"
       +"<div><div class='combo-val' id='combo-val' style='color:"+cb.c+"'>"+cb.t+"</div>"
       +"<div class='combo-desc' id='combo-desc'>"+cb.d+"</div></div>"
       +"</div></div>";
-
     h+="<div class='sec'>"+secTitle("美股期貨 · 即時");
-    Object.entries(US_FUT).forEach(([k,f])=>h+=futRow(k,f));
+    Object.entries(US_FUT).forEach(function([k,f]){h+=futRow(k,f);});
     h+="</div>";
-
     h+="<div class='sec'>"+secTitle("商品報價 · 即時");
-    Object.entries(US_COM).forEach(([k,f])=>h+=comRow(k,f));
+    Object.entries(US_COM).forEach(function([k,f]){h+=comRow(k,f);});
     h+="</div>";
-
     h+="<div class='sec'>"+secTitle("波動率 · 即時");
-    Object.entries(US_VIX).forEach(([k,f])=>h+=vixRow(k,f));
+    Object.entries(US_VIX).forEach(function([k,f]){h+=vixRow(k,f);});
     h+="</div>";
-
-    h+="<div class='sec'>"+secTitle("深度指標 · 自動")
-      +deepRows(aI,data)+"</div>";
-
+    h+="<div class='sec'>"+secTitle("深度指標 · 自動")+deepRows(aI,data)+"</div>";
     h+="<div class='sec'>"+secTitle("情緒指標 · 盤後更新");
-    mI.forEach(def=>h+=manualItem(def));
+    mI.forEach(function(def){h+=manualItem(def);});
     h+="</div>";
-
   }else{
     h+="<div class='sec'>"+secTitle("台股即時行情");
-    Object.entries(TW_LIVE).forEach(([k,f])=>h+=twRow(k,f));
+    Object.entries(TW_LIVE).forEach(function([k,f]){h+=twRow(k,f);});
     h+="</div>";
-
     h+="<div class='sec'>"+secTitle("三大法人 · 現貨")+renderForeign(data.foreign_data)+"</div>";
     h+="<div class='sec'>"+secTitle("三大法人 · 期貨淨部位")+renderFutInst(data.futures_data)+"</div>";
     h+="<div class='sec'>"+secTitle("Put / Call Ratio")+renderPC(data.putcall_data)+"</div>";
     h+="<div class='sec'>"+secTitle("融資餘額")+renderMargin(data.margin_data)+"</div>";
     h+="<div class='sec'>"+secTitle("深度指標")+deepRows(aI,data)+"</div>";
   }
-
   h+="<div class='footer'>即時 5 秒 · 深度數據 15 分鐘"+(isUS?" · 情緒指標支援 AI 自動抓取":" · 台股籌碼盤後更新")+"</div>";
   document.getElementById("main").innerHTML=h;
   updateStatus();
 }
-
 function switchMkt(mkt,btn){
   curMkt=mkt;
-  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("on"));
+  document.querySelectorAll(".tab").forEach(function(b){b.classList.remove("on");});
   btn.classList.add("on");
-  render(mkt);startLiveTimer();
+  render(mkt);
+  startLiveTimer();
 }
 async function loadDeep(){
   var btn=document.getElementById("rfBtn");if(btn)btn.classList.add("spin");
   try{
-    var ctrl=new AbortController();setTimeout(()=>ctrl.abort(),15000);
+    var ctrl=new AbortController();
+    setTimeout(function(){ctrl.abort();},15000);
     var res=await fetch(DEEP_URL,{cache:"no-store",signal:ctrl.signal});
     var json=await res.json();
     if(json&&json.us){
       apiData=json;
-      // 如果 Worker 有 AI 解析結果，自動更新本地
       if(json.us.aaii!=null)    setAIManual("aaii",   json.us.aaii,    json.us.ai_fetched_at);
       if(json.us.breadth!=null) setAIManual("breadth",json.us.breadth, json.us.ai_fetched_at);
       if(json.us.putcall!=null) setAIManual("putcall",json.us.putcall, json.us.ai_fetched_at);
@@ -767,11 +650,11 @@ async function loadDeep(){
   if(btn)btn.classList.remove("spin");
   render(curMkt);
 }
-
 var d=new Date();
 document.getElementById("dateLabel").textContent=
   d.toLocaleDateString("zh-TW",{month:"2-digit",day:"2-digit",weekday:"short"});
-loadDeep();startLiveTimer();
+loadDeep();
+startLiveTimer();
 setInterval(loadDeep,15*60*1000);
 </script>
 </body>
