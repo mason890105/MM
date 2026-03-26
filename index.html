@@ -475,7 +475,11 @@ function vixRow(key,f){
     +"</div></div>";
 }
 function twRow(key,f){
-  var d=liveData[f.sym];
+  // twii/otc 從 apiData 取，txf 從 liveData 取
+  var d=null;
+  if(key==="txf") d=liveData["TXF=F"]||null;
+  else if(key==="twii"){ var s=apiData.tw.twii; if(s) d={price:s.price,prev:s.prev,pct:s.pct}; }
+  else if(key==="otc") { var s=apiData.tw.otc;  if(s) d={price:s.price,prev:s.prev,pct:s.pct}; }
   return"<div class='prow' id='tw_"+key+"'>"
     +"<div class='prow-left'><div class='prow-sym'>"+f.short+"</div><div class='prow-name'>"+f.name+"</div></div>"
     +"<div class='prow-right'>"
