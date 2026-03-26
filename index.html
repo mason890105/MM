@@ -331,10 +331,9 @@ function fmtP(p,dec){
 
 // ── LIVE FETCH ──
 function batchSyms(){
-  if(curMkt==="us"){
-    var s=[];[US_FUT,US_COM,US_VIX].forEach(g=>Object.values(g).forEach(f=>s.push(f.sym)));return s;
-  }
-  return Object.values(TW_LIVE).map(f=>f.sym);
+  var s=[];[US_FUT,US_COM,US_VIX].forEach(g=>Object.values(g).forEach(f=>s.push(f.sym)));
+  if(curMkt==="tw") s.push("TXF=F","^TWII","^TWOII");
+  return s;
 }
 async function fetchBatch(){
   try{
@@ -407,7 +406,8 @@ function updateVix(key,f){
   if(ze){var z=vixZone(d.price);ze.style.background=z.bg;ze.style.color=z.tc;ze.textContent=z.t;}
 }
 function updateTW(key,f){
-  var d=liveData[f.sym];if(!d)return;
+  var sym={twii:"^TWII",otc:"^TWOII",txf:"TXF=F"}[key];
+  var d=liveData[sym];if(!d)return;
   var el=document.getElementById("tw_"+key);if(!el)return;
   var pe=el.querySelector("[data-price]");if(pe)updPrice(pe,fmtP(d.price,2),d.pct);
   var ce=el.querySelector("[data-chg]");if(ce)ce.innerHTML=chgHtml(d);
@@ -467,7 +467,7 @@ function twRow(key,f){
   return"<div class='prow' id='tw_"+key+"'>"
     +"<div class='prow-left'><div class='prow-sym'>"+f.short+"</div><div class='prow-name'>"+f.name+"</div></div>"
     +"<div class='prow-right'>"
-    +"<div class='prow-price' data-price>"+(d?fmtP(d.price,2):"—")+"</div>"
+    +"<div class='prow-price' data-price style='font-size:22px'>"+(d?fmtP(d.price,2):"—")+"</div>"
     +"<div class='prow-chg' data-chg>"+chgHtml(d)+"</div>"
     +"</div></div>";
 }
@@ -704,7 +704,7 @@ function render(mkt){
     h+="<div class='sec'>"+secTitle("台股即時行情");
     Object.entries(TW_LIVE).forEach(([k,f])=>h+=twRow(k,f));
     h+="</div>";
-    h+="<div class='sec'>"+secTitle("台指期行情")+renderNight(data.night_data)+"</div>";
+
     h+="<div class='sec'>"+secTitle("三大法人 · 現貨")+renderForeign(data.foreign_data)+"</div>";
     h+="<div class='sec'>"+secTitle("三大法人 · 期貨淨部位")+renderFutInst(data.futures_data)+"</div>";
     h+="<div class='sec'>"+secTitle("Put / Call Ratio")+renderPC(data.putcall_data)+"</div>";
