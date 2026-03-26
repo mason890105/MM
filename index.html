@@ -432,6 +432,9 @@ function updateAllRows(){
     if(cd)cd.textContent=cb.d;
   }else{
     Object.entries(TW_LIVE).forEach(([k,f])=>updateTW(k,f));
+    // 加權和OTC從深度數據更新，不等 liveData
+    updateTW("twii",null);
+    updateTW("otc",null);
   }
 }
 
