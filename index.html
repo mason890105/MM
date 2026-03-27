@@ -222,8 +222,7 @@ var MANUAL_KEYS=["putcall","aaii","trin","mmtw"];
 var manualData={};
 MANUAL_KEYS.forEach(k=>{
   try{var s=localStorage.getItem("manual_"+k);if(s)manualData[k]=JSON.parse(s);}catch{}
-});
-function saveManual(key,val){
+});function saveManual(key,val){
   var obj={val:parseFloat(val),updatedAt:new Date().toISOString(),source:"manual"};
   manualData[key]=obj;
   try{localStorage.setItem("manual_"+key,JSON.stringify(obj));}catch{}
@@ -662,7 +661,6 @@ function render(mkt){
     h+="<div class='sec'>"+secTitle("情緒指標 · 手動更新");
     US_MANUAL_DEFS.forEach(def=>h+=manualItem(def));
     h+="</div>";
-
   }else{
     h+="<div class='sec'>"+secTitle("台股即時行情");
     Object.entries(TW_LIVE).forEach(([k,f])=>h+=twRow(k,f));
