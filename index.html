@@ -660,7 +660,7 @@ function render(mkt){
       +"<div class='g2'>"+deepRows(aI,data)+"</div></div>";
 
     h+="<div class='sec'>"+secTitle("情緒指標 · 手動更新");
-    mI.forEach(def=>h+=manualItem(def));
+    US_MANUAL_DEFS.forEach(def=>h+=manualItem(def));
     h+="</div>";
 
   }else{
