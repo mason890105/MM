@@ -13,7 +13,7 @@ html,body{background:#0d0d0f;color:#f0f0f2;min-height:100vh;font-family:-apple-s
 body{padding:0 0 60px}
 
 /* ── HEADER ── */
-.hdr{background:#141416;border-bottom:1px solid #2a2a2e;padding:14px 16px 0;position:sticky;top:0;z-index:10
+.hdr{background:#141416;border-bottom:1px solid #2a2a2e;padding:14px 16px 0;position:sticky;top:0;z-index:10}
 .hdr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .hdr-title{font-size:18px;font-weight:700;color:#f0f0f2}
 .hdr-title span{color:#40c4ff}
@@ -218,7 +218,7 @@ var US_COM={gold:{sym:"GC=F",short:"黃金",dec:2},oil:{sym:"CL=F",short:"原油
 var US_VIX={vix:{sym:"^VIX",short:"VIX"},vvix:{sym:"^VVIX",short:"VVIX"},skew:{sym:"^SKEW",short:"SKEW"}};
 var TW_LIVE={twii:{sym:"^TWII",short:"TWII",name:"加權指數"},otc:{sym:"^TWOII",short:"OTC",name:"櫃買指數"},txf:{sym:"TXF=F",short:"TXF",name:"台指期貨"}};
 
-var MANUAL_KEYS=["putcall","aaii","trin"];
+var MANUAL_KEYS=["putcall","aaii","trin","mmtw"];
 var manualData={};
 MANUAL_KEYS.forEach(k=>{
   try{var s=localStorage.getItem("manual_"+k);if(s)manualData[k]=JSON.parse(s);}catch{}
@@ -270,6 +270,7 @@ var US_MANUAL_DEFS=[
   {key:"putcall",lbl:"Put/Call Ratio",placeholder:"例：0.85",zones:[{max:.6,s:-1,t:"過度貪婪"},{max:.85,s:1,t:"偏多"},{max:1.1,s:2,t:"均衡"},{max:1.3,s:0,t:"偏空"},{max:9,s:1,t:"極悲觀"}],hint:"CBOE 每日更新"},
   {key:"aaii",   lbl:"AAII 多頭%",   placeholder:"例：38",  zones:[{max:25,s:1,t:"極悲觀"},{max:35,s:1,t:"偏空"},{max:45,s:2,t:"正常"},{max:55,s:0,t:"偏熱"},{max:99,s:-1,t:"過熱"}],hint:"AAII 每週更新（週四）"},
   {key:"trin",   lbl:"TRIN",         placeholder:"例：1.20",zones:[{max:.5,s:-1,t:"過度樂觀"},{max:.8,s:1,t:"偏多"},{max:1.2,s:2,t:"中性"},{max:2.0,s:0,t:"偏空"},{max:99,s:1,t:"極度恐慌"}],hint:"盤中手動更新"},
+  {key:"mmtw",   lbl:"MMTW 20MA%",  placeholder:"例：36",  zones:[{max:20,s:-2,t:"極度超賣"},{max:35,s:-1,t:"超賣"},{max:50,s:0,t:"偏弱"},{max:65,s:2,t:"健康"},{max:80,s:1,t:"偏強"},{max:100,s:0,t:"超買警示"}],hint:"TradingView 搜尋 MMTW 手動更新"},
 ];
 var TW_AUTO=[
   {key:"twd",   lbl:"台幣 / 美金",  zones:[{max:30,s:2,t:"台幣強勢"},{max:31,s:2,t:"偏強"},{max:32,s:1,t:"中性"},{max:33,s:0,t:"偏弱"},{max:34,s:-1,t:"台幣弱勢"},{max:99,s:-2,t:"台幣大貶"}]},
