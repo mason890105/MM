@@ -77,24 +77,29 @@ body{padding:0 0 60px}
 .prow-badge.post{background:rgba(64,196,255,.12);color:#40c4ff}
 
 /* ── 兩欄並列 ── */
-.g2{display:grid;grid-template-columns:1fr 1fr}
-.g2 .prow{padding:10px 10px 10px 0}
-.g2 .prow:nth-child(even){padding:10px 0 10px 12px;border-left:1px solid #2a2a2e}
-.g2 .mrow{padding:9px 10px 9px 0}
-.g2 .mrow:nth-child(even){padding:9px 0 9px 12px;border-left:1px solid #2a2a2e}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.g2 .prow{padding:10px 8px 10px 0;border-bottom:1px solid #2a2a2e}
+.g2 .prow:nth-child(even){padding:10px 0 10px 14px;border-left:1px solid #2a2a2e}
+.g2 .prow:last-child{border-bottom:none}
+.g2 .prow:nth-last-child(2):nth-child(odd){border-bottom:none}
+.g2 .mrow{padding:9px 8px 9px 0;border-bottom:1px solid #2a2a2e}
+.g2 .mrow:nth-child(even){padding:9px 0 9px 14px;border-left:1px solid #2a2a2e}
+.g2 .mrow:last-child{border-bottom:none}
+.g2 .mrow:nth-last-child(2):nth-child(odd){border-bottom:none}
 
 /* ── 三欄並列 ── */
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr}
-.g3 .prow{padding:10px 8px 10px 0}
-.g3 .prow:nth-child(3n+2){padding:10px 8px;border-left:1px solid #2a2a2e}
-.g3 .prow:nth-child(3n){padding:10px 0 10px 8px;border-left:1px solid #2a2a2e}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.g3 .prow{padding:10px 6px 10px 0;border-bottom:1px solid #2a2a2e}
+.g3 .prow:nth-child(3n+2){padding:10px 6px;border-left:1px solid #2a2a2e}
+.g3 .prow:nth-child(3n){padding:10px 0 10px 6px;border-left:1px solid #2a2a2e}
+.g3 .prow:nth-last-child(-n+3){border-bottom:none}
 
 /* ── METRIC ROW ── */
-.mrow{display:flex;align-items:center;padding:9px 0;border-bottom:1px solid #2a2a2e}
+.mrow{display:flex;align-items:center;padding:9px 0;border-bottom:1px solid #2a2a2e;gap:12px}
 .mrow:last-child{border-bottom:none}
-.mrow-lbl{font-size:14px;color:#8a8a90;flex:1}
-.mrow-val{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;margin-right:10px}
-.mrow-zone{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.mrow-lbl{font-size:14px;color:#8a8a90;flex:1;min-width:0}
+.mrow-val{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;flex-shrink:0}
+.mrow-zone{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0}
 
 /* ── MANUAL INPUT ── */
 .manual-item{padding:12px 0;border-bottom:1px solid #2a2a2e}
